@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/styles.uss?fileID=7433441132597879392&amp;guid=5cd09a5265a89a04fa675a653219971d&amp;type=3#styles" />
+    <ui:VisualElement name="Wrapper" style="flex-grow: 1; width: 100%; height: 100%; justify-content: center;">
+        <ui:VisualElement name="Controls" style="flex-direction: row; justify-content: space-between; height: 50%; width: 100%; padding-right: 2%; padding-left: 2%;">
+            <ui:Slider value="0" high-value="1" name="LeftAxis" low-value="-1" show-input-field="false" style="width: 20%; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            <ui:Slider value="0" high-value="1" name="RightAxis" low-value="-1" show-input-field="false" direction="Vertical" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: 120px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
