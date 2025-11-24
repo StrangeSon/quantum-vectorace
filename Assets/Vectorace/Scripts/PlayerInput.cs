@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Deterministic;
 using Quantum;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public unsafe class PlayerInput : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public unsafe class PlayerInput : MonoBehaviour
     private InputAction leftAxisAction;
     private InputAction rightAxisAction;
 
+    public Slider leftAxisSlider;
+    public Slider rightAxisSlider;
 
     private void Start()
     {
@@ -45,6 +48,8 @@ public unsafe class PlayerInput : MonoBehaviour
         var leftAxis = leftAxisAction.ReadValue<Vector2>();
         var rightAxis = rightAxisAction.ReadValue<Vector2>();
 
+        leftAxis.x += leftAxisSlider.value;
+        rightAxis.y += rightAxisSlider.value;
 
         var playerSlot = callback.PlayerSlot;
         var input = new Quantum.Input();
