@@ -3,6 +3,7 @@ using Photon.Deterministic;
 using Quantum;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System;
 
 public unsafe class PlayerInput : MonoBehaviour
 {
@@ -11,13 +12,32 @@ public unsafe class PlayerInput : MonoBehaviour
     private InputAction leftAxisAction;
     private InputAction rightAxisAction;
 
+    private InputAction tiltAction;
+
+    private InputAction touchAction;
+
+
     public Slider leftAxisSlider;
     public Slider rightAxisSlider;
+
+    private InputMode inputMode = InputMode.Gamepad;
+
+    public static event Action<InputMode> OnInputModeChanged;
+
+    public enum InputMode
+    {
+        Gamepad,
+        Sliders,
+        Tilt,
+        Touch
+    }
 
     private void Start()
     {
         leftAxisAction = InputActionAsset.FindAction("LeftAxis");
         rightAxisAction = InputActionAsset.FindAction("RightAxis");
+        tiltAction = InputActionAsset.FindAction("Tilt");
+        touchAction = InputActionAsset.FindAction("Touch");
         InputActionAsset.Enable();
     }
 
@@ -33,6 +53,20 @@ public unsafe class PlayerInput : MonoBehaviour
         // would latch buttons here, if we used any
     }
 
+    public void ToggleInputMode()
+    {
+        if (inputMode == InputMode.Gamepad)
+            inputMode = InputMode.Sliders;
+        else if (inputMode == InputMode.Sliders)
+            inputMode = InputMode.Tilt;
+        else if (inputMode == InputMode.Tilt)
+            inputMode = InputMode.Touch;
+        else
+            inputMode = InputMode.Gamepad;
+
+
+        OnInputModeChanged?.Invoke(inputMode);
+    }
 
     /// <summary>
     /// Quantum callback to collect networked input.
@@ -45,11 +79,28 @@ public unsafe class PlayerInput : MonoBehaviour
         if (localPlayers.Count == 0)
             return;
 
-        var leftAxis = leftAxisAction.ReadValue<Vector2>();
-        var rightAxis = rightAxisAction.ReadValue<Vector2>();
+        Vector2 leftAxis = default;
+        Vector2 rightAxis = default;
 
-        leftAxis.x += leftAxisSlider.value;
-        rightAxis.y += rightAxisSlider.value;
+        if (inputMode == InputMode.Gamepad)
+        {
+            leftAxis = leftAxisAction.ReadValue<Vector2>();
+            rightAxis = rightAxisAction.ReadValue<Vector2>();
+        }
+        else if (inputMode == InputMode.Sliders)
+        {
+            leftAxis.x = leftAxisSlider.value;
+            rightAxis.y = rightAxisSlider.value;
+        }
+        else if (inputMode == InputMode.Tilt)
+        {
+            leftAxis = tiltAction.ReadValue<Vector2>();
+        } else if (inputMode == InputMode.Touch)
+        {
+            var pointer = touchAction.ReadValue<Vector2>();
+            leftAxis = pointer;
+        }
+
 
         var playerSlot = callback.PlayerSlot;
         var input = new Quantum.Input();

@@ -25,9 +25,27 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Tilt",
+                    "type": "Value",
+                    "id": "8922c61e-dcc5-44a2-95ff-837df4e85239",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Pointer",
                     "type": "Value",
                     "id": "cc231abb-2f94-4c4b-bb75-eb3ef9828afb",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Touch",
+                    "type": "Value",
+                    "id": "0657e1c5-420c-43e3-b2b7-8502cf31fc47",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -243,12 +261,56 @@
                 },
                 {
                     "name": "",
+                    "id": "b06e6fc3-0c98-479e-bb83-feb5af9418ce",
+                    "path": "<Pen>/tilt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Touch",
+                    "action": "Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28ed0caf-a31b-47a7-a85c-df649b6334f0",
+                    "path": "<HID>/{Tilt}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad;Touch",
+                    "action": "Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9edcdcb2-f9fb-4db7-b640-6e52149bc993",
+                    "path": "<Sensor>/{Tilt}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch;Gamepad",
+                    "action": "Tilt",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1d66966f-10cf-4a7b-9a03-1d30c5d31bac",
                     "path": "<Pointer>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",
                     "action": "Pointer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bbe5253-6a05-4207-bbea-71591bd0ffdf",
+                    "path": "<Touchscreen>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Touch",
+                    "action": "Touch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

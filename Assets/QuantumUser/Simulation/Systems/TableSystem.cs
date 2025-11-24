@@ -25,11 +25,9 @@ namespace Quantum
             var combinedY = FPMath.Clamp(leftAxis.Y + rightAxis.Y, -1, 1);
             combinedAxis = new FPVector2(combinedX, combinedY);
 
-            // Define max tilt (30 degrees, convert to radians for AngleAxis)
-            var maxTilt = FP.FromString("30");
+            var maxTilt = FP.FromString("15");
 
             // Compute angles: pitch (forward/back) from Y-axis, roll (left/right) from X-axis
-            // Invert if tilt direction feels opposite in playtesting
             var pitch = -combinedAxis.Y * maxTilt;  // Negative for intuitive forward tilt
             var roll = combinedAxis.X * maxTilt;
 
