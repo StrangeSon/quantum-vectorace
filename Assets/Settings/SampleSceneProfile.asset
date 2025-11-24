@@ -1,0 +1,418 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8009512534695834151
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374cf1a1ce1f4aadaf356dc22a113a88, type: 3}
+  m_Name: HTraceAOVolume
+  m_EditorClassIdentifier: HTraceAO::HTraceAO.Scripts.Infrastructure.URP.HTraceAOVolume
+  active: 1
+  <displayName>k__BackingField: HTrace Ambient Occlusion
+  Enable:
+    <fieldHash>k__BackingField: 41260600
+    m_OverrideState: 1
+    m_Value: 1
+  AmbientOcclusionMode:
+    <fieldHash>k__BackingField: 519961384
+    m_OverrideState: 1
+    m_Value: 1
+  HBuffer:
+    <fieldHash>k__BackingField: 998662168
+    m_OverrideState: 0
+    m_Value: 0
+  Intensity:
+    <fieldHash>k__BackingField: 1238012560
+    m_OverrideState: 1
+    m_Value: 2
+  DebugModeSSAO:
+    <fieldHash>k__BackingField: 1477362952
+    m_OverrideState: 0
+    m_Value: 0
+  Thickness:
+    <fieldHash>k__BackingField: 1716713344
+    m_OverrideState: 0
+    m_Value: 0
+  Radius:
+    <fieldHash>k__BackingField: 1956063736
+    m_OverrideState: 0
+    m_Value: 2
+  DirectLightingOcclusion:
+    <fieldHash>k__BackingField: -2099553168
+    m_OverrideState: 0
+    m_Value: 1
+  DebugModeGTAO:
+    <fieldHash>k__BackingField: -1860202776
+    m_OverrideState: 0
+    m_Value: 0
+  FullResolution:
+    <fieldHash>k__BackingField: -1620852384
+    m_OverrideState: 1
+    m_Value: 1
+  GTAOThickness:
+    <fieldHash>k__BackingField: -1381501992
+    m_OverrideState: 1
+    m_Value: 1
+  GTAOWorldSpaceRadius:
+    <fieldHash>k__BackingField: -1142151600
+    m_OverrideState: 1
+    m_Value: 5
+  GTAOSliceCount:
+    <fieldHash>k__BackingField: -902801208
+    m_OverrideState: 0
+    m_Value: 2
+  GTAOStepCount:
+    <fieldHash>k__BackingField: -663450816
+    m_OverrideState: 0
+    m_Value: 16
+  GTAOVisibilityBitmasks:
+    <fieldHash>k__BackingField: -424100424
+    m_OverrideState: 1
+    m_Value: 1
+  GTAOFalloff:
+    <fieldHash>k__BackingField: -184750032
+    m_OverrideState: 0
+    m_Value: 1
+  GTAOCheckerboarding:
+    <fieldHash>k__BackingField: 54600360
+    m_OverrideState: 0
+    m_Value: 0
+  GTAOSampleCountTemporal:
+    <fieldHash>k__BackingField: 293950752
+    m_OverrideState: 0
+    m_Value: 8
+  GTAOMotionRejection:
+    <fieldHash>k__BackingField: 533301144
+    m_OverrideState: 0
+    m_Value: 0.75
+  GTAONormalRejectionTemporal:
+    <fieldHash>k__BackingField: 772651536
+    m_OverrideState: 0
+    m_Value: 0
+  GTAORejectionStrengthTemporal:
+    <fieldHash>k__BackingField: 1012001928
+    m_OverrideState: 0
+    m_Value: 0.25
+  GTAOReprojectionFilter:
+    <fieldHash>k__BackingField: 1251352320
+    m_OverrideState: 0
+    m_Value: 0
+  GTAOPixelRadius:
+    <fieldHash>k__BackingField: 1490702712
+    m_OverrideState: 0
+    m_Value: 1
+  GTAOFilterStrength:
+    <fieldHash>k__BackingField: 1730053104
+    m_OverrideState: 0
+    m_Value: 0.75
+  GTAONormalRejectionSpatial:
+    <fieldHash>k__BackingField: 1969403496
+    m_OverrideState: 0
+    m_Value: 1
+  GTAOUpscalingQuality:
+    <fieldHash>k__BackingField: -2086213408
+    m_OverrideState: 0
+    m_Value: 0
+  GTAOUpscalingNormalRejection:
+    <fieldHash>k__BackingField: -1846863016
+    m_OverrideState: 0
+    m_Value: 1
+  DebugModeRTAO:
+    <fieldHash>k__BackingField: -1607512624
+    m_OverrideState: 0
+    m_Value: 0
+  RTAOWorldSpaceRadius:
+    <fieldHash>k__BackingField: -1368162232
+    m_OverrideState: 1
+    m_Value: 5
+  RTAOMaxRayBias:
+    <fieldHash>k__BackingField: -1128811840
+    m_OverrideState: 0
+    m_Value: 0.002
+  RTAOLayerMask:
+    <fieldHash>k__BackingField: -889461448
+    m_OverrideState: 0
+    m_Value:
+      m_Bits: 4294967295
+  RTAORayCount:
+    <fieldHash>k__BackingField: -650111056
+    m_OverrideState: 1
+    m_Value: 8
+  RTAOFullResolution:
+    <fieldHash>k__BackingField: -410760664
+    m_OverrideState: 1
+    m_Value: 0
+  RTAOCheckerboarding:
+    <fieldHash>k__BackingField: -171410272
+    m_OverrideState: 0
+    m_Value: 0
+  RTAOSampleCountTemporal:
+    <fieldHash>k__BackingField: 67940120
+    m_OverrideState: 0
+    m_Value: 12
+  RTAOMotionRejection:
+    <fieldHash>k__BackingField: 307290512
+    m_OverrideState: 0
+    m_Value: 0.6
+  RTAONormalRejectionTemporal:
+    <fieldHash>k__BackingField: 546640904
+    m_OverrideState: 0
+    m_Value: 0
+  RTAORejectionStrengthTemporal:
+    <fieldHash>k__BackingField: 785991296
+    m_OverrideState: 0
+    m_Value: 0.25
+  RTAOReprojectionFilter:
+    <fieldHash>k__BackingField: 1025341688
+    m_OverrideState: 0
+    m_Value: 0
+  RTAOPixelRadius:
+    <fieldHash>k__BackingField: 1264692080
+    m_OverrideState: 1
+    m_Value: 4
+  RTAOFilterStrength:
+    <fieldHash>k__BackingField: 1504042472
+    m_OverrideState: 0
+    m_Value: 0.75
+  RTAONormalRejectionSpatial:
+    <fieldHash>k__BackingField: 1743392864
+    m_OverrideState: 0
+    m_Value: 1
+  RTAOUpscalingQuality:
+    <fieldHash>k__BackingField: 1982743256
+    m_OverrideState: 0
+    m_Value: 0
+  RTAOUpscalingNormalRejection:
+    <fieldHash>k__BackingField: -2072873648
+    m_OverrideState: 0
+    m_Value: 1
+--- !u!114 &-7893295128165547882
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: 
+  active: 1
+  skipIterations:
+    m_OverrideState: 1
+    m_Value: 0
+  threshold:
+    m_OverrideState: 1
+    m_Value: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.25
+  scatter:
+    m_OverrideState: 1
+    m_Value: 0.5
+  clamp:
+    m_OverrideState: 0
+    m_Value: 65472
+  tint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  highQualityFiltering:
+    m_OverrideState: 1
+    m_Value: 1
+  downscale:
+    m_OverrideState: 0
+    m_Value: 0
+  maxIterations:
+    m_OverrideState: 0
+    m_Value: 6
+  dirtTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+    dimension: 1
+  dirtIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &-6772557349253168147
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06437c1ff663d574d9447842ba0a72e4, type: 3}
+  m_Name: ScreenSpaceLensFlare
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.ScreenSpaceLensFlare
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
+  tintColor:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  bloomMip:
+    m_OverrideState: 0
+    m_Value: 1
+  firstFlareIntensity:
+    m_OverrideState: 0
+    m_Value: 1
+  secondaryFlareIntensity:
+    m_OverrideState: 0
+    m_Value: 1
+  warpedFlareIntensity:
+    m_OverrideState: 0
+    m_Value: 1
+  warpedFlareScale:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 1}
+  samples:
+    m_OverrideState: 0
+    m_Value: 1
+  sampleDimmer:
+    m_OverrideState: 0
+    m_Value: 0.5
+  vignetteEffect:
+    m_OverrideState: 0
+    m_Value: 1
+  startingPosition:
+    m_OverrideState: 0
+    m_Value: 1.25
+  scale:
+    m_OverrideState: 0
+    m_Value: 1.5
+  streaksIntensity:
+    m_OverrideState: 0
+    m_Value: 0
+  streaksLength:
+    m_OverrideState: 0
+    m_Value: 0.5
+  streaksOrientation:
+    m_OverrideState: 0
+    m_Value: 0
+  streaksThreshold:
+    m_OverrideState: 0
+    m_Value: 0.25
+  resolution:
+    m_OverrideState: 0
+    m_Value: 4
+  chromaticAbberationIntensity:
+    m_OverrideState: 0
+    m_Value: 0.5
+--- !u!114 &-3357603926938260329
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  color:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.2
+  smoothness:
+    m_OverrideState: 0
+    m_Value: 0.2
+  rounded:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: SampleSceneProfile
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: 849379129802519247}
+  - {fileID: -7893295128165547882}
+  - {fileID: 7391319092446245454}
+  - {fileID: -3357603926938260329}
+  - {fileID: -6772557349253168147}
+--- !u!114 &849379129802519247
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
+  m_EditorClassIdentifier: 
+  active: 0
+  mode:
+    m_OverrideState: 1
+    m_Value: 1
+  neutralHDRRangeReductionMode:
+    m_OverrideState: 0
+    m_Value: 2
+  acesPreset:
+    m_OverrideState: 0
+    m_Value: 3
+  hueShiftAmount:
+    m_OverrideState: 0
+    m_Value: 0
+  detectPaperWhite:
+    m_OverrideState: 1
+    m_Value: 0
+  paperWhite:
+    m_OverrideState: 1
+    m_Value: 234
+  detectBrightnessLimits:
+    m_OverrideState: 1
+    m_Value: 1
+  minNits:
+    m_OverrideState: 1
+    m_Value: 0.005
+  maxNits:
+    m_OverrideState: 1
+    m_Value: 647
+--- !u!114 &7391319092446245454
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
+  m_Name: MotionBlur
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 1
+    m_Value: 1
+  quality:
+    m_OverrideState: 1
+    m_Value: 0
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.6
+  clamp:
+    m_OverrideState: 0
+    m_Value: 0.05

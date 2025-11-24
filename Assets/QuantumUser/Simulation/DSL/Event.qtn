@@ -1,0 +1,3 @@
+event PlayerLinked { PlayerRef PlayerRef; EntityRef PlayerEntity; }
+event MarbleAdded { EntityRef MarbleEntity; }
+event TableAdded { EntityRef TableEntity; }
