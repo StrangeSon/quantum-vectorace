@@ -16,6 +16,7 @@ public unsafe class PlayerInput : MonoBehaviour
 
     private InputAction touchAction;
 
+    private InputAction flipperAction;
 
     public Slider leftAxisSlider;
     public Slider rightAxisSlider;
@@ -38,6 +39,7 @@ public unsafe class PlayerInput : MonoBehaviour
         rightAxisAction = InputActionAsset.FindAction("RightAxis");
         tiltAction = InputActionAsset.FindAction("Tilt");
         touchAction = InputActionAsset.FindAction("Touch");
+        flipperAction = InputActionAsset.FindAction("Flipper");
         InputActionAsset.Enable();
     }
 
