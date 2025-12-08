@@ -16,12 +16,16 @@ public unsafe class PlayerInput : MonoBehaviour
 
     private InputAction touchAction;
 
-    private InputAction flipperAction;
+    private InputAction leftFlipperAction;
+    private InputAction rightFlipperAction;
 
     public Slider leftAxisSlider;
     public Slider rightAxisSlider;
 
     private InputMode inputMode = InputMode.Gamepad;
+
+    private bool leftFlipper;
+    private bool rightFlipper;
 
     public static event Action<InputMode> OnInputModeChanged;
 
@@ -39,7 +43,8 @@ public unsafe class PlayerInput : MonoBehaviour
         rightAxisAction = InputActionAsset.FindAction("RightAxis");
         tiltAction = InputActionAsset.FindAction("Tilt");
         touchAction = InputActionAsset.FindAction("Touch");
-        flipperAction = InputActionAsset.FindAction("Flipper");
+        leftFlipperAction = InputActionAsset.FindAction("LeftFlipper");
+        rightFlipperAction = InputActionAsset.FindAction("RightFlipper");
         InputActionAsset.Enable();
     }
 
@@ -52,7 +57,8 @@ public unsafe class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        // would latch buttons here, if we used any
+        leftFlipper = leftFlipper || leftFlipperAction.IsPressed();
+        rightFlipper = rightFlipper || rightFlipperAction.IsPressed();
     }
 
     public void ToggleInputMode()
@@ -84,30 +90,22 @@ public unsafe class PlayerInput : MonoBehaviour
         Vector2 leftAxis = default;
         Vector2 rightAxis = default;
 
-        if (inputMode == InputMode.Gamepad)
-        {
-            leftAxis = leftAxisAction.ReadValue<Vector2>();
-            rightAxis = rightAxisAction.ReadValue<Vector2>();
-        }
-        else if (inputMode == InputMode.Sliders)
-        {
-            leftAxis.x = leftAxisSlider.value;
-            rightAxis.y = rightAxisSlider.value;
-        }
-        else if (inputMode == InputMode.Tilt)
-        {
-            leftAxis = tiltAction.ReadValue<Vector2>();
-        } else if (inputMode == InputMode.Touch)
-        {
-            var pointer = touchAction.ReadValue<Vector2>();
-            leftAxis = pointer;
-        }
+        leftAxis = leftAxisAction.ReadValue<Vector2>();
+        rightAxis = rightAxisAction.ReadValue<Vector2>();
 
 
         var playerSlot = callback.PlayerSlot;
         var input = new Quantum.Input();
         input.LeftAxis = leftAxis.ToFPVector2();
         input.RightAxis = rightAxis.ToFPVector2();
+        leftFlipper = leftFlipper || leftFlipperAction.IsPressed();
+        rightFlipper = rightFlipper || rightFlipperAction.IsPressed();
+        input.LeftFlipper = leftFlipper;
+        input.RightFlipper = rightFlipper;
+
+        // Reset latched buttons
+        leftFlipper = false;
+        rightFlipper = false;
 
         callback.SetInput(input, DeterministicInputFlags.Repeatable);
     }

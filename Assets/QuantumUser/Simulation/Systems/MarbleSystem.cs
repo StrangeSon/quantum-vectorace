@@ -24,6 +24,7 @@ namespace Quantum
 
         public unsafe void OnAdded(Frame frame, EntityRef entity, Marble* marble)
         {
+            return;
             frame.Events.MarbleAdded(entity);
             if (!frame.Unsafe.TryGetPointer(entity, out Transform3D* transform3D))
                 return;

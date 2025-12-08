@@ -51,6 +51,8 @@ namespace Quantum {
   
   [System.FlagsAttribute()]
   public enum InputButtons : int {
+    LeftFlipper = 1 << 0,
+    RightFlipper = 1 << 1,
   }
   public static unsafe partial class FlagsExtensions {
     public static Boolean IsFlagSet(this InputButtons self, InputButtons flag) {
@@ -511,17 +513,23 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Input {
-    public const Int32 SIZE = 32;
+    public const Int32 SIZE = 56;
     public const Int32 ALIGNMENT = 8;
-    [FieldOffset(0)]
+    [FieldOffset(24)]
     public FPVector2 LeftAxis;
-    [FieldOffset(16)]
+    [FieldOffset(40)]
     public FPVector2 RightAxis;
+    [FieldOffset(0)]
+    public Button LeftFlipper;
+    [FieldOffset(12)]
+    public Button RightFlipper;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 19249;
         hash = hash * 31 + LeftAxis.GetHashCode();
         hash = hash * 31 + RightAxis.GetHashCode();
+        hash = hash * 31 + LeftFlipper.GetHashCode();
+        hash = hash * 31 + RightFlipper.GetHashCode();
         return hash;
       }
     }
@@ -530,23 +538,29 @@ namespace Quantum {
     }
     public Boolean IsDown(InputButtons button) {
       switch (button) {
+        case InputButtons.LeftFlipper: return LeftFlipper.IsDown;
+        case InputButtons.RightFlipper: return RightFlipper.IsDown;
         default: return false;
       }
     }
     public Boolean WasPressed(InputButtons button) {
       switch (button) {
+        case InputButtons.LeftFlipper: return LeftFlipper.WasPressed;
+        case InputButtons.RightFlipper: return RightFlipper.WasPressed;
         default: return false;
       }
     }
     static partial void SerializeCodeGen(void* ptr, FrameSerializer serializer) {
         var p = (Input*)ptr;
+        Button.Serialize(&p->LeftFlipper, serializer);
+        Button.Serialize(&p->RightFlipper, serializer);
         FPVector2.Serialize(&p->LeftAxis, serializer);
         FPVector2.Serialize(&p->RightAxis, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
-    public const Int32 SIZE = 808;
+    public const Int32 SIZE = 952;
     public const Int32 ALIGNMENT = 8;
     [FieldOffset(0)]
     public AssetRef<Map> Map;
@@ -570,12 +584,12 @@ namespace Quantum {
     public Int32 PlayerConnectedCount;
     [FieldOffset(608)]
     [FramePrinter.FixedArrayAttribute(typeof(Input), 6)]
-    private fixed Byte _input_[192];
-    [FieldOffset(800)]
+    private fixed Byte _input_[336];
+    [FieldOffset(944)]
     public BitSet6 PlayerLastConnectionState;
     public readonly FixedArray<Input> input {
       get {
-        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 32, 6); }
+        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 56, 6); }
       }
     }
     public override readonly Int32 GetHashCode() {
@@ -610,6 +624,59 @@ namespace Quantum {
         serializer.Stream.Serialize(&p->PlayerConnectedCount);
         FixedArray.Serialize(p->input, serializer, Statics.SerializeInput);
         Quantum.BitSet6.Serialize(&p->PlayerLastConnectionState, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct Flipper : Quantum.IComponent {
+    public const Int32 SIZE = 96;
+    public const Int32 ALIGNMENT = 8;
+    [FieldOffset(4)]
+    public QBoolean IsLeft;
+    [FieldOffset(0)]
+    [HideInInspector()]
+    public PlayerRef Owner;
+    [FieldOffset(8)]
+    [HideInInspector()]
+    public FP FlipProgress;
+    [FieldOffset(24)]
+    [HideInInspector()]
+    public FP MaxAngle;
+    [FieldOffset(16)]
+    [HideInInspector()]
+    public FP FlipSpeed;
+    [FieldOffset(32)]
+    [HideInInspector()]
+    public FP ReturnSpeed;
+    [FieldOffset(40)]
+    [HideInInspector()]
+    public FPVector3 RotationAxis;
+    [FieldOffset(64)]
+    [HideInInspector()]
+    public FPQuaternion RestRotation;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 10399;
+        hash = hash * 31 + IsLeft.GetHashCode();
+        hash = hash * 31 + Owner.GetHashCode();
+        hash = hash * 31 + FlipProgress.GetHashCode();
+        hash = hash * 31 + MaxAngle.GetHashCode();
+        hash = hash * 31 + FlipSpeed.GetHashCode();
+        hash = hash * 31 + ReturnSpeed.GetHashCode();
+        hash = hash * 31 + RotationAxis.GetHashCode();
+        hash = hash * 31 + RestRotation.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (Flipper*)ptr;
+        PlayerRef.Serialize(&p->Owner, serializer);
+        QBoolean.Serialize(&p->IsLeft, serializer);
+        FP.Serialize(&p->FlipProgress, serializer);
+        FP.Serialize(&p->FlipSpeed, serializer);
+        FP.Serialize(&p->MaxAngle, serializer);
+        FP.Serialize(&p->ReturnSpeed, serializer);
+        FPVector3.Serialize(&p->RotationAxis, serializer);
+        FPQuaternion.Serialize(&p->RestRotation, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
@@ -682,6 +749,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<CharacterController2D>();
       BuildSignalsArrayOnComponentAdded<CharacterController3D>();
       BuildSignalsArrayOnComponentRemoved<CharacterController3D>();
+      BuildSignalsArrayOnComponentAdded<Quantum.Flipper>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.Flipper>();
       BuildSignalsArrayOnComponentAdded<MapEntityLink>();
       BuildSignalsArrayOnComponentRemoved<MapEntityLink>();
       BuildSignalsArrayOnComponentAdded<Quantum.Marble>();
@@ -728,6 +797,8 @@ namespace Quantum {
       var i = _globals->input.GetPointer(player);
       i->LeftAxis = input.LeftAxis;
       i->RightAxis = input.RightAxis;
+      i->LeftFlipper = i->LeftFlipper.Update(this.Number, input.LeftFlipper);
+      i->RightFlipper = i->RightFlipper.Update(this.Number, input.RightFlipper);
     }
     public Input* GetPlayerInput(PlayerRef player) {
       if ((int)player >= (int)_globals->input.Length) { throw new System.ArgumentOutOfRangeException("player"); }
@@ -778,6 +849,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(FPQuaternion), FPQuaternion.SIZE);
       typeRegistry.Register(typeof(FPVector2), FPVector2.SIZE);
       typeRegistry.Register(typeof(FPVector3), FPVector3.SIZE);
+      typeRegistry.Register(typeof(Quantum.Flipper), Quantum.Flipper.SIZE);
       typeRegistry.Register(typeof(FrameMetaData), FrameMetaData.SIZE);
       typeRegistry.Register(typeof(FrameTimer), FrameTimer.SIZE);
       typeRegistry.Register(typeof(HingeJoint), HingeJoint.SIZE);
@@ -836,8 +908,9 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 3)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 4)
         .AddBuiltInComponents()
+        .Add<Quantum.Flipper>(Quantum.Flipper.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Marble>(Quantum.Marble.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.PlayerLink>(Quantum.PlayerLink.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Table>(Quantum.Table.Serialize, null, null, ComponentFlags.None)

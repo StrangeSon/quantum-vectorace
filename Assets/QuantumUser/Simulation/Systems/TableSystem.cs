@@ -25,10 +25,11 @@ namespace Quantum
             var combinedY = FPMath.Clamp(leftAxis.Y + rightAxis.Y, -1, 1);
             combinedAxis = new FPVector2(combinedX, combinedY);
 
-            var maxTilt = FP.FromString("15");
+            var maxTilt = FP.FromString("3");
+            var basePitch = FP.FromString("6.5");
 
             // Compute angles: pitch (forward/back) from Y-axis, roll (left/right) from X-axis
-            var pitch = -combinedAxis.Y * maxTilt;  // Negative for intuitive forward tilt
+            var pitch = basePitch - combinedAxis.Y * maxTilt;  // Add base pitch; input adjusts around it (negative input for intuitive forward tilt reduces slope)
             var roll = combinedAxis.X * maxTilt;
 
             // Default gravity magnitude and direction

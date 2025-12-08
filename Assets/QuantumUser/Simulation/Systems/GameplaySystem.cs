@@ -23,17 +23,22 @@ namespace Quantum
             }
         }
 
-        /// <summary>
-        /// Spawns a player at a random position
-        /// </summary>
         private void RespawnPlayer(Frame frame, PlayerRef playerRef)
         {
             var runtimePlayer = frame.GetPlayerData(playerRef);
-            var playerEntity = frame.Create(runtimePlayer.PlayerAvatar);
+            var playerAvatarEntity = frame.Create(runtimePlayer.PlayerAvatar);
 
-            frame.AddOrGet<PlayerLink>(playerEntity, out var playerLink);
+            frame.AddOrGet<PlayerLink>(playerAvatarEntity, out var playerLink);
             playerLink->PlayerRef = playerRef;
-            frame.Events.PlayerLinked(playerRef, playerEntity);
+            frame.Events.PlayerLinked(playerRef, playerAvatarEntity);
+
+            foreach (var (entity, _) in frame.GetComponentIterator<Flipper>())
+            {
+                if (frame.Unsafe.TryGetPointer(entity, out Flipper * flipper))
+                {
+                    flipper->Owner = playerRef;
+                }
+            }
         }
-    } 
+    }
 }

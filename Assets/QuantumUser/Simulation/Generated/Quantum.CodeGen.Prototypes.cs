@@ -50,14 +50,55 @@ namespace Quantum.Prototypes {
   #endif //;
   
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.Flipper))]
+  public unsafe partial class FlipperPrototype : ComponentPrototype<Quantum.Flipper> {
+    public QBoolean IsLeft;
+    [HideInInspector()]
+    public PlayerRef Owner;
+    [HideInInspector()]
+    public FP FlipProgress;
+    [HideInInspector()]
+    public FP MaxAngle;
+    [HideInInspector()]
+    public FP FlipSpeed;
+    [HideInInspector()]
+    public FP ReturnSpeed;
+    [HideInInspector()]
+    public FPVector3 RotationAxis;
+    [UnitAttribute(Units.Degrees)]
+    [HideInInspector()]
+    public FPVector3 RestRotation;
+    partial void MaterializeUser(Frame frame, ref Quantum.Flipper result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.Flipper component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.Flipper result, in PrototypeMaterializationContext context = default) {
+        result.IsLeft = this.IsLeft;
+        result.Owner = this.Owner;
+        result.FlipProgress = this.FlipProgress;
+        result.MaxAngle = this.MaxAngle;
+        result.FlipSpeed = this.FlipSpeed;
+        result.ReturnSpeed = this.ReturnSpeed;
+        result.RotationAxis = this.RotationAxis;
+        result.RestRotation = FPQuaternion.Euler(this.RestRotation);
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.Input))]
   public unsafe partial class InputPrototype : StructPrototype {
     public FPVector2 LeftAxis;
     public FPVector2 RightAxis;
+    public Button LeftFlipper;
+    public Button RightFlipper;
     partial void MaterializeUser(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context);
     public void Materialize(Frame frame, ref Quantum.Input result, in PrototypeMaterializationContext context = default) {
         result.LeftAxis = this.LeftAxis;
         result.RightAxis = this.RightAxis;
+        result.LeftFlipper = this.LeftFlipper;
+        result.RightFlipper = this.RightFlipper;
         MaterializeUser(frame, ref result, in context);
     }
   }

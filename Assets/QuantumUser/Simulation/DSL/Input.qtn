@@ -2,4 +2,6 @@ input
 {
 	FPVector2 LeftAxis;
 	FPVector2 RightAxis;
+	Button LeftFlipper;
+	Button RightFlipper;
 }

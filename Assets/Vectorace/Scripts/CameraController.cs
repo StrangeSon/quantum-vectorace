@@ -54,9 +54,7 @@ public unsafe class CameraController : MonoBehaviour
         if (!localPlayers.Contains(eventData.PlayerRef)) return;
 
         var frame = QuantumRunner.Default.Game.Frames.Predicted;
-        if (!frame.Unsafe.TryGetPointer(eventData.PlayerEntity, out Marble* marble)) return;
-
-        followingEntityRef = eventData.PlayerEntity;
+        if (!frame.Unsafe.TryGetPointer(eventData.PlayerAvatarEntity, out Marble* marble)) return;
     }
 
     private void Update()
@@ -66,8 +64,6 @@ public unsafe class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!followingEntityRef.IsValid) return;
-
         var frame = QuantumRunner.Default.Game.Frames.Predicted;
         var gravity = frame.PhysicsSceneSettings->Gravity.ToUnityVector3();
         var gravityDir = gravity.normalized;

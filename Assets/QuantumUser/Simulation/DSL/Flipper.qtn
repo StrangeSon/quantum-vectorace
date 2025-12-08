@@ -1,0 +1,12 @@
+component Flipper 
+{
+    bool IsLeft;
+
+    [HideInInspector] player_ref Owner;
+    [HideInInspector] FP FlipProgress;
+    [HideInInspector] FP MaxAngle;
+    [HideInInspector] FP FlipSpeed;
+    [HideInInspector] FP ReturnSpeed;
+    [HideInInspector] FPVector3 RotationAxis;
+    [HideInInspector] FPQuaternion RestRotation;
+}

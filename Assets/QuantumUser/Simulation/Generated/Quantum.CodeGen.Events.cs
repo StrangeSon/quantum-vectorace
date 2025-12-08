@@ -67,10 +67,10 @@ namespace Quantum {
           default: break;
         }
       }
-      public EventPlayerLinked PlayerLinked(PlayerRef PlayerRef, EntityRef PlayerEntity) {
+      public EventPlayerLinked PlayerLinked(PlayerRef PlayerRef, EntityRef PlayerAvatarEntity) {
         var ev = _f.Context.AcquireEvent<EventPlayerLinked>(EventPlayerLinked.ID);
         ev.PlayerRef = PlayerRef;
-        ev.PlayerEntity = PlayerEntity;
+        ev.PlayerAvatarEntity = PlayerAvatarEntity;
         _f.AddEvent(ev);
         return ev;
       }
@@ -91,7 +91,7 @@ namespace Quantum {
   public unsafe partial class EventPlayerLinked : EventBase {
     public new const Int32 ID = 1;
     public PlayerRef PlayerRef;
-    public EntityRef PlayerEntity;
+    public EntityRef PlayerAvatarEntity;
     protected EventPlayerLinked(Int32 id, EventFlags flags) : 
         base(id, flags) {
     }
@@ -110,7 +110,7 @@ namespace Quantum {
       unchecked {
         var hash = 41;
         hash = hash * 31 + PlayerRef.GetHashCode();
-        hash = hash * 31 + PlayerEntity.GetHashCode();
+        hash = hash * 31 + PlayerAvatarEntity.GetHashCode();
         return hash;
       }
     }
