@@ -10,10 +10,3 @@ ScriptedImporter:
   script: {fileID: 11500000, guid: e8ec9051dbb44694b9eb5949b28b5e7f, type: 3}
   ReadableCharacters: ABCDEFGHIJKLMNPQRSTUVWXYZ123456789
   RandomDataLength: 64
-AssetOrigin:
-  serializedVersion: 1
-  productId: 286874
-  packageName: Photon Quantum - Deterministic Game Engine
-  packageVersion: 3.0.5
-  assetPath: Assets/Photon/Quantum/Runtime/RuntimeAssets/QuantumMachineId.quantum-id
-  uploadId: 774129

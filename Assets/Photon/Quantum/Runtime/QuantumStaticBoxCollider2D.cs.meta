@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: b488b62207097a04392bf63c707ab9c5
 timeCreated: 1516633057
-licenseType: Store
+licenseType: Pro
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -11,10 +11,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 286874
-  packageName: Photon Quantum - Deterministic Game Engine
-  packageVersion: 3.0.5
-  assetPath: Assets/Photon/Quantum/Runtime/QuantumStaticBoxCollider2D.cs
-  uploadId: 774129

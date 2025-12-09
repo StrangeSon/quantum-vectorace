@@ -4,17 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - AppVersionMachineId: {fileID: -755480892457977500, guid: 498c2ba40c34da841b0bbfab91cfd57f,
-      type: 3}
+    - AppVersionMachineId: {fileID: -755480892457977500, guid: 498c2ba40c34da841b0bbfab91cfd57f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 286874
-  packageName: Photon Quantum - Deterministic Game Engine
-  packageVersion: 3.0.5
-  assetPath: Assets/Photon/Quantum/Runtime/StartUI/QuantumStartUIConnection.cs
-  uploadId: 774129

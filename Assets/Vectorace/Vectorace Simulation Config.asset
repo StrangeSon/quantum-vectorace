@@ -29,8 +29,9 @@ MonoBehaviour:
         RawValue: -64290816
       Z:
         RawValue: 0
-    SolverType: 1
-    SolverIterations: 8
+    SolverType: 4
+    WarmStart: 1
+    SolverIterations: 4
     PositionSolverIterations: 2
     UseJoints: 0
     UseAngularVelocity: 1
@@ -62,13 +63,13 @@ MonoBehaviour:
       RawValue: 2289
     AllowCCD: 1
     CCDLinearVelocityThreshold:
-      RawValue: 32768
+      RawValue: 65536
     CCDAngularVelocityThreshold:
-      RawValue: 32768
+      RawValue: 65536
     CCDDistanceTolerance:
       RawValue: 66
-    MaxTimeOfImpactIterations: 64
-    MaxRootFindingIterations: 128
+    MaxTimeOfImpactIterations: 16
+    MaxRootFindingIterations: 32
     DefaultEntriesCapacity: 2048
     DefaultStaticsCapacity: 1024
     DefaultQueriesCapacity: 1024
@@ -138,13 +139,23 @@ MonoBehaviour:
     MaxAvoidanceCandidates: 64
     VelocityObstacleTruncationFactor:
       RawValue: 72090
+  Heap:
+    TrackingMode: 1
+    Management: 1
+    PageSize: 5
+    SegmentSize: 4
+    SegmentCapacity: 32
+    PageShift: 15
+    PageCount: 256
+    ExtraHeapCount: 0
+  HeapTrackingMode: 1
+  HeapPageShift: 15
+  HeapPageCount: 256
+  HeapExtraCount: 0
+  HeapSettingsMigrated: 1
   AutoLoadSceneFromMap: 2
   DeltaTimeType: 0
   ThreadCount: 2
   ChecksumSnapshotHistoryLengthSeconds:
     RawValue: 196608
   ChecksumErrorDumpOptions: 0
-  HeapTrackingMode: 1
-  HeapPageShift: 15
-  HeapPageCount: 256
-  HeapExtraCount: 0

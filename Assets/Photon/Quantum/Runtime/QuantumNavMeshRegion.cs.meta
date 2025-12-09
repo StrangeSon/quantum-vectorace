@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: ab3accfee66e7534dbb7714221c33416
 timeCreated: 1557140157
-licenseType: Store
+licenseType: Pro
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -11,10 +11,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 286874
-  packageName: Photon Quantum - Deterministic Game Engine
-  packageVersion: 3.0.5
-  assetPath: Assets/Photon/Quantum/Runtime/QuantumNavMeshRegion.cs
-  uploadId: 774129

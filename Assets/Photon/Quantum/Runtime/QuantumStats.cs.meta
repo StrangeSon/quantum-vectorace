@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 2d40c1fa25e91914a9d79fad288e1687
 timeCreated: 1517991997
-licenseType: Store
+licenseType: Pro
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -11,10 +11,3 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 286874
-  packageName: Photon Quantum - Deterministic Game Engine
-  packageVersion: 3.0.5
-  assetPath: Assets/Photon/Quantum/Runtime/QuantumStats.cs
-  uploadId: 774129

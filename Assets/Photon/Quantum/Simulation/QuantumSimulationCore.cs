@@ -7,6 +7,81 @@
 #endregion
 
 
+#region Assets/Photon/Quantum/Simulation/Core/Addons.T4.cs
+
+
+
+namespace Quantum {
+  using UnityEngine;
+
+  /// <summary>
+  /// Static type registry is completed by code generation.
+  /// </summary>
+  partial class Statics {
+    static partial void InitStaticDelegatesBotSDK();  
+    static partial void RegisterSimulationTypesBotSDK(TypeRegistry typeRegistry);
+    static partial void EnsureNotStrippedBotSDK();  
+    static partial void InitStaticDelegatesNavigationSDK();  
+    static partial void RegisterSimulationTypesNavigationSDK(TypeRegistry typeRegistry);
+    static partial void EnsureNotStrippedNavigationSDK();  
+
+    static void InitStaticDelegatesAddons() {
+      InitStaticDelegatesBotSDK();
+      InitStaticDelegatesNavigationSDK();
+    }
+
+    static void RegisterSimulationTypesAddons(TypeRegistry typeRegistry) {
+      RegisterSimulationTypesBotSDK(typeRegistry);
+      RegisterSimulationTypesNavigationSDK(typeRegistry);
+    }
+
+    static void EnsureNotStrippedAddons() {
+      EnsureNotStrippedBotSDK();
+      EnsureNotStrippedNavigationSDK();
+    }
+  }
+
+  partial class FrameContextUser {
+    partial void ConstructBotSDK(Args args, IRuntimeConfig runtimeConfig);
+    partial void DisposeBotSDK();  
+    partial void ConstructNavigationSDK(Args args, IRuntimeConfig runtimeConfig);
+    partial void DisposeNavigationSDK();  
+
+    void ConstructAddons(Args args, IRuntimeConfig runtimeConfig) {
+      ConstructBotSDK(args, runtimeConfig);
+      ConstructNavigationSDK(args, runtimeConfig);
+    }
+
+    void DisposeAddons() {
+      DisposeBotSDK();
+      DisposeNavigationSDK();
+    }
+  }
+
+  partial class Frame {
+
+    partial void InitBotSDK();
+    partial void FreeBotSDK();    
+    partial void InitNavigationSDK();
+    partial void FreeNavigationSDK();    
+
+
+
+    void InitAddons() {
+      InitBotSDK();
+      InitNavigationSDK();
+    }
+
+    void FreeAddons() {
+      FreeBotSDK();
+      FreeNavigationSDK();
+    }
+  }
+}
+
+#endregion
+
+
 #region Assets/Photon/Quantum/Simulation/Core/CodeGenStub.cs
 
 namespace Quantum {
@@ -147,10 +222,10 @@ namespace Quantum {
     /// <summary>
     /// Called once per frame while two non-trigger 2D colliders are touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="CollisionInfo2D"/> with data about the collision.</param>
     /// \ingroup Physics2dApi
-    void OnCollision2D(Frame f, CollisionInfo2D info);
+    void OnCollision2D(Frame frame, CollisionInfo2D info);
   }
 
   /// <summary>
@@ -163,10 +238,10 @@ namespace Quantum {
     /// <summary>
     /// Called once two non-trigger 2D colliders start touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="CollisionInfo2D"/> with data about the collision.</param>
     /// \ingroup Physics2dApi
-    void OnCollisionEnter2D(Frame f, CollisionInfo2D info);
+    void OnCollisionEnter2D(Frame frame, CollisionInfo2D info);
   }
 
   /// <summary>
@@ -179,10 +254,10 @@ namespace Quantum {
     /// <summary>
     /// Called once two non-trigger 2D colliders stop touching.
     /// </summary>
-    /// <param name="f">The frame in which the entities stopped touching.</param>
+    /// <param name="frame">The frame in which the entities stopped touching.</param>
     /// <param name="info">The <see cref="ExitInfo2D"/> with the entities that were touching.</param>
     /// \ingroup Physics2dApi
-    void OnCollisionExit2D(Frame f, ExitInfo2D info);
+    void OnCollisionExit2D(Frame frame, ExitInfo2D info);
   }
 
   /// <summary>
@@ -196,10 +271,10 @@ namespace Quantum {
     /// <summary>
     /// Called once per frame while a non-trigger and a trigger 2D colliders are touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="TriggerInfo2D"/> with data about the trigger collision.</param>
     /// \ingroup Physics2dApi
-    void OnTrigger2D(Frame f, TriggerInfo2D info);
+    void OnTrigger2D(Frame frame, TriggerInfo2D info);
   }
 
   /// <summary>
@@ -213,10 +288,10 @@ namespace Quantum {
     /// <summary>
     /// Called once a non-trigger and a trigger 2D colliders start touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="TriggerInfo2D"/> with data about the trigger collision.</param>
     /// \ingroup Physics2dApi
-    void OnTriggerEnter2D(Frame f, TriggerInfo2D info);
+    void OnTriggerEnter2D(Frame frame, TriggerInfo2D info);
   }
 
   /// <summary>
@@ -230,10 +305,10 @@ namespace Quantum {
     /// <summary>
     /// Called once a non-trigger and a trigger 2D colliders stop touching.
     /// </summary>
-    /// <param name="f">The frame in which the entities stopped touching.</param>
+    /// <param name="frame">The frame in which the entities stopped touching.</param>
     /// <param name="info">The <see cref="ExitInfo2D"/> with the entities that were touching.</param>
     /// \ingroup Physics2dApi
-    void OnTriggerExit2D(Frame f, ExitInfo2D info);
+    void OnTriggerExit2D(Frame frame, ExitInfo2D info);
   }
   
   /// <summary>
@@ -246,10 +321,10 @@ namespace Quantum {
     /// <summary>
     /// Called once per frame while two non-trigger 3D colliders are touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="CollisionInfo3D"/> with data about the collision.</param>
     /// \ingroup Physics3dApi
-    void OnCollision3D(Frame f, CollisionInfo3D info);
+    void OnCollision3D(Frame frame, CollisionInfo3D info);
   }
 
   /// <summary>
@@ -262,10 +337,10 @@ namespace Quantum {
     /// <summary>
     /// Called once two non-trigger 3D colliders start touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="CollisionInfo3D"/> with data about the collision.</param>
     /// \ingroup Physics3dApi
-    void OnCollisionEnter3D(Frame f, CollisionInfo3D info);
+    void OnCollisionEnter3D(Frame frame, CollisionInfo3D info);
   }
 
   /// <summary>
@@ -278,10 +353,10 @@ namespace Quantum {
     /// <summary>
     /// Called once two non-trigger 3D colliders stop touching.
     /// </summary>
-    /// <param name="f">The frame in which the entities stopped touching.</param>
+    /// <param name="frame">The frame in which the entities stopped touching.</param>
     /// <param name="info">The <see cref="ExitInfo3D"/> with the entities that were touching.</param>
     /// \ingroup Physics3dApi
-    void OnCollisionExit3D(Frame f, ExitInfo3D info);
+    void OnCollisionExit3D(Frame frame, ExitInfo3D info);
   }
 
   /// <summary>
@@ -295,10 +370,10 @@ namespace Quantum {
     /// <summary>
     /// Called once per frame while a non-trigger and a trigger 3D colliders are touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="TriggerInfo3D"/> with data about the trigger collision.</param>
     /// \ingroup Physics3dApi
-    void OnTrigger3D(Frame f, TriggerInfo3D info);
+    void OnTrigger3D(Frame frame, TriggerInfo3D info);
   }
 
   /// <summary>
@@ -312,10 +387,10 @@ namespace Quantum {
     /// <summary>
     /// Called once a non-trigger and a trigger 3D colliders start touching.
     /// </summary>
-    /// <param name="f">The frame in which the collision happened.</param>
+    /// <param name="frame">The frame in which the collision happened.</param>
     /// <param name="info">The <see cref="TriggerInfo3D"/> with data about the trigger collision.</param>
     /// \ingroup Physics3dApi
-    void OnTriggerEnter3D(Frame f, TriggerInfo3D info);
+    void OnTriggerEnter3D(Frame frame, TriggerInfo3D info);
   }
 
   /// <summary>
@@ -329,10 +404,10 @@ namespace Quantum {
     /// <summary>
     /// Called once a non-trigger and a trigger 3D colliders stop touching.
     /// </summary>
-    /// <param name="f">The frame in which the entities stopped touching.</param>
+    /// <param name="frame">The frame in which the entities stopped touching.</param>
     /// <param name="info">The <see cref="ExitInfo3D"/> with the entities that were touching.</param>
     /// \ingroup Physics3dApi
-    void OnTriggerExit3D(Frame f, ExitInfo3D info);
+    void OnTriggerExit3D(Frame frame, ExitInfo3D info);
   }
 }
 
@@ -362,7 +437,9 @@ namespace Quantum {
       var factories = new List<IDeterministicCommandFactory>() {
         // pre-defined core commands
         Core.DebugCommand.CreateCommand(),
+#pragma warning disable CS0618 // Type or member is obsolete
         new DeterministicCommandPool<Core.CompoundCommand>(),
+        new DeterministicCommandPool<Core.DeterministicCommandWrapper>(),
       };
 
       AddCommandFactoriesUser(factories, gameConfig, simulationConfig);
@@ -380,15 +457,14 @@ namespace Quantum {
 #region Assets/Photon/Quantum/Simulation/Core/Frame.cs
 
 namespace Quantum {
+  using Photon.Deterministic;
+  using Quantum.Core;
   using System;
   using System.Collections.Generic;
   using System.Diagnostics;
   using System.IO;
   using System.Linq;
   using System.Runtime.CompilerServices;
-  using Photon.Deterministic;
-  using Quantum.Core;
-  using Quantum.Profiling;
 
   /// <summary>
   /// The user implementation of <see cref="FrameBase"/> that resides in the project quantum_state and has access to all user relevant classes.
@@ -398,11 +474,11 @@ namespace Quantum {
     /// <summary>
     /// If set the <see cref="Quantum.SimulationConfig"/> will not be printed in the frame dump during <see cref="DumpFrame(int)"/>.
     /// </summary>
-    public const int DumpFlag_NoSimulationConfig           = 1 << 1;
+    public const int DumpFlag_NoSimulationConfig = 1 << 1;
     /// <summary>
     /// If set the <see cref="Quantum.RuntimeConfig"/> will not be printed in the frame dump during <see cref="DumpFrame(int)"/>.
     /// </summary>
-    public const int DumpFlag_NoRuntimeConfig              = 1 << 3;
+    public const int DumpFlag_NoRuntimeConfig = 1 << 3;
     /// <summary>
     /// If set the <see cref="DeterministicSessionConfig"/> will not be printed in the frame dump during <see cref="DumpFrame(int)"/>.
     /// </summary>
@@ -410,41 +486,41 @@ namespace Quantum {
     /// <summary>
     /// If set the <see cref="RuntimePlayer"/>s will not be printed in the frame dump during <see cref="DumpFrame(int)"/>.
     /// </summary>
-    public const int DumpFlag_NoRuntimePlayers             = 1 << 5;
+    public const int DumpFlag_NoRuntimePlayers = 1 << 5;
     /// <summary>
     /// If set the Dynamic Asset DB will not be printed in the frame dump during <see cref="DumpFrame(int)"/>.
     /// </summary>
-    public const int DumpFlag_NoDynamicDB                  = 1 << 6;
+    public const int DumpFlag_NoDynamicDB = 1 << 6;
     /// <summary>
     /// If set the Dynamic Asset DB will be dumped in readable form during <see cref="DumpFrame(int)"/>.
     /// </summary>
-    public const int DumpFlag_ReadableDynamicDB            = 1 << 7;
+    public const int DumpFlag_ReadableDynamicDB = 1 << 7;
     /// <summary>
     /// If set the frame dump will print more raw values like pointers.
     /// </summary>
-    public const int DumpFlag_PrintRawValues               = 1 << 8;
+    public const int DumpFlag_PrintRawValues = 1 << 8;
     /// <summary>
     /// If set the frame dump will print component checksums.
     /// </summary>
-    public const int DumpFlag_ComponentChecksums           = 1 << 9;
+    public const int DumpFlag_ComponentChecksums = 1 << 9;
     /// <summary>
     /// If set the frame dump will print Asset DB checksums.
     /// </summary>
-    public const int DumpFlag_AssetDBCheckums              = 1 << 10;
+    public const int DumpFlag_AssetDBCheckums = 1 << 10;
     /// <summary>
     /// Is set the frame dump will not print the IsVerified information.
     /// </summary>
-    public const int DumpFlag_NoIsVerified                 = 1 << 11;
+    public const int DumpFlag_NoIsVerified = 1 << 11;
     /// <summary>
     /// If set the 3D Physics SceneMesh metadata will be dumped.
     /// </summary>
-    public const int DumpFlag_SceneMesh3D                  = 1 << 12;
+    public const int DumpFlag_SceneMesh3D = 1 << 12;
 
     struct RuntimePlayerData {
-      public Int32         ActorId;
-      public Int32         PlayerSlot;
+      public Int32 ActorId;
+      public Int32 PlayerSlot;
       [Obsolete("Will not be set anymore")]
-      public Byte[]        Data => null;
+      public Byte[] Data => null;
       public RuntimePlayer Player;
     }
 
@@ -452,13 +528,13 @@ namespace Quantum {
     _globals_* _globals;
 
     // configs
-    RuntimeConfig              _runtimeConfig;
-    SimulationConfig           _simulationConfig;
+    RuntimeConfig _runtimeConfig;
+    SimulationConfig _simulationConfig;
     DeterministicSessionConfig _sessionConfig;
 
     // systems
-    SystemBase[]                  _systemsAll;
-    SystemBase[]                  _systemsRoots;
+    SystemBase[] _systemsAll;
+    SystemBase[] _systemsRoots;
     Dictionary<Type, List<Int32>> _systemIndexByType;
 
     // player data
@@ -471,33 +547,33 @@ namespace Quantum {
     ISignalOnPlayerRemoved[] _ISignalOnPlayerRemoved;
 
     // 2D Physics collision signals
-    ISignalOnCollision2D[]      _ISignalOnCollision2DSystems;
+    ISignalOnCollision2D[] _ISignalOnCollision2DSystems;
     ISignalOnCollisionEnter2D[] _ISignalOnCollisionEnter2DSystems;
-    ISignalOnCollisionExit2D[]  _ISignalOnCollisionExit2DSystems;
+    ISignalOnCollisionExit2D[] _ISignalOnCollisionExit2DSystems;
 
     // 2D Physics trigger signals
-    ISignalOnTrigger2D[]      _ISignalOnTrigger2DSystems;
+    ISignalOnTrigger2D[] _ISignalOnTrigger2DSystems;
     ISignalOnTriggerEnter2D[] _ISignalOnTriggerEnter2DSystems;
-    ISignalOnTriggerExit2D[]  _ISignalOnTriggerExit2DSystems;
+    ISignalOnTriggerExit2D[] _ISignalOnTriggerExit2DSystems;
 
     // 3D Physics collision signals
-    ISignalOnCollision3D[]      _ISignalOnCollision3DSystems;
+    ISignalOnCollision3D[] _ISignalOnCollision3DSystems;
     ISignalOnCollisionEnter3D[] _ISignalOnCollisionEnter3DSystems;
-    ISignalOnCollisionExit3D[]  _ISignalOnCollisionExit3DSystems;
+    ISignalOnCollisionExit3D[] _ISignalOnCollisionExit3DSystems;
 
     // 3D Physics trigger signals
-    ISignalOnTrigger3D[]      _ISignalOnTrigger3DSystems;
+    ISignalOnTrigger3D[] _ISignalOnTrigger3DSystems;
     ISignalOnTriggerEnter3D[] _ISignalOnTriggerEnter3DSystems;
-    ISignalOnTriggerExit3D[]  _ISignalOnTriggerExit3DSystems;
+    ISignalOnTriggerExit3D[] _ISignalOnTriggerExit3DSystems;
 
     ISignalOnNavMeshWaypointReached[] _ISignalOnNavMeshWaypointReachedSystems;
-    ISignalOnNavMeshSearchFailed[]    _ISignalOnNavMeshSearchFailedSystems;
-    ISignalOnNavMeshMoveAgent[]       _ISignalOnNavMeshMoveAgentSystems;
+    ISignalOnNavMeshSearchFailed[] _ISignalOnNavMeshSearchFailedSystems;
+    ISignalOnNavMeshMoveAgent[] _ISignalOnNavMeshMoveAgentSystems;
 
-    ISignalOnMapChanged[]                   _ISignalOnMapChangedSystems;
-    ISignalOnEntityPrototypeMaterialized[]  _ISignalOnEntityPrototypeMaterializedSystems;
+    ISignalOnMapChanged[] _ISignalOnMapChangedSystems;
+    ISignalOnEntityPrototypeMaterialized[] _ISignalOnEntityPrototypeMaterializedSystems;
 
-    ISignalOnPlayerConnected[]    _ISignalOnPlayerConnectedSystems;
+    ISignalOnPlayerConnected[] _ISignalOnPlayerConnectedSystems;
     ISignalOnPlayerDisconnected[] _ISignalOnPlayerDisconnectedSystems;
 
     /// <summary>
@@ -512,7 +588,7 @@ namespace Quantum {
     /// </code></example>
     /// </summary>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public _globals_* Global { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => _globals;  }
+    public _globals_* Global { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => _globals; }
 
     /// <summary>
     /// Whether this is safe is verified at the codegen stage.
@@ -525,13 +601,13 @@ namespace Quantum {
     /// <para>Supports determinism under roll-backs.</para>
     /// <para>If random is used in conjunction with the prediction area feature the session needs to be stored on the entities themselves.</para>
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public RNGSession* RNG { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->RngSession; } 
+    public RNGSession* RNG { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->RngSession; }
 
     /// <summary>
     /// Returns the max player count that the simulation was started with <see cref="DeterministicSessionConfig.PlayerCount"/>.
     /// </summary>
     [Obsolete("Use MaxPlayerCount instead")]
-    public Int32 PlayerCount{
+    public Int32 PlayerCount {
       [MethodImpl(MethodImplOptions.AggressiveInlining)]
       get => _sessionConfig.PlayerCount;
     }
@@ -547,31 +623,31 @@ namespace Quantum {
     /// <summary>
     /// Returns the number of players that are currently connected, requires the <see cref="PlayerConnectedSystem"/>.
     /// </summary>
-    public Int32 PlayerConnectedCount { 
-      [MethodImpl(MethodImplOptions.AggressiveInlining)] 
-      get => GlobalsCore->PlayerConnectedCount; 
+    public Int32 PlayerConnectedCount {
+      [MethodImpl(MethodImplOptions.AggressiveInlining)]
+      get => GlobalsCore->PlayerConnectedCount;
       internal set => GlobalsCore->PlayerConnectedCount = value;
     }
 
     /// <summary>
     /// Returns the global navmesh region mask that controls toggling on/off regions.
     /// </summary>
-    public override NavMeshRegionMask* NavMeshRegionMask { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->NavMeshRegions; } 
+    public override NavMeshRegionMask* NavMeshRegionMask { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->NavMeshRegions; }
 
     /// <summary>
     /// Returns the frame meta data.
     /// </summary>
-    public override FrameMetaData* FrameMetaData { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->FrameMetaData; } 
+    public override FrameMetaData* FrameMetaData { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->FrameMetaData; }
 
     /// <summary>
     /// Returns the physics 2D engine state.
     /// </summary>
-    protected override PhysicsEngineState* _physicsState2D { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->PhysicsState2D; } 
+    protected override PhysicsEngineState2D* _physicsState2D { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->PhysicsState2D; }
 
     /// <summary>
     /// Returns the physics 3d engine state.
     /// </summary>
-    protected override PhysicsEngineState* _physicsState3D { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->PhysicsState3D; }
+    protected override PhysicsEngineState3D* _physicsState3D { [MethodImpl(MethodImplOptions.AggressiveInlining)] get => &GlobalsCore->PhysicsState3D; }
 
     /// <summary>
     /// Returns the mode that commands are committed to the simulation.
@@ -592,7 +668,7 @@ namespace Quantum {
     /// <para>Custom events are defined in the DSL.</para>
     /// </summary>
     public FrameEvents Events;
-    
+
     /// <summary>
     /// The frame user context
     /// </summary>
@@ -622,7 +698,7 @@ namespace Quantum {
     public DeterministicSessionConfig SessionConfig {
       [MethodImpl(MethodImplOptions.AggressiveInlining)]
       get => _sessionConfig;
-      internal set => _sessionConfig = value; 
+      internal set => _sessionConfig = value;
     }
 
     /// <summary>
@@ -691,29 +767,39 @@ namespace Quantum {
     /// <summary>
     /// Create a new frame object.
     /// </summary>
-    public Frame(FrameContext context, SystemBase[] systemsAll, SystemBase[] systemsRoots, DeterministicSessionConfig sessionConfig, RuntimeConfig runtimeConfig, SimulationConfig simulationConfig, FP deltaTime) 
-      : base(context) {
+    public Frame(FrameContext context, SystemBase[] systemsAll, SystemBase[] systemsRoots, DeterministicSessionConfig sessionConfig, RuntimeConfig runtimeConfig, SimulationConfig simulationConfig, FP deltaTime, bool verified, bool enableHeapTrackerDuringInit)
+      : base(context, sessionConfig.PlayerCount, sizeof(Input), verified, enableHeapTrackerDuringInit) {
       Assert.Check(context != null);
 
-      _systemsAll   = systemsAll;
+      using var scope = HostProfiler.Markers.FrameConstructor();
+
+      _systemsAll = systemsAll;
       _systemsRoots = systemsRoots;
 
-      _runtimeConfig    = runtimeConfig;
+      _runtimeConfig = runtimeConfig;
       _simulationConfig = simulationConfig;
-      _sessionConfig    = sessionConfig;
+      _sessionConfig = sessionConfig;
 
       _playerData = new PersistentMap<Int32, RuntimePlayerData>();
 
       AllocGen();
       InitStatic();
       InitGen();
-      
-      Events     = new FrameEvents(this);
-      Signals    = new FrameSignals(this);
-      Unsafe     = new FrameBaseUnsafe(this);
-      
-      Physics2D  = new Physics2D.PhysicsEngine2D.Api(this, context.TaskContext.ThreadCount);
-      Physics3D  = new Physics3D.PhysicsEngine3D.Api(this, context.TaskContext.ThreadCount);
+      InitAddons();
+
+      Events = new FrameEvents(this);
+      Signals = new FrameSignals(this);
+      Unsafe = new FrameBaseUnsafe(this);
+
+      if (context.Physics2D != null) {
+        Physics2D = new Physics2D.PhysicsEngine2D.Api(this, context.TaskContext.ThreadCount);
+        PhysicsEngineState2D.Allocate(this, 64);
+      }
+
+      if (context.Physics3D != null) {
+        Physics3D = new Physics3D.PhysicsEngine3D.Api(this, context.TaskContext.ThreadCount);
+        PhysicsEngineState3D.Allocate(this, 64);
+      }
 
       // player data set signal
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -723,35 +809,35 @@ namespace Quantum {
       _ISignalOnPlayerRemoved = BuildSignalsArray<ISignalOnPlayerRemoved>();
 
       // 2D Physics collision signals
-      _ISignalOnCollision2DSystems      = BuildSignalsArray<ISignalOnCollision2D>();
+      _ISignalOnCollision2DSystems = BuildSignalsArray<ISignalOnCollision2D>();
       _ISignalOnCollisionEnter2DSystems = BuildSignalsArray<ISignalOnCollisionEnter2D>();
-      _ISignalOnCollisionExit2DSystems  = BuildSignalsArray<ISignalOnCollisionExit2D>();
+      _ISignalOnCollisionExit2DSystems = BuildSignalsArray<ISignalOnCollisionExit2D>();
 
       // 2D Physics trigger signals
-      _ISignalOnTrigger2DSystems      = BuildSignalsArray<ISignalOnTrigger2D>();
+      _ISignalOnTrigger2DSystems = BuildSignalsArray<ISignalOnTrigger2D>();
       _ISignalOnTriggerEnter2DSystems = BuildSignalsArray<ISignalOnTriggerEnter2D>();
-      _ISignalOnTriggerExit2DSystems  = BuildSignalsArray<ISignalOnTriggerExit2D>();
+      _ISignalOnTriggerExit2DSystems = BuildSignalsArray<ISignalOnTriggerExit2D>();
 
       // 3D Physics collision signals
-      _ISignalOnCollision3DSystems      = BuildSignalsArray<ISignalOnCollision3D>();
+      _ISignalOnCollision3DSystems = BuildSignalsArray<ISignalOnCollision3D>();
       _ISignalOnCollisionEnter3DSystems = BuildSignalsArray<ISignalOnCollisionEnter3D>();
-      _ISignalOnCollisionExit3DSystems  = BuildSignalsArray<ISignalOnCollisionExit3D>();
+      _ISignalOnCollisionExit3DSystems = BuildSignalsArray<ISignalOnCollisionExit3D>();
 
       // 3D Physics trigger signals
-      _ISignalOnTrigger3DSystems      = BuildSignalsArray<ISignalOnTrigger3D>();
+      _ISignalOnTrigger3DSystems = BuildSignalsArray<ISignalOnTrigger3D>();
       _ISignalOnTriggerEnter3DSystems = BuildSignalsArray<ISignalOnTriggerEnter3D>();
-      _ISignalOnTriggerExit3DSystems  = BuildSignalsArray<ISignalOnTriggerExit3D>();
+      _ISignalOnTriggerExit3DSystems = BuildSignalsArray<ISignalOnTriggerExit3D>();
 
       _ISignalOnNavMeshWaypointReachedSystems = BuildSignalsArray<ISignalOnNavMeshWaypointReached>();
-      _ISignalOnNavMeshSearchFailedSystems    = BuildSignalsArray<ISignalOnNavMeshSearchFailed>();
-      _ISignalOnNavMeshMoveAgentSystems       = BuildSignalsArray<ISignalOnNavMeshMoveAgent>();
+      _ISignalOnNavMeshSearchFailedSystems = BuildSignalsArray<ISignalOnNavMeshSearchFailed>();
+      _ISignalOnNavMeshMoveAgentSystems = BuildSignalsArray<ISignalOnNavMeshMoveAgent>();
 
       // map changed signal
       _ISignalOnMapChangedSystems = BuildSignalsArray<ISignalOnMapChanged>();
 
       // prototype materialized signal
       _ISignalOnEntityPrototypeMaterializedSystems = BuildSignalsArray<ISignalOnEntityPrototypeMaterialized>();
-      if ( _ISignalOnEntityPrototypeMaterializedSystems.Length > 0 ) {
+      if (_ISignalOnEntityPrototypeMaterializedSystems.Length > 0) {
         base._SignalOnEntityPrototypeMaterialized = (entity, prototype) => Signals.OnEntityPrototypeMaterialized(entity, prototype);
       }
 
@@ -759,9 +845,9 @@ namespace Quantum {
       _ISignalOnPlayerDisconnectedSystems = BuildSignalsArray<ISignalOnPlayerDisconnected>();
 
       // assign map, rng session, etc.
-      GlobalsCore->Map        = FindAsset<Map>(runtimeConfig.Map.Id);
+      GlobalsCore->Map = FindAsset<Map>(runtimeConfig.Map.Id);
       GlobalsCore->RngSession = new RNGSession(runtimeConfig.Seed);
-      GlobalsCore->DeltaTime  = deltaTime;
+      GlobalsCore->DeltaTime = deltaTime;
 
       _systemIndexByType = new Dictionary<Type, List<Int32>>(_systemsAll.Length);
 
@@ -773,7 +859,7 @@ namespace Quantum {
         if (_systemIndexByType.TryGetValue(systemType, out var list)) {
           list.Add(i);
         } else {
-          _systemIndexByType.Add(systemType, new () { i });
+          _systemIndexByType.Add(systemType, new() { i });
         }
 
         // set default enabled systems
@@ -783,7 +869,7 @@ namespace Quantum {
       }
 
       // init physics settings
-      Quantum.PhysicsSceneSettings.Init(&GlobalsCore->PhysicsSettings, simulationConfig.Physics);
+      Quantum.PhysicsSceneSettings.Init(&GlobalsCore->PhysicsSettings, context.ResourceManager, simulationConfig.Physics);
 
       // Init navmesh regions to all bit fields to be set
       ClearAllNavMeshRegions();
@@ -793,7 +879,7 @@ namespace Quantum {
 
       // preallocate any pointers globals might need
       _globals->AllocatePointers(this, default);
-      
+
       InitUser();
     }
 
@@ -869,7 +955,7 @@ namespace Quantum {
     public ArraySegment<byte> Serialize(DeterministicFrameSerializeMode mode, byte[] buffer, int offset = 0, bool allocOutput = false) {
       return Serialize(mode, buffer, out _, offset, allocOutput);
     }
-    
+
     public ArraySegment<byte> Serialize(DeterministicFrameSerializeMode mode, byte[] buffer, out FrameSerializer serializer, int offset = 0, bool allocOutput = false) {
       offset = ByteUtils.AddValueBlock((int)mode, buffer, offset);
       offset = ByteUtils.AddValueBlock(Number, buffer, offset);
@@ -912,7 +998,7 @@ namespace Quantum {
       }
 
       using (var outputStream = allocOutput ? new MemoryStream() : new MemoryStream(buffer, offset, buffer.Length - offset)) {
-        using (var compressedOutput = ByteUtils.CreateGZipCompressStream(outputStream)) {
+        using (var compressedOutput = Compression.CreateCompressingStream(outputStream)) {
           compressedOutput.Write(buffer, 0, offset);
           compressedOutput.Write(assetDBHeader, 0, assetDBHeader.Length);
           compressedOutput.Write(assetDBData, 0, assetDBData.Length);
@@ -923,24 +1009,24 @@ namespace Quantum {
         } else {
           return new ArraySegment<byte>(buffer, offset, (int)outputStream.Position);
         }
-        
+
       }
     }
 
     public override void Deserialize(Byte[] data) {
-      var blocks = ByteUtils.ReadByteBlocks(ByteUtils.GZipDecompressBytes(data)).ToArray();
-      
-      var mode   = (DeterministicFrameSerializeMode)BitConverter.ToInt32(blocks[0], 0);
-      
+      var blocks = ByteUtils.ReadByteBlocks(Compression.DecompressBytes(data)).ToArray();
+
+      var mode = (DeterministicFrameSerializeMode)BitConverter.ToInt32(blocks[0], 0);
+
       Number = BitConverter.ToInt32(blocks[1], 0);
-      
+
       var checksum = BitConverter.ToUInt64(blocks[2], 0);
 
       DeserializeRuntimePlayers(blocks[3]);
       DeserializeDynamicAssetDB(blocks[5]);
 
       FrameSerializer serializer;
-      serializer         = new FrameSerializer(mode, this, blocks[4]);
+      serializer = new FrameSerializer(mode, this, blocks[4]);
       serializer.Reading = true;
 
       SerializeState(serializer);
@@ -954,6 +1040,7 @@ namespace Quantum {
 
     void SerializeState(FrameSerializer serializer) {
       FrameBase.Serialize(this, serializer);
+      SerializeInputFlags(serializer.Stream);
       _globals_.Serialize(_globals, serializer);
       SerializeEntitiesGen(serializer);
       SerializeUser(serializer);
@@ -971,7 +1058,7 @@ namespace Quantum {
 
     void DeserializeRuntimePlayers(Byte[] bytes) {
       BitStream stream;
-      stream         = new BitStream(bytes);
+      stream = new BitStream(bytes);
       stream.Reading = true;
 
       var count = stream.ReadInt();
@@ -1008,7 +1095,7 @@ namespace Quantum {
       } else {
         printer.AddLine($"#### FRAME DUMP FOR {Number} IsVerified={IsVerified} ####");
       }
-      
+
       if ((dumpFlags & DumpFlag_NoSimulationConfig) != DumpFlag_NoSimulationConfig) {
         printer.AddLine();
         printer.AddObject("# " + nameof(SimulationConfig), SimulationConfig);
@@ -1050,10 +1137,10 @@ namespace Quantum {
         printer.AddLine("# ASSETDB CHECKSUMS");
         {
           printer.ScopeBegin();
-          
+
           var orderedAssets = Context.ResourceManager.LoadAllAssets();
           orderedAssets.Sort((a, b) => a.Guid.CompareTo(b.Guid));
-          
+
           foreach (var asset in orderedAssets) {
             var bytes = this.Context.AssetSerializer.AssetToByteArray(asset);
             fixed (byte* p = bytes) {
@@ -1098,13 +1185,13 @@ namespace Quantum {
       if (Physics2D != null) {
         printer.AddLine();
         printer.AddLine("# 2D PHYSICS STATE");
-        PhysicsEngineState.Print(_physicsState2D, printer);
+        PhysicsEngineState2D.Print(_physicsState2D, printer);
       }
 
       if (Physics3D != null) {
         printer.AddLine();
         printer.AddLine("# 3D PHYSICS STATE");
-        PhysicsEngineState.Print(_physicsState3D, printer);
+        PhysicsEngineState3D.Print(_physicsState3D, printer);
 
         if ((dumpFlags & DumpFlag_SceneMesh3D) == DumpFlag_SceneMesh3D && Physics3D.SceneMesh != null) {
           printer.AddLine();
@@ -1117,7 +1204,7 @@ namespace Quantum {
       if ((dumpFlags & DumpFlag_NoHeap) != DumpFlag_NoHeap) {
         printer.AddLine();
         printer.AddLine("# HEAP");
-        Allocator.Heap.Print(_frameHeap.HeapUnsafe, printer);
+        Allocator.FrameHeap.Print(_frameHeap, printer);
       }
 
       // dump user data
@@ -1145,7 +1232,7 @@ namespace Quantum {
       FrameSerializer frameSerializer;
       if (useSharedSerializer) {
         frameSerializer = Context.SharedChecksumSerializer;
-        Assert.Check(frameSerializer != null); 
+        Assert.Check(frameSerializer != null);
       } else {
         frameSerializer = new FrameSerializer(DeterministicFrameSerializeMode.Serialize, this, new FrameChecksumerBitStream());
       }
@@ -1161,10 +1248,10 @@ namespace Quantum {
       if (serializer.Mode != DeterministicFrameSerializeMode.Serialize) {
         throw new ArgumentException($"Serializer needs to be in {nameof(DeterministicFrameSerializeMode.Serialize)} mode", nameof(serializer));
       }
-      
+
       if (serializer.Stream is FrameChecksumerBitStream checksumStream) {
 
-        using var scope = HostProfiler.Markers.CalculateChecksumInternal.Start();
+        using var scope = HostProfiler.Markers.CalculateChecksumInternal();
 
         try {
           serializer.Reset();
@@ -1196,14 +1283,11 @@ namespace Quantum {
     protected sealed override void Copy(DeterministicFrame frame) {
       var f = (Frame)frame;
 
-      using (HostProfiler.Markers.FrameCopy.Start()) {
+      using (HostProfiler.Markers.FrameCopy()) {
 
         if (IsVerified) {
-          // TODO(Erick): fix and optimize size see DeterministicFrame.Init()
-          if (RawInputs == null) {
-            RawInputs = new int[1024 * 32];
-          }
-
+          Assert.Always(RawInputs != null, "Expected RawInputs to be not null");
+          
           // only copy RawInputs into verified frame buffer, checksum and replay ring buffer, etc
           Array.Copy(f.RawInputs, RawInputs, f.RawInputs.Length);
         }
@@ -1211,9 +1295,9 @@ namespace Quantum {
         // copy player data
         _playerData = f._playerData;
 
-        using (HostProfiler.Markers.FrameCopyHeap.Start()) {
+        using (HostProfiler.Markers.FrameCopyHeap()) {
           // copy heap from frame
-          Allocator.Heap.Copy(Context.Allocator, _frameHeap.HeapUnsafe, f._frameHeap.HeapUnsafe);
+          Heap.CopyFrom(f.Heap);
         }
 
         // copy entity registry
@@ -1224,11 +1308,11 @@ namespace Quantum {
 
         // perform native copy
 
-        using (HostProfiler.Markers.FrameCopyGlobals.Start()) {
+        using (HostProfiler.Markers.FrameCopyGlobals()) {
           CopyFromGen(f);
         }
 
-        using (HostProfiler.Markers.FrameCopyUser.Start()) {
+        using (HostProfiler.Markers.FrameCopyUser()) {
           CopyFromUser(f);
         }
       }
@@ -1237,6 +1321,7 @@ namespace Quantum {
     public sealed override void Free() {
       _globals->ClearPointers(this, default);
       FreeUser();
+      FreeAddons();
       FreeGen();
       base.Free();
     }
@@ -1255,7 +1340,7 @@ namespace Quantum {
     }
 
     /// <inheritdoc cref="SystemAllEnabledSelf{T}()"/>
-    public Boolean SystemAllEnabledSelf(Type systemType){ 
+    public Boolean SystemAllEnabledSelf(Type systemType) {
       if (_systemIndexByType.TryGetValue(systemType, out var systems)) {
         for (int i = 0; i < systems.Count; i++) {
           if (SystemIsEnabledSelf(systems[i]) == false) {
@@ -1444,7 +1529,7 @@ namespace Quantum {
     /// Logs an error if the system type is not found.
     /// </summary>
     /// <param name="systemRuntimeIndex">System runtime index identified by <see cref="SystemBase.RuntimeIndex"/></param>
-    public void SystemEnable(int systemRuntimeIndex){
+    public void SystemEnable(int systemRuntimeIndex) {
       if (systemRuntimeIndex < 0 || systemRuntimeIndex >= SystemsAll.Length) {
         Log.Error($"System runtime index '{systemRuntimeIndex}' not found");
         return;
@@ -1520,8 +1605,8 @@ namespace Quantum {
     /// </summary>
     /// <param name="system">System object</param>
     public void SystemDisable(SystemBase system) {
-      if (system == null) { 
-        return; 
+      if (system == null) {
+        return;
       }
 
       if (GlobalsCore->Systems.IsSet(system.RuntimeIndex)) {
@@ -1562,21 +1647,52 @@ namespace Quantum {
     }
 
     #endregion Legacy
-    
+
     #endregion // System API
 
     T[] BuildSignalsArray<T>() {
-      return _systemsAll.Where(x => x is T).Cast<T>().ToArray();
+      // Replaced LINQ expression
+      //return _systemsAll.Where(x => x is T).Cast<T>().ToArray();
+      return BuildArrayOfType<T>(_systemsAll);
+
+    }
+
+    static T[] BuildArrayOfType<T>(object[] systems) {
+      //HostProfiler.Start("BuildSignalsArray");
+
+      // Use ArraySegments as an alternative to iterating twice, but the measured improvements were minor.
+      var count = 0;
+      for (var i = 0; i < systems.Length; i++) {
+        if (systems[i] is T) {
+          count++;
+        }
+      }
+
+      var result = new T[count];
+      var resultIndex = 0;
+
+      for (var i = 0; i < systems.Length; i++) {
+        if (systems[i] is T system) {
+          result[resultIndex++] = system;
+        }
+      }
+
+      //HostProfiler.End();
+
+      return result;
     }
 
     void BuildSignalsArrayOnComponentAdded<T>() where T : unmanaged, IComponent {
       Assert.Check(ComponentTypeId<T>.Id > 0);
 
-      var array = _systemsAll.Where(x => x is ISignalOnComponentAdded<T>).Cast<ISignalOnComponentAdded<T>>().ToArray();
+      // Replaced LINQ expression
+      // var array = _systemsAll.Where(x => x is ISignalOnComponentAdded<T>).Cast<ISignalOnComponentAdded<T>>().ToArray();
+      var array = BuildArrayOfType<ISignalOnComponentAdded<T>>(_systemsAll);
+
       if (array.Length > 0) {
         _ComponentSignalsOnAdded[ComponentTypeId<T>.Id] = (entity, componentData) => {
           var component = (T*)componentData;
-          var systems   = &(GlobalsCore->Systems);
+          var systems = &(GlobalsCore->Systems);
           for (Int32 i = 0; i < array.Length; ++i) {
             if (SystemIsEnabledInHierarchy((SystemBase)array[i])) {
               array[i].OnAdded(this, entity, component);
@@ -1591,11 +1707,14 @@ namespace Quantum {
     void BuildSignalsArrayOnComponentRemoved<T>() where T : unmanaged, IComponent {
       Assert.Check(ComponentTypeId<T>.Id > 0);
 
-      var array = _systemsAll.Where(x => x is ISignalOnComponentRemoved<T>).Cast<ISignalOnComponentRemoved<T>>().ToArray();
-      if (array.Length > 0) {
+      // Replaced LINQ expression
+      //var array = _systemsAll.Where(x => x is ISignalOnComponentRemoved<T>).Cast<ISignalOnComponentRemoved<T>>().ToArray();
+      var array = BuildArrayOfType<ISignalOnComponentRemoved<T>>(_systemsAll);
+      
+      if (array.Length> 0) {
         _ComponentSignalsOnRemoved[ComponentTypeId<T>.Id] = (entity, componentData) => {
           var component = (T*)componentData;
-          var systems   = &(GlobalsCore->Systems);
+          var systems = &(GlobalsCore->Systems);
           for (Int32 i = 0; i < array.Length; ++i) {
             if (SystemIsEnabledInHierarchy((SystemBase)array[i])) {
               array[i].OnRemoved(this, entity, component);
@@ -1626,16 +1745,16 @@ namespace Quantum {
     partial void InitGen();
     partial void FreeGen();
     partial void AllocGen();
-    partial void CopyFromGen(Frame                    frame);
+    partial void CopyFromGen(Frame frame);
     partial void SerializeEntitiesGen(FrameSerializer serializer);
 
     partial void InitUser();
     partial void FreeUser();
     partial void AllocUser();
     partial void CopyFromUser(Frame frame);
-
+    
     partial void SerializeUser(FrameSerializer serializer);
-    partial void DumpFrameUser(ref String      dump);
+    partial void DumpFrameUser(ref String dump);
 
 
     /// <summary>
@@ -1744,7 +1863,7 @@ namespace Quantum {
               _playerData = _playerData.AddOrSet(i, data);
 
               // global player index mapping needs to be injected into the session
-              OnPlayerAdded(this, game.Session, data.PlayerSlot, data.ActorId, i);
+              OnPlayerAdded(this, game.Session, data.PlayerSlot, data.ActorId, i, true);
 
               // set mask
               set.Add(i);
@@ -1778,9 +1897,25 @@ namespace Quantum {
       ResetPhysicsCodeGen();
     }
 
+    /// <summary>
+    /// Resets local player mapping to support promoting a local snapshot to an online session.
+    /// </summary>
     protected override void ResetPlayerMapping() {
       _playerData = new PersistentMap<int, RuntimePlayerData>();
       PlayerLastConnectionState.ClearAll();
+    }
+
+    /// <summary>
+    /// Restores local player mapping when reconnecting to an online session that did not remove the player yet.
+    /// This checks if the local client actor id matches any of the previous players and restores the local player mapping for them.
+    /// </summary>
+    public override void RestorePlayerMapping(DeterministicSession session) {
+      foreach (var (key, value) in _playerData) {
+        var inputFlags = GetPlayerInputFlags(key);
+        if ((inputFlags & DeterministicInputFlags.PlayerNotPresent) == 0) {
+          OnPlayerAdded(this, session, value.PlayerSlot, value.ActorId, key, false);
+        }
+      }
     }
   }
 }
@@ -1799,8 +1934,9 @@ namespace Quantum {
     /// <summary>
     /// Frame context user constructor.
     /// </summary>
-    public FrameContextUser(Args args) 
+    public FrameContextUser(Args args, IRuntimeConfig runtimeConfig) 
       : base(args) {
+      ConstructAddons(args, runtimeConfig);
       ConstructUser(args);
     }
 
@@ -1809,6 +1945,7 @@ namespace Quantum {
     /// </summary>
     public override sealed void Dispose() {
       DisposeUser();
+      DisposeAddons();
       base.Dispose();
     }
 
@@ -1816,6 +1953,7 @@ namespace Quantum {
     partial void DisposeUser();
   }
 }
+
 
 #endregion
 
@@ -1850,10 +1988,10 @@ namespace Quantum {
     /// <summary>
     /// The signal is called after a component of the desired type has been added to an entity.
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="entity">The entity that the component was added to.</param>
     /// <param name="component">The component that was added.</param>
-    void OnAdded(Frame f, EntityRef entity, T* component);
+    void OnAdded(Frame frame, EntityRef entity, T* component);
   }
 
   /// <inheritdoc cref="OnRemoved(Frame, EntityRef, T*)"/>
@@ -1862,10 +2000,10 @@ namespace Quantum {
     /// <summary>
     /// The signal is called after a component of the desired type has been removed from an entity.
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="entity">The entity that the component was removed from.</param>
     /// <param name="component">The component that was removed.</param>
-    void OnRemoved(Frame f, EntityRef entity, T* component);
+    void OnRemoved(Frame frame, EntityRef entity, T* component);
   }
 
   /// <inheritdoc cref="OnMapChanged(Frame, AssetRef{Map})"/>
@@ -1873,9 +2011,9 @@ namespace Quantum {
     /// <summary>
     /// This signal is called after the map has been changed by assigning a new map to <see cref="Frame.Map"/>.
     /// </summary>
-    /// <param name="f">The frame reference</param>
+    /// <param name="frame">The frame reference</param>
     /// <param name="previousMap">The previous map</param>
-    void OnMapChanged(Frame f, AssetRef<Map> previousMap);
+    void OnMapChanged(Frame frame, AssetRef<Map> previousMap);
   }
 
   /// <inheritdoc cref="OnEntityPrototypeMaterialized(Frame, EntityRef, EntityPrototypeRef)"/>
@@ -1883,11 +2021,11 @@ namespace Quantum {
     /// <summary>
     /// This signal is called after an entity prototype has been materialized.
     /// <para>During Load Map: the signal is invoked for all Entity and Entity Prototype pairs after all scene prototypes have been materialized.</para>
-    /// <para>Created with Frame.Create(): the signal is invoked immediately after the prototype has been materialized.</para>    /// <param name="f">The frame reference.</param>
+    /// <para>Created with Frame.Create(): the signal is invoked immediately after the prototype has been materialized.</para>    /// <param name="frame">The frame reference.</param>
     /// </summary>
     /// <param name="entity">The entity that was created.</param>
     /// <param name="prototypeRef">The entity prototype that was materialized.</param>
-    void OnEntityPrototypeMaterialized(Frame f, EntityRef entity, EntityPrototypeRef prototypeRef);
+    void OnEntityPrototypeMaterialized(Frame frame, EntityRef entity, EntityPrototypeRef prototypeRef);
   }
 
   /// <inheritdoc cref="OnPlayerConnected(Frame, PlayerRef)"/>
@@ -1898,9 +2036,9 @@ namespace Quantum {
     /// <para>The connected status is based on the <see cref="DeterministicFrame.GetPlayerInputFlags"/>.</para>
     /// <para>The signal is always called from a verified frame.</para>
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="player">The player that connected.</param>
-    void OnPlayerConnected(Frame f, PlayerRef player);
+    void OnPlayerConnected(Frame frame, PlayerRef player);
   }
 
   /// <inheritdoc cref="OnPlayerDisconnected(Frame, PlayerRef)"/>
@@ -1910,9 +2048,9 @@ namespace Quantum {
     /// <para>It's originating from the <see cref="Core.PlayerConnectedSystem"/>.</para>
     /// <para>The connected status is based on the <see cref="DeterministicFrame.GetPlayerInputFlags"/>.</para>
     /// <para>The signal is always called from a verified frame.</para>
-    /// </summary>    /// <param name="f">The frame reference.</param>
+    /// </summary>    /// <param name="frame">The frame reference.</param>
     /// <param name="player">The disconnected player.</param>
-    void OnPlayerDisconnected(Frame f, PlayerRef player);
+    void OnPlayerDisconnected(Frame frame, PlayerRef player);
   }
 
   partial class Frame {
@@ -2288,10 +2426,10 @@ namespace Quantum {
     /// and the server accepted the RuntimePlayer data. 
     /// </summary>
     /// <para>The signal is always called from a verified frame.</para>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="player">The player that was added.</param>
     /// <param name="firstTime">The first time that this player ref was assigned to a player at all. When firstTime is false the player ref is being reused by a different player. See documentation.</param>
-    void OnPlayerAdded(Frame f, PlayerRef player, bool firstTime);
+    void OnPlayerAdded(Frame frame, PlayerRef player, bool firstTime);
   }
 
   /// <inheritdoc cref="ISignalOnPlayerRemoved.OnPlayerRemoved(Frame, PlayerRef)"/>/>
@@ -2301,9 +2439,9 @@ namespace Quantum {
     /// the InputFlags are set to <see cref="Photon.Deterministic.DeterministicInputFlags.PlayerNotPresent"/>.
     /// </summary>
     /// <para>The signal is always called from a verified frame.</para>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="player">The player that was removed.</param>
-    void OnPlayerRemoved(Frame f, PlayerRef player);
+    void OnPlayerRemoved(Frame frame, PlayerRef player);
   }
 
   #region Legacy
@@ -2311,14 +2449,14 @@ namespace Quantum {
   /// <summary>
   /// Obsolete: use <see cref="ISignalOnPlayerAdded"/>.
   /// </summary>
-  [Obsolete("Use new interface ISignalOnPlayerAdded and change signature to OnPlayerAdded(Frame f, PlayerRef player, bool firstTime)")]
+  [Obsolete("Use new interface ISignalOnPlayerAdded and change signature to OnPlayerAdded(Frame frame, PlayerRef player, bool firstTime)")]
   public interface ISignalOnPlayerDataSet : ISignal {
     /// <summary>
     /// Is called when a player and his RuntimePlayer was added to the simulation.
     /// </summary>
-    /// <param name="f">Frame</param>
+    /// <param name="frame">Frame</param>
     /// <param name="player">Player</param>
-    void OnPlayerDataSet(Frame f, PlayerRef player);
+    void OnPlayerDataSet(Frame frame, PlayerRef player);
   }
 
   #endregion
@@ -2339,12 +2477,12 @@ namespace Quantum {
     /// Signal is called when an agent reaches a waypoint.
     /// <para>Requires enabled <see cref="Navigation.Config.EnableNavigationCallbacks"/> in <see cref="SimulationConfig.Navigation"/>.</para>
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="entity">The entity the navmesh agent component belongs to</param>
     /// <param name="waypoint">The current waypoint position</param>
     /// <param name="waypointFlags">The current waypoint flags</param>
     /// <param name="resetAgent">If set to true the NavMeshPathfinder component will be cleared and stopped. Set to false if NavMeshPathfinder.SetTarget() was called inside the callback.</param>
-    void OnNavMeshWaypointReached(Frame f, EntityRef entity, FPVector3 waypoint, Navigation.WaypointFlag waypointFlags, ref bool resetAgent);
+    void OnNavMeshWaypointReached(Frame frame, EntityRef entity, FPVector3 waypoint, Navigation.WaypointFlag waypointFlags, ref bool resetAgent);
   }
 
   /// <inheritdoc cref="OnNavMeshSearchFailed(Frame, EntityRef, ref bool)"/>
@@ -2354,10 +2492,10 @@ namespace Quantum {
     /// Signal is called when the agent could not find a path in the agent update after using <see cref="NavMeshPathfinder.SetTarget"/>
     /// <para>Requires enabled <see cref="Navigation.Config.EnableNavigationCallbacks"/> in <see cref="SimulationConfig.Navigation"/>.</para>
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="entity">The entity the navmesh agent component belongs to</param>
     /// <param name="resetAgent">Set this to true if the agent should reset its internal state (default is true).</param>
-    void OnNavMeshSearchFailed(Frame f, EntityRef entity, ref bool resetAgent);
+    void OnNavMeshSearchFailed(Frame frame, EntityRef entity, ref bool resetAgent);
   }
 
   /// <inheritdoc cref="OnNavMeshMoveAgent(Frame, EntityRef, FPVector2)"/>
@@ -2369,13 +2507,128 @@ namespace Quantum {
     /// <para>Requires enabled <see cref="NavMeshAgentConfig.MovementType"/> to be set to Callback.</para>
     /// <para>Requires enabled <see cref="Navigation.Config.EnableNavigationCallbacks"/> in <see cref="SimulationConfig.Navigation"/>.</para>
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="entity">The entity the navmesh agent component belongs to.</param>
     /// <param name="desiredDirection">The normalized direction that the internal steering and avoidance thinks the agent movement vector should be.</param>
-    void OnNavMeshMoveAgent(Frame f, EntityRef entity, FPVector2 desiredDirection);
+    void OnNavMeshMoveAgent(Frame frame, EntityRef entity, FPVector2 desiredDirection);
   }
 }
 
+
+#endregion
+
+
+#region Assets/Photon/Quantum/Simulation/Core/QuantumUnityDB.Proxy.cs
+
+#if QUANTUM_UNITY_SIMULATION && UNITY_EDITOR
+namespace Quantum {
+  using System;
+  using System.Linq;
+  using System.Reflection;
+  using UnityEditor;
+
+  /// <summary>
+  /// QuantumUnityDB static Editor methods to use in OnValidate etc.
+  /// </summary>
+  static class QuantumUnityDB {
+
+    delegate bool TryGetGlobalAssetEditorInstanceDelegate(AssetRef assetRef, out AssetObject result);
+    delegate AssetObject GetGlobalAssetEditorInstanceDelegate(AssetRef assetRef);
+    delegate string CreateAssetPathFromUnityPathDelegate(string unityAssetPath, string nestedName = null);
+    
+    static readonly Lazy<TryGetGlobalAssetEditorInstanceDelegate> TryGetGlobalAssetEditorInstanceReflected = new(() => CreateQuantumUnityDBDelegateOrThrow<TryGetGlobalAssetEditorInstanceDelegate>(nameof(TryGetGlobalAssetEditorInstance)));
+    static readonly Lazy<GetGlobalAssetEditorInstanceDelegate> GetGlobalAssetEditorInstanceReflected = new(() => CreateQuantumUnityDBDelegateOrThrow<GetGlobalAssetEditorInstanceDelegate>(nameof(GetGlobalAssetEditorInstance)));
+    static readonly Lazy<CreateAssetPathFromUnityPathDelegate> CreateAssetPathFromUnityPathReflected = new(() => CreateQuantumUnityDBDelegateOrThrow<CreateAssetPathFromUnityPathDelegate>(nameof(CreateAssetPathFromUnityPath)));
+
+    /// <summary>
+    /// Returns the editor instance of the asset with the given <paramref name="assetRef"/>. Use in editor code only, for inspectors
+    /// and editors. Returned asset will not have its <see cref="AssetObject.Loaded"/> called.
+    /// </summary>
+    /// <param name="assetRef"></param>
+    /// <returns>Asset instance or <c>null</c> if not found.</returns>
+    public static AssetObject GetGlobalAssetEditorInstance(AssetRef assetRef) {
+      return GetGlobalAssetEditorInstanceReflected.Value(assetRef);
+    }
+
+    /// <inheritdoc cref="GetGlobalAssetEditorInstance"/>
+    public static T GetGlobalAssetEditorInstance<T>(AssetRef<T> assetRef) where T : AssetObject {
+      return GetGlobalAssetEditorInstanceReflected.Value(new AssetRef(assetRef.Id)) as T;
+    }
+
+    /// <inheritdoc cref="GetGlobalAssetEditorInstance"/>
+    public static T GetGlobalAssetEditorInstance<T>(AssetRef assetRef) where T : AssetObject {
+      return GetGlobalAssetEditorInstanceReflected.Value(assetRef) as T;
+    }
+
+    /// <summary>
+    /// Attempts to get the editor instance of the asset with the given <paramref name="assetRef"/>. Use in editor code only, for inspectors
+    /// and editors. Returned asset will not have its <see cref="AssetObject.Loaded"/> called..
+    /// </summary>
+    public static bool TryGetGlobalAssetEditorInstance<T>(AssetRef assetRef, out T result)
+      where T : AssetObject {
+
+      if (!TryGetGlobalAssetEditorInstanceReflected.Value(assetRef, out var editorInstance)) {
+        result = null;
+        return false;
+      }
+
+      if (editorInstance is T assetT) {
+        result = assetT;
+        return true;
+      }
+
+      result = null;
+      return false;
+
+    }
+
+    /// <inheritdoc cref="TryGetGlobalAssetEditorInstance{T}(Quantum.AssetRef,out T)"/>
+    public static bool TryGetGlobalAssetEditorInstance<T>(AssetRef<T> assetRef, out T result)
+      where T : AssetObject {
+      return TryGetGlobalAssetEditorInstance(new AssetRef(assetRef.Id), out result);
+    }
+
+    /// <inheritdoc cref="TryGetGlobalAssetEditorInstance{T}(Quantum.AssetRef,out T)"/>
+    public static bool TryGetGlobalAssetEditorInstance(AssetRef assetRef, out AssetObject result) {
+      return TryGetGlobalAssetEditorInstance<AssetObject>(new AssetRef(assetRef.Id), out result);
+    }
+    
+    /// <summary>
+    /// Creates Quantum asset path based on the Unity asset path. The resulting path will have its extension removed.
+    /// If the path is not in the "Assets" folder, it will be made relative to it.
+    /// </summary>
+    /// <param name="unityAssetPath"></param>
+    /// <param name="nestedName"></param>
+    /// <returns></returns>
+    public static string CreateAssetPathFromUnityPath(string unityAssetPath, string nestedName = null) {
+      return CreateAssetPathFromUnityPathReflected.Value(unityAssetPath, nestedName);
+    }
+    
+    
+    static T CreateQuantumUnityDBDelegateOrThrow<T>(string name) where T : Delegate {
+      var dbType = TypeCache.GetTypesDerivedFrom<IResourceManager>().SingleOrDefault(x => x.Namespace == "Quantum" && x.Name == "QuantumUnityDB");
+      if (dbType == null) {
+        throw new InvalidOperationException($"Type Quantum.QuantumUnityDB not found");
+      }
+
+      var invokeMethod = typeof(T).GetMethod("Invoke") ?? throw new InvalidOperationException($"Delegate {typeof(T).FullName} does not have Invoke method");
+
+      var parameters = invokeMethod.GetParameters();
+      var paramTypes = new Type[parameters.Length];
+
+      for (var i = 0; i < parameters.Length; ++i) {
+        paramTypes[i] = parameters[i].ParameterType;
+      }
+
+      var method = dbType.GetMethod(name, 0, BindingFlags.Public | BindingFlags.Static, null, paramTypes, null)
+                   ?? throw new ArgumentOutOfRangeException($"Non-generic method {dbType.FullName}.{name} with params {string.Join(", ", paramTypes.Select(x => x.FullName))} not found");
+
+      var result = (T)method.CreateDelegate(typeof(T));
+      return result;
+    }
+  }
+}
+#endif
 
 #endregion
 
@@ -2511,6 +2764,7 @@ namespace Quantum {
 
 namespace Quantum {
   using UnityEngine;
+  using UnityEngine.Scripting;
 
   /// <summary>
   /// Static type registry is completed by code generation.
@@ -2519,7 +2773,7 @@ namespace Quantum {
     static Statics() {
       InitComponentTypeIdGen();
       InitStaticDelegatesGen();
-      InitStaticDelegatesBotSDK();
+      InitStaticDelegatesAddons();
       InitStaticDelegatesUser();
     }
 
@@ -2531,6 +2785,18 @@ namespace Quantum {
       // this will invoke the static constructor
     }
 
+    public static void InitComponentTypeId(int extraComponentCount) {
+      InitComponentTypeIdGen(extraComponentCount);
+    }
+
+#if QUANTUM_UNITY
+    [UnityEngine.Scripting.Preserve]
+#endif
+    static void EnsureNotStripped() {
+      EnsureNotStrippedGen();
+      EnsureNotStrippedAddons();
+    }
+    
     /// <summary>
     /// Register Quantum types. Use <see cref="RegisterSimulationTypesUser"/> partial method to extend.
     /// </summary>
@@ -2538,19 +2804,19 @@ namespace Quantum {
     public static void RegisterSimulationTypes(TypeRegistry typeRegistry) {
       RegisterSimulationTypesGen(typeRegistry);
       RegisterLegacySimulationTypesGen(typeRegistry);
-      RegisterSimulationTypesBotSDK(typeRegistry);
+      RegisterSimulationTypesAddons(typeRegistry);
       RegisterSimulationTypesUser(typeRegistry);
     }
     
-    static partial void InitComponentTypeIdGen();
+    static partial void InitComponentTypeIdGen(int extraComponentCount = 0);
     static partial void InitStaticDelegatesGen();
-    static partial void InitStaticDelegatesBotSDK();
     static partial void InitStaticDelegatesUser();
     
     static partial void RegisterSimulationTypesGen(TypeRegistry typeRegistry);
     static partial void RegisterLegacySimulationTypesGen(TypeRegistry typeRegistry);
-    static partial void RegisterSimulationTypesBotSDK(TypeRegistry typeRegistry);
     static partial void RegisterSimulationTypesUser(TypeRegistry typeRegistry);
+    
+    static partial void EnsureNotStrippedGen();
   }
 }
 
@@ -2747,6 +3013,8 @@ namespace Quantum {
         { typeof(CallbackInputConfirmed), CallbackInputConfirmed.ID },
         { typeof(CallbackPollInput), CallbackPollInput.ID },
         { typeof(CallbackSimulateFinished), CallbackSimulateFinished.ID },
+        { typeof(CallbackBeforeSimulationStage), CallbackBeforeSimulationStage.ID },
+        { typeof(CallbackSimulationStageFinished), CallbackSimulationStageFinished.ID },
         { typeof(CallbackUpdateView), CallbackUpdateView.ID },
         { typeof(CallbackPluginDisconnect), CallbackPluginDisconnect.ID },
         { typeof(CallbackLocalPlayerAddConfirmed), CallbackLocalPlayerAddConfirmed.ID },
@@ -2998,14 +3266,14 @@ namespace Quantum {
 #region Assets/Photon/Quantum/Simulation/Game/QuantumGame.cs
 
 namespace Quantum {
-  using System;
-  using System.Collections.Generic;
-  using System.IO;
-  using System.Linq;
   using Photon.Deterministic;
   using Quantum.Allocator;
   using Quantum.Core;
   using Quantum.Profiling;
+  using System;
+  using System.Collections.Generic;
+  using System.IO;
+  using System.Linq;
 
   /// <summary>
   /// QuantumGame acts as an interface to the simulation from the client code's perspective.
@@ -3093,7 +3361,7 @@ namespace Quantum {
     /// </summary>
     public IResourceManager ResourceManager { get => _resourceManager; }
     /// <summary> 
-    /// Extra heaps to allocate for a session in case you need to create 'auxiliary' frames than actually required for the simulation itself. 
+    /// The number of additional heaps to create for the session, useful for "auxiliary" frames that are managed outside of Quantum. 
     /// </summary>
     public int HeapExtraCount { get; }
     /// <summary>
@@ -3106,6 +3374,7 @@ namespace Quantum {
     IResourceManager _resourceManager;
     ICallbackDispatcher _callbackDispatcher;
     IEventDispatcher _eventDispatcher;
+    IDeterministicPlatformTaskRunner _taskRunner;
 
     FrameSerializer _inputSerializerRead;
     FrameSerializer _inputSerializerWrite;
@@ -3120,6 +3389,10 @@ namespace Quantum {
     int _flags;
     bool _gameStartedCalled;
 
+    List<DeterministicCommandWrapper[]> _commandBuffers;
+    List<int[]> _commandBufferSizes;
+    int _currentCommandBufferIndex;
+
     /// <summary>
     /// Create a Quantum game instance.
     /// </summary>
@@ -3132,6 +3405,7 @@ namespace Quantum {
       Configurations = new ConfigurationsContainer();
 
       _resourceManager = startParams.ResourceManager;
+      _taskRunner = startParams.TaskRunner;
       AssetSerializer = startParams.AssetSerializer;
       _callbackDispatcher = startParams.CallbackDispatcher;
       _eventDispatcher = startParams.EventDispatcher;
@@ -3180,29 +3454,110 @@ namespace Quantum {
       return Session.IsPlayerLocal(playerRef);
     }
 
-    /// <summary>
-    /// Sends a command to the server.
-    /// </summary>
-    /// <param name="command">Command to send</param>
-    /// Commands are similar to input, they drive the simulation, but do not have to be sent regularly.
-    /// <example><code>
-    /// RemoveUnitCommand command = new RemoveUnitCommand();
-    /// command.CellIndex = 42;
-    /// QuantumRunner.Default.Game.SendCommand(command);
-    /// </code></example>
+    [Obsolete("Function was renamed to " + nameof(AddCommand) + ". Use the new one instead.")]
+    public DeterministicCommandSendResult SendCommand(Int32 playerSlot, DeterministicCommand command) {
+      return AddCommand(playerSlot, command);
+    }
+
+    [Obsolete("Function was renamed to " + nameof(AddCommand) + ". Use the new one instead.")]
     public DeterministicCommandSendResult SendCommand(DeterministicCommand command) {
-      return Session.SendCommand(0, command);
+      return AddCommand(command);
     }
 
     /// <summary>
-    /// Sends a command to the server.
+    /// Queues a frame command to be sent to the server.
     /// </summary>
     /// <param name="playerSlot">Specify the local player index when you have multiple players controlled from the same machine.</param>
     /// <param name="command">Command to send</param>
-    /// <para>See <see cref="SendCommand(DeterministicCommand)"/></para>
     /// <para>Games that only have one local player can ignore the player index field.</para>
-    public DeterministicCommandSendResult SendCommand(Int32 playerSlot, DeterministicCommand command) {
-      return Session.SendCommand(playerSlot, command);
+    /// Commands are similar to input, they drive the simulation, but do not have to be sent regularly.
+    /// Sending is done automatically once per frame at the beginning of the simulation.
+    /// <example><code>
+    /// RemoveUnitCommand command = new RemoveUnitCommand();
+    /// command.CellIndex = 42;
+    /// QuantumRunner.Default.Game.AddCommand(player, command);
+    /// </code></example>
+    /// <seealso cref="AddCommand(DeterministicCommand)"/>
+    /// <seealso cref="Quantum.QuantumGame.SendBufferedCommands"/>
+    public DeterministicCommandSendResult AddCommand(Int32 playerSlot, DeterministicCommand command) {
+      if (!Session.IsRunning) {
+        return DeterministicCommandSendResult.FailedSimulationNotRunning;
+      }
+      if (Session.IsSpectating) {
+        return DeterministicCommandSendResult.FailedIsSpectating;
+      }
+
+      // Temporary solution: serialize only to check the size and discard the data buffer for now.
+      if (!Session.CommandSerializer.EncodeCommand(command, out var buffer)) {
+        return DeterministicCommandSendResult.FailedTooBig;
+      }
+
+      // We need additional space for the wrapper type id. Make sure we have it in case of a large single command.
+      int idSize = DeterministicCommandSerializer.IdSizeBytes;
+      int maxSize = Session.CommandSerializer.CommandSerializerStreamWrite.Capacity;
+      if (buffer.Length > maxSize - idSize) {
+        return DeterministicCommandSendResult.FailedTooBig;
+      }
+
+      int newSize = _commandBufferSizes[_currentCommandBufferIndex][playerSlot] + buffer.Length;
+
+      // Make sure there's additional space for the wrapper type id after summing up the individual commands' sizes.
+      if (newSize > maxSize - idSize) {
+        ++_currentCommandBufferIndex;
+      }
+
+      if (_commandBuffers.Count <= _currentCommandBufferIndex) {
+        AddNextCommandBuffer(Session.PlayerCount);
+      }
+
+      _commandBufferSizes[_currentCommandBufferIndex][playerSlot] += buffer.Length;
+      _commandBuffers[_currentCommandBufferIndex][playerSlot].Commands.Add(command);
+
+      return DeterministicCommandSendResult.Success;
+    }
+
+    /// <summary>
+    /// Queues a frame command to be sent to the server.
+    /// </summary>
+    /// <param name="command">Command to send</param>
+    /// Commands are similar to input, they drive the simulation, but do not have to be sent regularly.
+    /// Sending is done automatically once per frame at the beginning of the simulation.
+    /// <example><code>
+    /// RemoveUnitCommand command = new RemoveUnitCommand();
+    /// command.CellIndex = 42;
+    /// QuantumRunner.Default.Game.AddCommand(command);
+    /// </code></example>
+    /// <seealso cref="AddCommand(Int32, DeterministicCommand)"/>
+    /// <seealso cref="Quantum.QuantumGame.SendBufferedCommands"/>
+    public DeterministicCommandSendResult AddCommand(DeterministicCommand command) {
+      return AddCommand(0, command);
+    }
+
+    /// <summary>
+    /// Sends commands queued during the last frame to the server.
+    /// </summary>
+    public void SendBufferedCommands() {
+      for (int i = 0; i <= _currentCommandBufferIndex; ++i) {
+        for (int j = 0; j < _commandBuffers[i].Length; ++j) {
+          if (_commandBuffers[i][j].Commands.Count > 0) {
+            Session.SendCommand(j, _commandBuffers[i][j]);
+
+            for (int k = 0; k < _commandBuffers[i][j].Commands.Count; ++k) {
+              _commandBuffers[i][j].Commands[k].Dispose();
+            }
+
+            _commandBuffers[i][j].Commands.Clear();
+          }
+        }
+      }
+
+      for (int i = 0; i < _commandBufferSizes.Count; ++i) {
+        for (int j = 0; j < _commandBufferSizes[i].Length; ++j) {
+          _commandBufferSizes[i][j] = 0;
+        }
+      }
+
+      _currentCommandBufferIndex = 0;
     }
 
     /// <summary>
@@ -3262,18 +3617,22 @@ namespace Quantum {
     /// <summary>
     /// Create a new frame object using the internal frame context.
     /// </summary>
+    /// <param name="verified">Whether or not this is a verified frame.</param>
+    /// <param name="enableHeapTrackerDuringInit">Enables frame heap tracking immediately.</param>
     /// <returns>Frame</returns>
-    public Frame CreateFrame() {
-      return (Frame)((IDeterministicGame)this).CreateFrame(_context);
+    public Frame CreateFrame(bool verified = false, bool enableHeapTrackerDuringInit = false) {
+      return (Frame)((IDeterministicGame)this).CreateFrame(_context, verified, enableHeapTrackerDuringInit);
     }
 
     /// <summary>
     /// Create a new frame object using an external context.
     /// </summary>
-    /// <param name="context"></param>
+    /// <param name="context">The context the frame should be created under.</param>
+    /// <param name="verified">Whether or not this is a verified frame.</param>
+    /// <param name="enableHeapTrackerDuringInit">Enables frame heap tracking immediately.</param>
     /// <returns>Frame</returns>
-    DeterministicFrame IDeterministicGame.CreateFrame(IDisposable context) {
-      return new Frame((FrameContextUser)context, _systemsAll, _systemsRoot, Session.SessionConfig, Configurations.Runtime, Configurations.Simulation, Session.DeltaTime);
+    DeterministicFrame IDeterministicGame.CreateFrame(IDisposable context, bool verified, bool enableHeapTrackerDuringInit) {
+      return new Frame((FrameContextUser)context, _systemsAll, _systemsRoot, Session.SessionConfig, Configurations.Runtime, Configurations.Simulation, Session.DeltaTime, verified, enableHeapTrackerDuringInit);
     }
     
     /// <summary>
@@ -3283,9 +3642,9 @@ namespace Quantum {
     /// <param name="data">Serialized frame data</param>
     /// <returns>Frame</returns>
     DeterministicFrame IDeterministicGame.CreateFrame(IDisposable context, Byte[] data) {
-      Frame f = CreateFrame();
-      f.Deserialize(data);
-      return f;
+      Frame frame = CreateFrame(verified: true, enableHeapTrackerDuringInit: true);
+      frame.Deserialize(data);
+      return frame;
     }
 
     /// <summary>
@@ -3334,29 +3693,34 @@ namespace Quantum {
         _systemsRoot = DeterministicSystemSetup.CreateSystems(Configurations.Runtime, Configurations.Simulation, systemsConfig).Where(x => x != null).ToArray();
         _systemsAll = _systemsRoot.SelectMany(x => x.Hierarchy).ToArray();
 
-        // the simulator creates at least one frame (Verified)
-        Int32 heapCount = 1;
+        var heapConfig = Configurations.Simulation.Heap.Clone();
 
+        // the simulator creates at least one frame (Verified)
         // additional frame (Predicted) in predicted sessions
         if (Session.IsPredicted) {
-          heapCount++;
+          heapConfig.ExtraHeapCount++;
         }
 
         // additional frame (Previous) in interpolate-able sessions
         if (Session.IsInterpolatable) {
-          heapCount++;
+          heapConfig.ExtraHeapCount++;
         }
 
         // additional frame (Previous Update Predicted) if the session is both predicted and interpolate-able
         if (Session.IsPredicted && Session.IsInterpolatable) {
-          heapCount++;
+          heapConfig.ExtraHeapCount++;
         }
 
-        heapCount += Math.Max(0, Configurations.Simulation.HeapExtraCount);
-        heapCount += Math.Max(0, HeapExtraCount);
-        heapCount += SnapshotsCreateBuffers(Session.SessionConfig.UpdateFPS,
+        heapConfig.ExtraHeapCount += Math.Max(0, HeapExtraCount);
+        heapConfig.ExtraHeapCount += SnapshotsCreateBuffers(Session.SessionConfig.UpdateFPS,
           Session.IsOnline ? Session.SessionConfig.ChecksumInterval : 0, Configurations.Simulation.ChecksumSnapshotHistoryLengthSeconds,
           InstantReplayConfig.SnapshotsPerSecond == 0 ? 0 : Session.SessionConfig.UpdateFPS / InstantReplayConfig.SnapshotsPerSecond, InstantReplayConfig.LengthSeconds);
+
+        // assemble heap config
+
+#if !DEBUG
+        heapConfig.TrackingMode = HeapTrackingMode.Disabled;
+#endif
 
         // set system runtime indices
         for (Int32 i = 0; i < _systemsAll.Length; ++i) {
@@ -3370,12 +3734,8 @@ namespace Quantum {
         args.PlatformInfo = Session.PlatformInfo;
         args.IsServer = (_flags & QuantumGameFlags.Server) == QuantumGameFlags.Server;
         args.IsLocalPlayer = Session.IsLocalPlayer;
-        args.HeapConfig = new Heap.Config(Configurations.Simulation.HeapPageShift, Configurations.Simulation.HeapPageCount, heapCount);
-#if DEBUG  
-        args.HeapTrackingMode = Configurations.Simulation.HeapTrackingMode;
-#else
-        args.HeapTrackingMode            = HeapTrackingMode.Disabled;
-#endif
+        args.IsSimulation = true;
+        args.HeapConfig = heapConfig;
         args.PhysicsConfig = Configurations.Simulation.Physics;
         args.NavigationConfig = Configurations.Simulation.Navigation;
         args.CommandSerializer = Session.CommandSerializer;
@@ -3383,6 +3743,7 @@ namespace Quantum {
         args.ResourceManager = _resourceManager;
         args.InitialDynamicAssets = _initialDynamicAssets;
         args.UseSharedChecksumSerialized = (_flags & QuantumGameFlags.DisableSharedChecksumSerializer) != QuantumGameFlags.DisableSharedChecksumSerializer;
+        args.TaskRunner = _taskRunner;
 
         // toggle various parts of the context code
         args.UsePhysics2D = _systemsAll.FirstOrDefault(x => x is PhysicsSystem2D) != null;
@@ -3391,7 +3752,7 @@ namespace Quantum {
         args.UseCullingArea = _systemsAll.FirstOrDefault(x => x is CullingSystem2D) != null || _systemsAll.FirstOrDefault(x => x is CullingSystem3D) != null;
 
         // create frame context
-        _context = new FrameContextUser(args);
+        _context = new FrameContextUser(args, Configurations.Runtime);
         
         // at this point, the ownership over the initial dynamic db is gone to the frame context
         _initialDynamicAssets = null;
@@ -3534,12 +3895,24 @@ namespace Quantum {
       Buffer.BlockCopy(_inputSerializerWrite.Stream.Data, 0, result, 0, _inputSerializerWrite.Stream.BytesRequired);
     }
 
+    /// <inheritdoc cref="IDeterministicGame.OnBeforeSimulationStage"/>
+    public void OnBeforeSimulationStage(SimulatorContext context) {
+      InvokeOnBeforeSimulationStage(context);
+    }
+
+    /// <inheritdoc cref="IDeterministicGame.OnSimulationStageFinished"/>
+    public void OnSimulationStageFinished(SimulatorContext context) {
+      InvokeOnSimulationStageFinished(context);
+    }
+
     /// <summary>
     /// The callback is called when any simulation step was executed.
     /// </summary>
     /// <param name="state">Frame that was simulated</param>
     public void OnSimulate(DeterministicFrame state) {
-      using var profilerScope = HostProfiler.Markers.OnSimulate.Start();
+      using var profilerScope = state.IsVerified
+        ? HostProfiler.Markers.OnSimulateVerified()
+        : HostProfiler.Markers.OnSimulatePredicted();
 
       var f = (Frame)state;
       
@@ -3547,17 +3920,17 @@ namespace Quantum {
         // reset profiling
         var isTaskProfilerEnabled = _callbackDispatcher?.HasAnyListeners(_callbackTaskProfilerReportGenerated) ?? false;
         Profiler profiler;
-        using (HostProfiler.Markers.OnSimulateInitProfiler.Start()) {
+        using (HostProfiler.Markers.OnSimulateInitProfiler()) {
           f.Context.ProfilerContext.Reset(isTaskProfilerEnabled);
           profiler = f.Context.ProfilerContext.GetProfilerForTaskThread(0);
         }
 
-        using (HostProfiler.Markers.OnSimulateApplyInputs.Start()) {
+        using (HostProfiler.Markers.OnSimulateApplyInputs()) {
           //ApplyInputs(f);
           ApplyInputs(f);
         }
 
-        using (HostProfiler.Markers.OnSimulateBegin.Start()) {
+        using (HostProfiler.Markers.OnSimulateBegin()) {
           f.Context.OnFrameSimulationBegin(f);
           f.OnFrameSimulateBegin();
           f.Context.TaskContext.BeginFrame(f);
@@ -3565,13 +3938,13 @@ namespace Quantum {
 
         var handle = f.Context.TaskContext.AddRootTask();
 
-        using (HostProfiler.Markers.OnSimulateUpdatePlayerData.Start()) {
+        using (HostProfiler.Markers.OnSimulateUpdatePlayerData()) {
           f.UpdatePlayerData(this);
         }
 
         profiler.Start("Scheduling Tasks #ff9900");
 
-        using (HostProfiler.Markers.OnSimulateSchedulingTasks.Start()) {
+        using (HostProfiler.Markers.OnSimulateSchedulingTasks()) {
           for (Int32 i = 0; i < _systemsRoot.Length; ++i) {
             if (f.SystemIsEnabledSelf(_systemsRoot[i])) {
               try {
@@ -3615,9 +3988,10 @@ namespace Quantum {
     /// The callback is called after any simulation step was executed and after the <see cref="OnSimulate(DeterministicFrame)"/> callback.
     /// </summary>
     /// <param name="state">Frame that was simulated</param>
-    public void OnSimulateFinished(DeterministicFrame state) {
+    /// <param name="context">The current <see cref="SimulatorContext"/>.</param>
+    public void OnSimulateFinished(DeterministicFrame state, SimulatorContext context) {
       SnapshotsOnSimulateFinished(state);
-      InvokeOnSimulateFinished(state);
+      InvokeOnSimulateFinished(state, context);
     }
 
     /// <summary>
@@ -3645,21 +4019,24 @@ namespace Quantum {
     public void AssignSession(DeterministicSession session) {
       Session = session;
 
-      DeterministicSessionConfig sessionConfig;
-      Session.GetLocalConfigs(out sessionConfig, out _);
+      Session.GetLocalConfigs(out DeterministicSessionConfig sessionConfig, out _);
 
       // verify player count is in correct range
       if (sessionConfig.PlayerCount < 1 || sessionConfig.PlayerCount > Quantum.Input.MAX_COUNT) {
         throw new Exception(String.Format("Invalid player count {0} (needs to be in 1-{1} range)", sessionConfig.PlayerCount, Quantum.Input.MAX_COUNT));
       }
 
+      _commandBuffers = new List<DeterministicCommandWrapper[]>();
+      _commandBufferSizes = new List<int[]>();
+      _currentCommandBufferIndex = 0;
+      AddNextCommandBuffer(sessionConfig.PlayerCount);
+
       // verify all types
       if ((GameFlags & QuantumGameFlags.DisableMemoryIntegrityCheck) == 0) {
-        HostProfiler.Start("MemoryIntegrityCheck");
-        var verifier = new MemoryLayoutVerifier(MemoryLayoutVerifier.Platform ?? new MemoryLayoutVerifier.DefaultPlatform());
+        using var profiler = HostProfiler.Markers.MemoryIntegrityCheck();
+        var verifier = new MemoryLayoutVerifier();
         var result = verifier.Verify(_typeRegistry.Types);
-        HostProfiler.End();
-        if (result.Count > 0) {
+        if (result?.Count > 0) {
           throw new Exception("MemoryIntegrity Check Failed: " + System.Environment.NewLine + String.Join(System.Environment.NewLine, result.ToArray()));
         } else {
           Log.Info("Memory Integrity Verified");
@@ -3769,7 +4146,9 @@ namespace Quantum {
     /// <param name="playerSlot">The player slot that was requested</param>
     /// <param name="message">Debug message</param>
     public void OnLocalPlayerAddFailed(int playerSlot, string message) {
-      InvokeOnLocalPlayerAddFailed(playerSlot, message);
+      if (InvokeOnLocalPlayerAddFailed(playerSlot, message) == false) {
+        Log.Error($"Failed to add player {playerSlot}: {message}");
+      }
     }
 
     /// <summary>
@@ -3778,7 +4157,9 @@ namespace Quantum {
     /// <param name="playerSlot">The player slot that was tried to remove</param>
     /// <param name="message">Debug message</param>
     public void OnLocalPlayerRemoveFailed(int playerSlot, string message) {
-      InvokeOnLocalPlayerRemoveFailed(playerSlot, message);
+      if (InvokeOnLocalPlayerRemoveFailed(playerSlot, message) == false) {
+        Log.Error($"Failed to remove player {playerSlot}: {message}");
+      }
     }
 
     /// <summary>
@@ -3879,13 +4260,13 @@ namespace Quantum {
       }
     }
 
-    void ApplyInputs(Frame f) {
+    void ApplyInputs(Frame frame) {
       for (Int32 i = 0; i < Session.PlayerCount; i++) {
-        var raw = f.GetRawInput(i);
+        var raw = frame.GetRawInput(i);
         if (raw == null) {
           Log.Error($"Got null input for player {i}");
         } else {
-          f.SetPlayerInput(i, *(Input*)raw);
+          frame.SetPlayerInput(i, *(Input*)raw);
         }
       }
     }
@@ -3941,8 +4322,18 @@ namespace Quantum {
           throw new ArgumentOutOfRangeException();
       }
     }
+
+    private void AddNextCommandBuffer(int playerCount) {
+      _commandBuffers.Add(new DeterministicCommandWrapper[playerCount]);
+      _commandBufferSizes.Add(new int[playerCount]);
+
+      for (int i = 0; i < playerCount; ++i) {
+        _commandBuffers[^1][i] = new DeterministicCommandWrapper();
+      }
+    }
   }
 }
+
 
 #endregion
 
@@ -3972,7 +4363,7 @@ namespace Quantum {
     }
 
     void RaiseEvent(EventBase evnt) {
-      using var profilerScope = HostProfiler.Markers.RaiseEvent.Start();
+      using var profilerScope = HostProfiler.Markers.RaiseEvent();
       try {
         evnt.Game = this;
         _eventDispatcher?.Publish(evnt);
@@ -3992,7 +4383,7 @@ namespace Quantum {
 
 
     void InvokeEvents() {
-      using var profilerScope = HostProfiler.Markers.InvokeEvents.Start();
+      using var profilerScope = HostProfiler.Markers.InvokeEvents();
       while (_context.Events.Count > 0) {
         var head = _context.Events.PopHead();
         try {
@@ -4143,9 +4534,9 @@ namespace Quantum {
     /// </summary>
     /// <param name="includeDb">Include the AssetDb</param>
     /// <returns>Replay file to be stored</returns>
-    public QuantumReplayFile CreateSavegame(bool includeDb = false) {
+    public QuantumReplayFile GetSnapshotFile(bool includeDb = false) {
       if (Frames.Verified == null) {
-        Log.Error("Cannot create a savegame. Frames verified not found.");
+        Log.Error("Cannot create a snapshot file. Frames verified not found.");
         return null;
       }
 
@@ -4167,6 +4558,9 @@ namespace Quantum {
       return result;
     }
 
+    [Obsolete("Use GetSnapshotFile()")]
+    public QuantumReplayFile CreateSavegame(bool includeDb = false) => GetSnapshotFile(includeDb);
+
     /// <summary>
     /// Creates a replay file that represents a recorded replay of the complete simulation.
     /// Requires the <see cref="RecordingFlags"/> to be set accordingly.
@@ -4178,7 +4572,7 @@ namespace Quantum {
     /// <param name="customInputSerializer">A custom input serialized</param>
     /// <returns>Replay file to store</returns>
     public QuantumReplayFile GetRecordedReplay(
-      bool includeChecksums = false, 
+      bool includeChecksums = false,
       bool includeDb = false,
       QuantumJsonFriendlyDataBlob.Encoder customAssetDbSerializer = null,
       QuantumJsonFriendlyDataBlob.Encoder customRuntimeConfigSerializer = null,
@@ -4203,17 +4597,16 @@ namespace Quantum {
         }
       }
 
-      var verifiedFrame = Frames.Verified.Number;
       var runtimeConfigBytes = AssetSerializer.ConfigToByteArray(Frames.Verified.RuntimeConfig, compress: true);
 
       var result = new QuantumReplayFile {
         DeterministicConfig = Frames.Verified.SessionConfig,
         RuntimeConfigData = customRuntimeConfigSerializer?.Invoke(runtimeConfigBytes) ?? QuantumJsonFriendlyDataBlob.Encode(runtimeConfigBytes, isCompressed: false, asBase64String: true),
         InputHistoryDeltaCompressed = customInputSerializer?.Invoke(inputHistoryRaw) ?? QuantumJsonFriendlyDataBlob.Encode(inputHistoryRaw, isCompressed: true, asBase64String: true),
-        InputHistoryLegacy = RecordedInputs?.ExportToList(verifiedFrame),
-        LastTick = verifiedFrame,
+        InputHistoryLegacy = RecordedInputs?.ExportToList(Frames.Verified.Number),
+        LastTick = Frames.Verified.Number,
         InitialTick = Session.InitialTick,
-        InitialFrameData = Session.IntitialFrameData,
+        InitialFrameData = Session.InitialFrameData,
         Checksums = includeChecksums ? RecordedChecksums.Clone() : null,
         LocalActorNumber = Session.GetActorNumber()
       };
@@ -4377,7 +4770,7 @@ namespace Quantum {
         return;
       }
 
-      using var profilerScope = HostProfiler.Markers.RecordingSnapshots.Start();
+      using var profilerScope = HostProfiler.Markers.RecordingSnapshots();
 
       if (_checksumSnapshotBuffer != null) {
         // in case replay interval is less than checksum interval and replay is not being recorded,
@@ -4536,6 +4929,14 @@ namespace Quantum {
     /// </summary>
     ProfilerReportGenerated,
     /// <summary>
+    /// Callback before the Verified or Prediction stages of the simulation are about to start.
+    /// </summary>
+    BeforeSimulationStage,
+    /// <summary>
+    /// Callback after the Verified or Prediction stages have finished.
+    /// </summary>
+    SimulationStageFinished,
+    /// <summary>
     /// A tag where user callbacks can start.
     /// </summary>
     UserCallbackIdStart,
@@ -4679,6 +5080,40 @@ namespace Quantum {
   }
 
   /// <summary>
+  /// Callback called before the Verified or Predicted stages of the simulation start.
+  /// </summary>
+  public sealed class CallbackBeforeSimulationStage : QuantumGame.CallbackBase {
+    /// <summary>
+    /// The const CallbackBeforeSimulationStage callback id.
+    /// </summary>
+    public new const Int32 ID = (int)CallbackId.BeforeSimulationStage;
+
+    internal CallbackBeforeSimulationStage(QuantumGame game) : base(ID, game) { }
+
+    /// <summary>
+    /// The current <see cref="SimulatorContext"/>.
+    /// </summary>
+    public SimulatorContext SimulatorContext;
+  }
+
+  /// <summary>
+  /// Callback called after the Verified or Predicted stages of the simulation have finished.
+  /// </summary>
+  public sealed class CallbackSimulationStageFinished : QuantumGame.CallbackBase {
+    /// <summary>
+    /// The const CallbackSimulationStageFinished callback id.
+    /// </summary>
+    public new const Int32 ID = (int)CallbackId.SimulationStageFinished;
+
+    internal CallbackSimulationStageFinished(QuantumGame game) : base(ID, game) { }
+
+    /// <summary>
+    /// The current <see cref="SimulatorContext"/>.
+    /// </summary>
+    public SimulatorContext SimulatorContext;
+  }
+
+  /// <summary>
   /// Callback called when frame simulation has completed.
   /// </summary>
   public sealed class CallbackSimulateFinished : QuantumGame.CallbackBase {
@@ -4693,6 +5128,11 @@ namespace Quantum {
     /// The frame that was simulated.
     /// </summary>
     public Frame Frame;
+
+    /// <summary>
+    /// The current <see cref="SimulatorContext"/>.
+    /// </summary>
+    public SimulatorContext SimulatorContext;
   }
 
   /// <summary>
@@ -4945,7 +5385,7 @@ namespace Quantum {
               byte[] actualData = FrameData;
               bool wasCompressed = false;
               try {
-                actualData = ByteUtils.GZipDecompressBytes(FrameData);
+                actualData = Compression.DecompressBytes(FrameData);
                 wasCompressed = true;
               } catch { }
 
@@ -5219,6 +5659,8 @@ namespace Quantum {
           case CallbackId.PlayerRemoveConfirmed: return typeof(CallbackLocalPlayerRemoveConfirmed);
           case CallbackId.PlayerAddFailed: return typeof(CallbackLocalPlayerAddFailed);
           case CallbackId.PlayerRemoveFailed: return typeof(CallbackLocalPlayerRemoveFailed);
+          case CallbackId.BeforeSimulationStage: return typeof(CallbackBeforeSimulationStage);
+          case CallbackId.SimulationStageFinished: return typeof(CallbackSimulationStageFinished);
           default: throw new ArgumentOutOfRangeException(nameof(id));
         }
       }
@@ -5236,6 +5678,8 @@ namespace Quantum {
     private CallbackGameResynced _callbackGameResynced;
     private CallbackInputConfirmed _callbackInputConfirmed;
     private CallbackPollInput _callbackPollInput;
+    private CallbackBeforeSimulationStage _callbackBeforeSimulationStage;
+    private CallbackSimulationStageFinished _callbackSimulationStageFinished;
     private CallbackSimulateFinished _callbackSimulateFinished;
     private CallbackUpdateView _callbackUpdateView;
     private CallbackPluginDisconnect _callbackPluginDisconnect;
@@ -5260,6 +5704,8 @@ namespace Quantum {
       _callbackGameResynced = new CallbackGameResynced(this);
       _callbackInputConfirmed = new CallbackInputConfirmed(this);
       _callbackPollInput = new CallbackPollInput(this);
+      _callbackBeforeSimulationStage = new CallbackBeforeSimulationStage(this);
+      _callbackSimulationStageFinished = new CallbackSimulationStageFinished(this);
       _callbackSimulateFinished = new CallbackSimulateFinished(this);
       _callbackUpdateView = new CallbackUpdateView(this);
       _callbackPluginDisconnect = new CallbackPluginDisconnect(this);
@@ -5330,7 +5776,7 @@ namespace Quantum {
     }
 
     void InvokeOnUpdateView() {
-      using var profilerScope = HostProfiler.Markers.InvokeOnUpdateView.Start();
+      using var profilerScope = HostProfiler.Markers.InvokeOnUpdateView();
       try {
         _callbackDispatcher?.Publish(_callbackUpdateView);
       } catch (Exception ex) {
@@ -5338,16 +5784,42 @@ namespace Quantum {
       }
     }
 
-    void InvokeOnSimulateFinished(DeterministicFrame state) {
-      using var profilerScope = HostProfiler.Markers.InvokeOnSimulateFinished.Start();
+    void InvokeOnSimulateFinished(DeterministicFrame state, SimulatorContext context) {
+      using var profilerScope = HostProfiler.Markers.InvokeOnSimulateFinished();
       try {
         _callbackSimulateFinished.Frame = (Frame)state;
+        _callbackSimulateFinished.SimulatorContext = context;
         _callbackDispatcher?.Publish(_callbackSimulateFinished);
       } catch (Exception ex) {
         Log.Exception(ex);
       }
 
       _callbackSimulateFinished.Frame = null;
+      _callbackSimulateFinished.SimulatorContext = null;
+    }
+
+    void InvokeOnBeforeSimulationStage(SimulatorContext context) {
+      using var profilerScope = HostProfiler.Markers.InvokeOnBeforeSimulationStage();
+      try {
+        _callbackBeforeSimulationStage.SimulatorContext = context;
+        _callbackDispatcher?.Publish(_callbackBeforeSimulationStage);
+      } catch (Exception ex) {
+        Log.Exception(ex);
+      }
+
+      _callbackBeforeSimulationStage.SimulatorContext = null;
+    }
+
+    void InvokeOnSimulationStageFinished(SimulatorContext context) {
+      using var profilerScope = HostProfiler.Markers.InvokeOnSimulationStageFinished();
+      try {
+        _callbackSimulationStageFinished.SimulatorContext = context;
+        _callbackDispatcher?.Publish(_callbackSimulationStageFinished);
+      } catch (Exception ex) {
+        Log.Exception(ex);
+      }
+
+      _callbackSimulationStageFinished.SimulatorContext = null;
     }
 
     void InvokeOnChecksumError(DeterministicTickChecksumError error, DeterministicFrame[] frames) {
@@ -5390,7 +5862,7 @@ namespace Quantum {
     }
 
     void InvokeOnChecksumErrorFrameDump(Int32 actorId, Int32 frameNumber, DeterministicSessionConfig sessionConfig, byte[] runtimeConfig, byte[] frameData, byte[] extraData, IAssetSerializer serializer) {
-      using var profilerScope = HostProfiler.Markers.InvokeOnChecksumErrorFrameDump.Start();
+      using var profilerScope = HostProfiler.Markers.InvokeOnChecksumErrorFrameDump();
       try {
 
         // find the frame that's going to be overwritten: 
@@ -5427,7 +5899,7 @@ namespace Quantum {
     }
 
     void InvokeOnEvent(EventKey key, bool confirmed) {
-      using var profilerScope = HostProfiler.Markers.InvokeOnEvent.Start();
+      using var profilerScope = HostProfiler.Markers.InvokeOnEvent();
       try {
         if (confirmed) {
           _callbackEventConfirmed.EventKey = key;
@@ -5474,27 +5946,38 @@ namespace Quantum {
       }
     }
 
-    void InvokeOnLocalPlayerAddFailed(int playerSlot, string message) {
+    bool InvokeOnLocalPlayerAddFailed(int playerSlot, string message) {
+      var result = false;
       try {
         _callbackLocalPlayerAddFailed.PlayerSlot = playerSlot;
         _callbackLocalPlayerAddFailed.Message = message;
-        _callbackDispatcher?.Publish(_callbackLocalPlayerAddFailed);
+        if (_callbackDispatcher != null) {
+          result = _callbackDispatcher.Publish(_callbackLocalPlayerAddFailed);
+        }
       } catch (Exception ex) {
         Log.Exception(ex);
       }
+
+      return result;
     }
 
-    void InvokeOnLocalPlayerRemoveFailed(int playerSlot, string message) {
+    bool InvokeOnLocalPlayerRemoveFailed(int playerSlot, string message) {
+      var result = false;
       try {
         _callbackLocalPlayerRemoveFailed.PlayerSlot = playerSlot;
         _callbackLocalPlayerRemoveFailed.Message = message;
-        _callbackDispatcher?.Publish(_callbackLocalPlayerRemoveFailed);
+        if (_callbackDispatcher != null) {
+          result = _callbackDispatcher.Publish(_callbackLocalPlayerRemoveFailed);
+        }
       } catch (Exception ex) {
         Log.Exception(ex);
       }
+
+      return result;
     }
   }
 }
+
 
 #endregion
 
@@ -5560,10 +6043,10 @@ namespace Quantum {
   using System;
 
   public partial class QuantumGame {
-    [Obsolete("Use QuantumGame(in QuantumGameStartParameters startParams)")]
+    [Obsolete("Use QuantumGame(in QuantumGameStartParameters startParams)", true)]
     public QuantumGame(in StartParameters startParams) : this(in startParams.Parameters) { }
 
-    [Obsolete("Has been replaced by QuantumGame(in QuantumGameStartParameters startParams)")]
+    [Obsolete("Has been replaced by QuantumGame(in QuantumGameStartParameters startParams)", true)]
     public QuantumGame(IResourceManager manager, IAssetSerializer assetSerializer, ICallbackDispatcher callbackDispatcher, IEventDispatcher eventDispatcher)
       : this(new QuantumGameStartParameters() {
         ResourceManager = manager,
@@ -5635,6 +6118,7 @@ namespace Quantum {
 namespace Quantum {
   using System;
   using Photon.Deterministic;
+  
   [Obsolete("Has been replaced by SessionRunner class.")]
   public class SessionContainer {
     public static Boolean _loadedAllStatics = false;
@@ -5668,28 +6152,7 @@ namespace Quantum {
         _startGameTimeoutInMiliseconds = value;
       }
     }
-
-    public static Native.Allocator CreateNativeAllocator() {
-      switch (Environment.OSVersion.Platform) {
-        case PlatformID.Unix:
-        case PlatformID.MacOSX:
-          return new Native.LIBCAllocator();
-        default:
-          return new Native.MSVCRTAllocator();
-      }
-    }
-
-    public static Native.Utility CreateNativeUtils() {
-      switch (Environment.OSVersion.Platform) {
-        case PlatformID.Unix:
-        case PlatformID.MacOSX:
-          return new Native.LIBCUtility();
-
-        default:
-          return new Native.MSVCRTUtility();
-      }
-    }
-
+    
     /// <summary>
     /// Start the simulation as a replay by providing an input provider.
     /// </summary>
@@ -5763,15 +6226,6 @@ namespace Quantum {
             if (logInitForConsole) {
               Log.InitializeForConsole(new LogSettings(LogLevel.Info, default));
             }
-
-            // try to figure out platform if not set
-            if (Native.Utils == null) {
-              Native.Utils = CreateNativeUtils();
-            }
-
-            if (MemoryLayoutVerifier.Platform == null) {
-              MemoryLayoutVerifier.Platform = new MemoryLayoutVerifier.DefaultPlatform();
-            }
           }
 
           _loadedAllStatics = true;
@@ -5782,7 +6236,6 @@ namespace Quantum {
 
       DeterministicPlatformInfo info;
       info = new DeterministicPlatformInfo();
-      info.Allocator = CreateNativeAllocator();
       info.Architecture = DeterministicPlatformInfo.Architectures.x86;
       info.RuntimeHost = DeterministicPlatformInfo.RuntimeHosts.PhotonServer;
       info.Runtime = DeterministicPlatformInfo.Runtimes.NetFramework;
@@ -5857,10 +6310,13 @@ namespace Quantum {
 
 namespace Quantum {
   using Photon.Deterministic;
+  using System;
 
   /// <summary>
   /// This implementation of <see cref="IDeterministicStreamReplayInputProvider"/> 
   /// is used to provide delta compressed input for a Quantum simulation replay from a <see cref="BitStream"/>.
+  /// Alternatively the input provider can be started empty (new BitStreamReplayInputProvider(null, 0)) and to a later point in time 
+  /// be filled with input history chunks by setting a new <see cref="Stream"/> and a new <see cref="MaxFrame"/> values.
   /// </summary>
   public class BitStreamReplayInputProvider : IDeterministicStreamReplayInputProvider {
     private int _maxFrame;
@@ -5868,14 +6324,25 @@ namespace Quantum {
     private BitStream _inputStream;
 
     /// <summary>
-    /// The max frame available to read.
-    /// </summary>
-    public int MaxFrame => _maxFrame;
-
-    /// <summary>
     /// The actor number of the client that recoded the replay.
     /// </summary>
     public int LocalActorNumber => _localActorNumber;
+
+    /// <summary>
+    /// Access or replace the underlaying input stream.
+    /// </summary>
+    public BitStream Stream {
+      get => _inputStream;
+      set => _inputStream = value;
+    }
+
+    /// <summary>
+    /// The max frame that the simulation will try to progress to and query input for.
+    /// </summary>
+    public int MaxFrame {
+      get => _maxFrame;
+      set => _maxFrame = value;
+    }
 
     /// <summary>
     /// Create input provider.
@@ -5946,6 +6413,56 @@ namespace Quantum {
     public QTuple<byte[], bool> GetRpc(int frame, int player) {
       // unused
       return new QTuple<byte[], bool>();
+    }
+
+    /// <summary>
+    /// Clone a part of the input provider, copying internal buffers.
+    /// </summary>
+    /// <param name="startFrame">The frame to start from</param>
+    /// <param name="endFrame">The last frame this input provider can produce input for.</param>
+    /// <returns>New input provider of the same type.</returns>
+    public IDeterministicStreamReplayInputProvider Clone(int startFrame, int endFrame) {
+      Assert.Always(startFrame < endFrame, "Start frame {0} must be larger then endFrame {1}", startFrame, endFrame);
+
+      var currentPosition = _inputStream.Position;
+      var startPosition = -1;
+      var endPosition = -1;
+      var firstRead = true;
+
+      _inputStream.Position = 0;
+
+      while (_inputStream.CanRead() && (startPosition < 0 || endPosition < 0)) {
+        int dataLength = _inputStream.ReadInt();
+        int recordedFrame = _inputStream.ReadInt();
+
+        if (firstRead) {
+          firstRead = false;
+          Assert.Always(startFrame >= recordedFrame, "Start frame {0} too small, must be larger or equal to {1}", startFrame, recordedFrame);
+        }
+
+        if (recordedFrame == startFrame) {
+          startPosition = _inputStream.Position - 8 * 8;
+        }
+
+        _inputStream.Position += (dataLength - 4) * 8;
+
+        if (recordedFrame == endFrame) {
+          endPosition = _inputStream.Position;
+        }
+      }
+
+      Assert.Always(startPosition >= 0, "Start position not found for frame {0}", startFrame);
+      Assert.Always(endPosition >= 0, "End position not found for frame {0}", endFrame);
+      Assert.Always(startPosition % 8 == 0, "Start position {0} expected to be byte aligned", startPosition);
+      Assert.Always(endPosition % 8 == 0, "End position {0} expected to be byte aligned", endPosition);
+
+      _inputStream.Position = currentPosition;
+
+      var length = (endPosition - startPosition) / 8;
+      var bytes = new byte[length];
+      Array.Copy(_inputStream.Data, startPosition / 8, bytes, 0, length);
+      var inputStream = new BitStream(bytes);
+      return new BitStreamReplayInputProvider(inputStream, endFrame, LocalActorNumber);
     }
   }
 }
@@ -6153,7 +6670,8 @@ namespace Quantum {
 namespace Quantum {
   using System;
   using Photon.Deterministic;
-
+  
+  // TODO: how does it force? doesn't look as such
   /// <summary>
   /// An implementation of <see cref="IDeterministicPlatformTaskRunner"/> that forces the Quantum task system to run synchronously (single-threaded).
   /// </summary>
@@ -6603,7 +7121,7 @@ namespace Quantum {
       }
 
       if (bytes?.Length > 0) {
-        return IsCompressed ? ByteUtils.GZipDecompressBytes(bytes) : bytes;
+        return IsCompressed ? Compression.DecompressBytes(bytes) : bytes;
       }
 
       return null;
@@ -6623,7 +7141,7 @@ namespace Quantum {
 
       var bytes = data;
       if (isCompressed) {
-        bytes = ByteUtils.GZipCompressBytes(data);
+        bytes = Compression.CompressBytes(data);
       }
 
       return new QuantumJsonFriendlyDataBlob {
@@ -7118,6 +7636,73 @@ namespace Quantum {
         }
       }
     }
+
+    /// <summary>
+    /// Clone a part of the input provider, copying internal buffers.
+    /// Is not implemented for this stream.
+    /// </summary>
+    /// <param name="startFrame">The frame to start from</param>
+    /// <param name="endFrame">The last frame this input provider can produce input for.</param>
+    /// <returns>New input provider of the same type.</returns>
+    public IDeterministicStreamReplayInputProvider Clone(int startFrame, int endFrame) {
+      throw new NotImplementedException();
+    }
+  }
+}
+
+#endregion
+
+
+#region Assets/Photon/Quantum/Simulation/Runner/DotNetHardwareInfoCollector.cs
+
+namespace Quantum {
+  using System;
+  using System.Runtime.InteropServices;
+  using Photon.Deterministic;
+  
+  public class DotNetHardwareInfoCollector {
+    /// <summary>
+    /// Static method to create platform info.
+    /// </summary>
+    /// <returns>Platform information data</returns>
+    public static DeterministicPlatformInfo CreatePlatformInfo() {
+      DeterministicPlatformInfo info;
+      info = new DeterministicPlatformInfo();
+      
+      switch (RuntimeInformation.ProcessArchitecture) {
+        case Architecture.Arm:
+          info.Architecture = DeterministicPlatformInfo.Architectures.ARMv7;
+          break;
+        case Architecture.Arm64:
+          info.Architecture = DeterministicPlatformInfo.Architectures.ARM64;
+          break;
+        case Architecture.X86:
+          info.Architecture = DeterministicPlatformInfo.Architectures.x86;
+          break;
+        case Architecture.X64:
+          info.Architecture = DeterministicPlatformInfo.Architectures.x64;
+          break;
+      }
+      
+      info.RuntimeHost = DeterministicPlatformInfo.RuntimeHosts.PhotonServer;
+      info.Runtime = DeterministicPlatformInfo.Runtimes.NetFramework;
+
+      switch (Environment.OSVersion.Platform) {
+        case PlatformID.Unix:
+          info.Platform = DeterministicPlatformInfo.Platforms.Linux;
+          break;
+
+        case PlatformID.MacOSX:
+          info.Platform = DeterministicPlatformInfo.Platforms.OSX;
+          break;
+
+        default:
+          info.Platform = DeterministicPlatformInfo.Platforms.Windows;
+          break;
+      }
+
+      return info;
+    }
   }
 }
 
@@ -7137,13 +7722,10 @@ namespace Quantum {
   /// standalone Quantum applications and on the Quantum server plugin.
   /// </summary>
   public class DotNetRunnerFactory : IRunnerFactory {
-    static Boolean _isInitialized = false;
-    static readonly Object _lock = new Object();
-
     /// <summary>
     /// Gather the platform information.
     /// </summary>
-    public virtual DeterministicPlatformInfo CreatePlaformInfo => CreatePlatformInfo();
+    public virtual DeterministicPlatformInfo CreatePlatformInfo => DotNetHardwareInfoCollector.CreatePlatformInfo();
     /// <summary>
     /// Create a Quantum task factory.
     /// </summary>
@@ -7162,75 +7744,9 @@ namespace Quantum {
     /// Instantiate a <see cref="SessionRunner"/>.
     /// </summary>
     /// <param name="arguments">Session arguments</param>
+    /// <param name="defaultRunnerId">Optional default runner id.</param>
     /// <returns>A session runner</returns>
-    public virtual SessionRunner CreateRunner(SessionRunner.Arguments arguments) => new SessionRunner();
-
-    /// <summary>
-    /// Static method to create platform info.
-    /// Initializes statics <see cref="Native.Utils"/> and <see cref="MemoryLayoutVerifier.Platform"/>.
-    /// </summary>
-    /// <returns>Platform information data</returns>
-    public static DeterministicPlatformInfo CreatePlatformInfo() {
-      Init();
-
-      DeterministicPlatformInfo info;
-      info = new DeterministicPlatformInfo();
-      info.Allocator = CreateNativeAllocator();
-      info.Architecture = DeterministicPlatformInfo.Architectures.x86;
-      info.RuntimeHost = DeterministicPlatformInfo.RuntimeHosts.PhotonServer;
-      info.Runtime = DeterministicPlatformInfo.Runtimes.NetFramework;
-      info.TaskRunner = new DotNetTaskRunner();
-
-      switch (Environment.OSVersion.Platform) {
-        case PlatformID.Unix:
-          info.Platform = DeterministicPlatformInfo.Platforms.Linux;
-          break;
-
-        case PlatformID.MacOSX:
-          info.Platform = DeterministicPlatformInfo.Platforms.OSX;
-          break;
-
-        default:
-          info.Platform = DeterministicPlatformInfo.Platforms.Windows;
-          break;
-      }
-
-      return info;
-    }
-
-    public static void Init() {
-      if (!_isInitialized) {
-        lock (_lock) {
-          if (!_isInitialized) {
-            Native.Utils ??= CreateNativeUtils();
-            MemoryLayoutVerifier.Platform ??= new MemoryLayoutVerifier.DefaultPlatform();
-          }
-
-          _isInitialized = true;
-        }
-      }
-    }
-
-    public static Native.Allocator CreateNativeAllocator() {
-      switch (Environment.OSVersion.Platform) {
-        case PlatformID.Unix:
-        case PlatformID.MacOSX:
-          return new Native.LIBCAllocator();
-        default:
-          return new Native.MSVCRTAllocator();
-      }
-    }
-
-    public static Native.Utility CreateNativeUtils() {
-      switch (Environment.OSVersion.Platform) {
-        case PlatformID.Unix:
-        case PlatformID.MacOSX:
-          return new Native.LIBCUtility();
-
-        default:
-          return new Native.MSVCRTUtility();
-      }
-    }
+    public virtual SessionRunner CreateRunner(SessionRunner.Arguments arguments, string defaultRunnerId) => new SessionRunner();
   }
 }
 
@@ -7287,16 +7803,12 @@ namespace Quantum {
     /// This method throws exceptions on errors.
     /// </summary>
     public void Init(DeterministicSessionContextInitArguments args) {
-      AssetSerializer ??= (IAssetSerializer)args.AssetSerializer;
+      AssetSerializer ??= args.AssetSerializer;
       Assert.Always(AssetSerializer != null, "AssetSerializer required");
 
       lock (_lock) {
         if (!FPLut.IsLoaded) {
           FPLut.Init(args.LutPath);
-        }
-
-        if (Native.Utils == null) {
-          Native.Utils = DotNetRunnerFactory.CreateNativeUtils();
         }
 
         // TODO: If resource manager changes during runtime there should be an option to pass an instance here or to to create individual managers for each simulation and make it accessible.
@@ -7324,7 +7836,7 @@ namespace Quantum {
 
           using (var stream = new MemoryStream(assetDBData)) {
             var assets = AssetSerializer.DeserializeAssets(stream);
-            _sharedResourceManager = new ResourceManagerStatic(assets, DotNetRunnerFactory.CreateNativeAllocator());
+            _sharedResourceManager = new ResourceManagerStatic(assets);
           }
         }
       }
@@ -7431,7 +7943,7 @@ namespace Quantum {
         return AssetGuid.Invalid;
       }
 
-      _dynamicAssetDB ??= new DynamicAssetDB(DotNetRunnerFactory.CreateNativeAllocator());
+      _dynamicAssetDB ??= new DynamicAssetDB();
 
       return _dynamicAssetDB.AddAsset(asset);
     }
@@ -7455,7 +7967,7 @@ namespace Quantum {
 
       var tempRunner = _runner;
       _runner = null;
-      tempRunner.Shutdown(ShutdownCause.SimulationStopped);
+      tempRunner.Shutdown(ShutdownCause.Ok);
     }
 
     /// <summary>
@@ -7572,7 +8084,7 @@ namespace Quantum {
     /// Gather the platform information.
     /// There is a spelling mistake in the method name, but it's considered a bigger annoyance to change the interface.
     /// </summary>
-    DeterministicPlatformInfo CreatePlaformInfo { get; }
+    DeterministicPlatformInfo CreatePlatformInfo { get; }
     /// <summary>
     /// Create a Quantum task factory.
     /// </summary>
@@ -7592,8 +8104,9 @@ namespace Quantum {
     /// For Unity it is wrapped in a MonoBehaviour.
     /// </summary>
     /// <param name="arguments">Session arguments</param>
+    /// <param name="defaultRunnerId">Optionally a default runner name</param>
     /// <returns>A session runner</returns>
-    SessionRunner CreateRunner(SessionRunner.Arguments arguments);
+    SessionRunner CreateRunner(SessionRunner.Arguments arguments, string defaultRunnerId);
   }
 }
 
@@ -7657,7 +8170,8 @@ namespace Quantum {
       /// </summary>
       public Byte[] FrameData;
       /// <summary>
-      /// Optionally name the runner to access it from by id. This is useful when multiple runners are active on the client (for example an instant replay).
+      /// Optionally name the runner to access it from by id. By default the GameMode is used the runner id.
+      /// Setting a custom runner id is useful when multiple runners are active on the client.
       /// </summary>
       public string RunnerId;
       /// <summary>
@@ -7675,7 +8189,12 @@ namespace Quantum {
       /// <summary>
       /// The LoadBalancingClient object needs to be connected to game sever (joined a room) when handed to Quantum. Is not required for Replay or Local game modes.
       /// </summary>
+      [Obsolete("Use ShutdownCallback instead")]
       public Action<ShutdownCause, SessionRunner> OnShutdown;
+      /// <summary>
+      /// The LoadBalancingClient object needs to be connected to game sever (joined a room) when handed to Quantum. Is not required for Replay or Local game modes.
+      /// </summary>
+      public Action<ShutdownArgs> ShutdownCallback;
       /// <summary>
       /// Quantum communicator which encapsulates the connection object (from Photon Realtime).
       /// </summary>
@@ -7684,10 +8203,6 @@ namespace Quantum {
       /// Runner factory to create platform dependent objects.
       /// </summary>
       public IRunnerFactory RunnerFactory;
-      /// <summary>
-      /// The Quantum internal task runner.
-      /// </summary>
-      public InactiveTaskRunner TaskRunner;
       /// <summary>
       /// A cancellation token to stop all async tasks (only used during StartAsync()).
       /// </summary>
@@ -7705,13 +8220,6 @@ namespace Quantum {
       /// When enabled QuantumGame.GetRecordedReplay can be used access the replay data.
       /// </summary>
       public RecordingFlags RecordingFlags;
-
-      /// <summary>
-      /// Initializes struct with default values.
-      /// </summary>
-      public static Arguments CreateDefault() {
-        return new Arguments { RunnerId = "Default" };
-      }
 
       /// <summary>
       /// Optionally override the resource manager for example from deserialized Quantum assets (as showcased in QuantumRunnerLocalReplay).
@@ -7782,37 +8290,60 @@ namespace Quantum {
       }
 
       /// <summary>
+      /// The Quantum internal task runner.
+      /// </summary>
+      public IDeterministicPlatformTaskRunner TaskRunner {
+        get { return GameParameters.TaskRunner; }
+        set { GameParameters.TaskRunner = value; }
+      }
+
+      /// <summary>
+      /// Initializes struct with default values.
+      /// </summary>
+      public static Arguments CreateDefault() => new Arguments { RunnerId = "Default" };
+
+      /// <summary>
       ///  Validate, log warnings and throw exceptions on errors.
       /// </summary>
       /// <exception cref="SessionRunnerException">Communicator object invalid.</exception>
       public void Validate() {
-        if (FrameData?.Length > 0 && (InitialDynamicAssets?.IsEmpty == false)) {
-          Log.Warn(
-            $"Both {nameof(Arguments.FrameData)} and {nameof(Arguments.InitialDynamicAssets)} are set " +
-            $"and not empty. Serialized frames already contain a copy of DynamicAssetDB and that copy will be used " +
-            $"instead of {nameof(Arguments.InitialDynamicAssets)}");
-        }
+        // Assertions
+
+        Assert.Always(RuntimeConfig != null, "SessionRunner.Arguments validation failed: RuntimeConfig not set");
+        Assert.Always(SessionConfig != null, "SessionRunner.Arguments validation failed: SessionConfig not set");
+        Assert.Always(SessionConfig.PlayerCount > 0 || PlayerCount > 0, "SessionRunner.Arguments validation failed: PlayerCount or SessionConfig.PlayerCount must be greater than 0");
+
+        Assert.Always(RunnerFactory != null, "SessionRunner.Arguments validation failed: RunnerFactory not set");
+        Assert.Always(TaskRunner != null, "SessionRunner.Arguments validation failed: TaskRunner not set");
+        Assert.Always(ResourceManager != null, "SessionRunner.Arguments validation failed: ResourceManager not set");
 
         switch (GameMode) {
           case DeterministicGameMode.Multiplayer:
-            if (Communicator == null) {
-              throw new SessionRunnerException($"Communicator required for game mode {GameMode}");
-            }
-            if (Communicator.IsConnected == false) {
-              throw new SessionRunnerException($"Communicator connection required for game mode {GameMode}");
-            }
+            Assert.Always(Communicator != null, "SessionRunner.Arguments validation failed: Multiplayer mode requires a valid Communicator");
+            Assert.Always(Communicator.IsConnected, "SessionRunner.Arguments validation failed: Multiplayer mode requires a connected Communicator");
+            break;
+
+          case DeterministicGameMode.Replay:
+            Assert.Always(ReplayProvider != null, "SessionRunner.Arguments validation failed: Replay mode requires a valid ReplayProvider");
             break;
         }
 
-        Assert.Always(RunnerFactory != null, "RunnerFactory not set");
-        Assert.Always(RuntimeConfig != null, "RuntimeConfig not set");
-        Assert.Always(SessionConfig != null, "SessionConfig not set");
-        Assert.Always(SessionConfig.PlayerCount > 0 || PlayerCount > 0, "Either PlayerCount or SessionConfig.PlayerCount must be greater than 0");
+        // Warnings
+
+        if (HeapExtraCount > 20) {
+          Log.Warn($"SessionRunner.Arguments validation: HeapExtraCount '{HeapExtraCount}' is unreasonably high");
+        }
+
+        if (FrameData?.Length > 0 && (InitialDynamicAssets?.IsEmpty == false)) {
+          Log.Warn(
+            $"SessionRunner.Arguments validation: Both {nameof(Arguments.FrameData)} and {nameof(Arguments.InitialDynamicAssets)} are set " +
+            $"and not empty. Serialized frames already contain a copy of DynamicAssetDB and that copy will be used " +
+            $"instead of {nameof(Arguments.InitialDynamicAssets)}");
+        }
       }
     }
   }
 }
-
 
 #endregion
 
@@ -7837,9 +8368,10 @@ namespace Quantum {
   /// This class is delivered in source code to enable developers to create custom runner code.
   /// </summary>
   public partial class SessionRunner : IDisposable {
-    private Action<ShutdownCause, SessionRunner> _onShutdown;
+    private Action<ShutdownArgs> _onShutdownCallback;
     private bool _inSessionUpdate;
     private bool _shutdownRequested;
+    private ShutdownArgs _shutdownRequestedArgs;
     private TaskCompletionSource<bool> _waitForStartDone;
     private TaskCompletionSource<bool> _waitForShutdownStart;
     private TaskCompletionSource<bool> _waitForShutdownDone;
@@ -7881,6 +8413,17 @@ namespace Quantum {
     /// Access the recording flags that the runner was started with.
     /// </summary>
     public RecordingFlags RecordingFlags { get; private set; }
+    /// <summary>
+    /// Get and set the shutdown callback.
+    /// </summary>
+    public Action<ShutdownArgs> OnShutdownCallback {
+      get { 
+        return _onShutdownCallback; 
+      }
+      set {
+        _onShutdownCallback = value;
+      }
+    }
 
     private TaskFactory TaskFactory {
       get { return _taskFactory ?? System.Threading.Tasks.Task.Factory; }
@@ -7900,22 +8443,20 @@ namespace Quantum {
     /// This is also called from inside Session.Destroy() to signal shutdown by the simulation.
     /// </summary>
     public void Dispose() {
-      Shutdown(ShutdownCause.SimulationStopped);
-    }
+      if (string.IsNullOrEmpty(Session.LastErrorMessage)) {
+        Shutdown();
+      }else {
+        Shutdown(ShutdownCause.Error, Session.LastErrorMessage);
+      }
 
-    /// <summary>
-    /// Calls shutdown. Backwards compatibility.
-    /// </summary>
-    public void Destroy() {
-      Shutdown();
     }
 
     /// <summary>
     /// Can be overridden in a subclass not be notified on shutdowns.
-    /// Is called right after tje <see cref="Arguments.OnShutdown"/> callback.
+    /// Is called right after the <see cref="Arguments.ShutdownCallback"/> callback.
     /// </summary>
-    /// <param name="cause">The shutdown cause</param>
-    protected virtual void OnShutdown(ShutdownCause cause) { }
+    /// <param name="args">The shutdown arguments</param>
+    protected virtual void OnShutdown(ShutdownArgs args) { }
 
     /// <summary>
     /// To update the Quantum simulation this needs to be run from the outside.
@@ -7923,15 +8464,7 @@ namespace Quantum {
     /// and the spectator has an extra service task to tick this.
     /// </summary>
     /// <param name="deltaTime">If null the internal stopwatch is used to update, otherwise pass in the desired delta time to progress the simulation.</param>
-    public void Service(double? deltaTime = null) {
-#if UNITY_EDITOR
-      //Guarantees that only one frame will be step during pause mode 
-      if (UnityEditor.EditorApplication.isPaused && !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
-      {
-        deltaTime = (double)1 / Session.SimulationRate;
-      }
-#endif
-      
+    public void Service(double? deltaTime = null) {     
       if (Session != null && State == SessionState.Starting) {
         // Waiting for a snapshot 
         if (Session.IsRunning && Session.IsPaused == false) {
@@ -7945,6 +8478,15 @@ namespace Quantum {
         }
       }
 
+#if UNITY_EDITOR
+      if (Session != null && State == SessionState.Running) {
+        // Guarantees that only one frame will be step during pause mode 
+        if (UnityEditor.EditorApplication.isPaused) {
+          deltaTime = 1d / Session.SimulationRate;
+        }
+      }
+#endif
+
       if (Session != null) {
         _inSessionUpdate = true;
         try {
@@ -7953,7 +8495,7 @@ namespace Quantum {
         } catch (Exception e) {
           _inSessionUpdate = false;
           Log.Exception(e);
-          Shutdown(ShutdownCause.SessionError);
+          Shutdown(ShutdownCause.Error, e.Message);
           throw;
         }
 
@@ -8014,7 +8556,7 @@ namespace Quantum {
         throw new ArgumentException(e.Message);
       }
 
-      var startGameTimeoutIsSeconds = arguments.StartGameTimeoutInSeconds.HasValue ? arguments.StartGameTimeoutInSeconds.Value : Arguments.DefaultStartGameTimeoutInSeconds;
+      var startGameTimeoutIsSeconds = arguments.StartGameTimeoutInSeconds ?? Arguments.DefaultStartGameTimeoutInSeconds;
       if (startGameTimeoutIsSeconds <= 0) {
         throw new ArgumentException("StartGameTimeoutInSeconds must be greater than 0, or use non-async Start() method.");
       }
@@ -8035,11 +8577,10 @@ namespace Quantum {
 
         // Wait for game started
         try {
-          // TODO: it would be actually nice if this would throw on plugin errors while waiting for the start to complete!
           await runner.WaitForStartAsync(startGameTimeoutIsSeconds);
         } catch (TaskCanceledException) {
           bool isTimedOut = runner._waitForStartTimeout != null && runner._waitForStartTimeout.IsCancellationRequested;
-          await runner.ShutdownAsync(ShutdownCause.StartFailed);
+          await runner.ShutdownAsync(ShutdownCause.Error, "Start failed");
           if (isTimedOut) {
             Log.Error($"Session start timed out, the client is still connected but the server did not respond in time to complete the start protocol. SessionRunner.Arguments.StartGameTimeoutInSeconds is a client controlled time out.");
             throw new SessionRunnerException($"Session start timed out");
@@ -8056,7 +8597,8 @@ namespace Quantum {
     /// Can be called from inside the simulation (during a simulation callback), the shutdown will commence during the next <see cref="Service(double?)"/> call.
     /// </summary>
     /// <param name="cause">Shutdown cause</param>
-    public void Shutdown(ShutdownCause cause = ShutdownCause.Ok) {
+    /// <param name="message">The message for <see cref="ShutdownArgs"/></param>
+    public void Shutdown(ShutdownCause cause = ShutdownCause.Ok, string message = null) {
       switch (State) {
         case SessionState.Shutdown:
         case SessionState.ShuttingDown:
@@ -8066,13 +8608,14 @@ namespace Quantum {
       if (_inSessionUpdate) {
       // If called from inside session we want to wait until we are back inside the Unity thread. Maybe from Update().
         _shutdownRequested = true;
+        _shutdownRequestedArgs = new ShutdownArgs { Cause = cause, Message = message, Runner = this };
         Log.Info("Shutdown requested during session update, postponing execution");
         return;
       }
 
       State = SessionState.ShuttingDown;
 
-      ShutdownInternal(this, cause);
+      ShutdownInternal(this, cause, message);
 
       Communicator?.OnDestroy();
       Communicator = null;
@@ -8086,9 +8629,10 @@ namespace Quantum {
     /// Will also wait for the connection to be properly disconnected.
     /// </summary>
     /// <param name="cause">Shutdown cause</param>
+    /// <param name="message">The message for <see cref="ShutdownArgs"/></param>
     /// <returns>Once the complete shutdown is completed.</returns>
     /// <exception cref="SessionRunnerException">TaskFactory was never set.</exception>
-    public System.Threading.Tasks.Task ShutdownAsync(ShutdownCause cause = ShutdownCause.Ok) {
+    public System.Threading.Tasks.Task ShutdownAsync(ShutdownCause cause = ShutdownCause.Ok, string message = null) {
       switch (State) {
         case SessionState.Shutdown:
           return System.Threading.Tasks.Task.CompletedTask;
@@ -8122,7 +8666,7 @@ namespace Quantum {
         result = ((System.Threading.Tasks.Task)_waitForShutdownStart.Task).ContinueWith(t => ShutdownInternal(this, cause), TaskFactory.Scheduler);
       } else {
         // Shut down right away
-        result = TaskFactory.StartNew(() => ShutdownInternal(this, cause));
+        result = TaskFactory.StartNew(() => ShutdownInternal(this, cause, message));
       }
 
       // disconnect
@@ -8174,7 +8718,7 @@ namespace Quantum {
     }
 
     /// <summary>
-    /// Wait for the simulation shutdown is signaled. This is an alternative way to listen for the <see cref="Arguments.OnShutdown"/> callback.
+    /// Wait for the simulation shutdown is signaled. This is an alternative way to listen for the <see cref="Arguments.ShutdownCallback"/> callback.
     /// </summary>
     /// <param name="cancellationToken">Token to cancel this task</param>
     /// <returns>After the runner shut down.</returns>
@@ -8192,14 +8736,11 @@ namespace Quantum {
     }
 
     /// <summary>
-    /// Wait for the simulation shutdown is signaled. This is an alternative way to listen for the <see cref="Arguments.OnShutdown"/> callback.
+    /// Wait for the simulation shutdown is signaled. This is an alternative way to listen for the <see cref="Arguments.ShutdownCallback"/> callback.
     /// </summary>
     /// <returns>After the runner shut down.</returns>
     public System.Threading.Tasks.Task WaitForShutdownAsync() {
-      if (_waitForShutdownDone == null) {
-        _waitForShutdownDone = new TaskCompletionSource<bool>();
-      }
-
+      _waitForShutdownDone ??= new TaskCompletionSource<bool>();
       return _waitForShutdownDone.Task;
     }
 
@@ -8209,14 +8750,23 @@ namespace Quantum {
     /// <param name="arguments">Start arguments.</param>
     /// <returns>Initialized runner object.</returns>
     protected static SessionRunner CreateRunnerInternal(Arguments arguments) {
-      arguments.RunnerId = arguments.RunnerId ?? "Default";
-      var runner = arguments.RunnerFactory.CreateRunner(arguments);
+      var defaultRunnerId = arguments.GameMode.ToString();
+      
+      var runner = arguments.RunnerFactory.CreateRunner(arguments, defaultRunnerId);
 
       try {
         runner.State = SessionState.Starting;
-        runner.Id = arguments.RunnerId;
+        runner.Id = string.IsNullOrEmpty(arguments.RunnerId) ? defaultRunnerId : arguments.RunnerId;
         runner.Communicator = arguments.Communicator;
-        runner._onShutdown = arguments.OnShutdown;
+
+        runner._onShutdownCallback = arguments.ShutdownCallback;
+#pragma warning disable CS0618 // Type or member is obsolete
+        if (runner._onShutdownCallback == null && arguments.OnShutdown != null) {
+          // Backwards compatibility
+          var onShutdown = arguments.OnShutdown;
+          runner._onShutdownCallback = (args) => onShutdown(args.Cause, args.Runner); 
+        }
+#pragma warning restore CS0618 // Type or member is obsolete
         runner._updateDb = arguments.RunnerFactory.UpdateDB;
         runner.DeltaTimeType = arguments.DeltaTimeType;
         runner.RecordingFlags = arguments.RecordingFlags;
@@ -8228,17 +8778,12 @@ namespace Quantum {
           deterministicConfig.PlayerCount = arguments.PlayerCount;
         }
 
-        var platformInfo = arguments.RunnerFactory.CreatePlaformInfo;
-        if (arguments.TaskRunner != null) {
-          platformInfo.TaskRunner = arguments.TaskRunner;
-        }
-
         var args = new DeterministicSessionArgs {
           FrameData = arguments.FrameData,
           Game = runner.DeterministicGame,
           InitialTick = arguments.InitialTick,
           Mode = arguments.GameMode,
-          PlatformInfo = platformInfo,
+          PlatformInfo = arguments.RunnerFactory.CreatePlatformInfo,
           SessionConfig = deterministicConfig,
           Replay = arguments.ReplayProvider,
           DisableInterpolatableStates = (arguments.GameFlags & QuantumGameFlags.DisableInterpolatableStates) == QuantumGameFlags.DisableInterpolatableStates
@@ -8252,9 +8797,9 @@ namespace Quantum {
 
         runner.Session = new DeterministicSession(args) { Runner = runner };
         runner.Session.Join(arguments.ClientId);
-      } catch (Exception) {
+      } catch (Exception e) {
         // We need to listen to anything that breaks and cleanup the runner, the calling code does not have the runner, yet.
-        runner.Destroy();
+        runner.Shutdown(ShutdownCause.Error, e.Message);
         throw;
       }
 
@@ -8266,10 +8811,11 @@ namespace Quantum {
     /// </summary>
     /// <param name="runner">Session runner object.</param>
     /// <param name="cause">Shutdown code.</param>
-    protected static void ShutdownInternal(SessionRunner runner, ShutdownCause cause) {
-      Log.Info($"Shutting down runner '{runner.Id}'");
+    /// <param name="message">The message for <see cref="ShutdownArgs"/></param>
+    protected static void ShutdownInternal(SessionRunner runner, ShutdownCause cause, string message = null) {
+      Log.Info($"Shutting down runner '{runner.Id}' {(cause == ShutdownCause.Error ? "(" + message + ")" : "")}");
 
-      runner._waitForStartDone?.TrySetException(new Exception("Game shut down"));
+      runner._waitForStartDone?.TrySetException(new Exception(message ?? "Game shut down"));
       runner._waitForStartDone = null;
       runner._waitForStartTimeout?.Dispose();
       runner._waitForStartTimeout = null;
@@ -8281,9 +8827,10 @@ namespace Quantum {
       runner.Session = null;
       runner.DeterministicGame = null;
 
-      runner._onShutdown?.Invoke(cause, runner);
-      runner._onShutdown = null;
-      runner.OnShutdown(cause);
+      var args = new ShutdownArgs {  Cause = cause, Message = message, Runner = runner };
+      runner._onShutdownCallback?.Invoke(args);
+      runner._onShutdownCallback = null;
+      runner.OnShutdown(args);
 
       runner._taskFactory = null;
       runner._updateDb = null;
@@ -8293,8 +8840,19 @@ namespace Quantum {
     /// The method is used to enable exception logging inside the Async call when invoked from the non-async Service() method.
     /// </summary>
     private async void WrapShutdownAsync() {
-      await ShutdownAsync(ShutdownCause.Ok);
+      await ShutdownAsync(_shutdownRequestedArgs.Cause, _shutdownRequestedArgs.Message);
     }
+
+    #region Legacy
+    #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+    [Obsolete("Use OnShutdown(ShutdownArgs) instead")]
+    protected virtual void OnShutdown(ShutdownCause cause) { }
+    [Obsolete("Use Shutdown() instead")]
+    public void Destroy() => Shutdown();
+    
+    #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+    #endregion
   }
 }
 
@@ -8360,30 +8918,81 @@ namespace Quantum {
 #endregion
 
 
+#region Assets/Photon/Quantum/Simulation/Runner/ShutdownArgs.cs
+
+namespace Quantum {
+  using System;
+
+  /// <summary>
+  /// SessionRunner shutdown information.
+  /// </summary>
+  public struct ShutdownArgs {
+    /// <summary>
+    /// The cause of the shutdown, error or expected.
+    /// </summary>
+    public ShutdownCause Cause;
+    /// <summary>
+    /// A debug message that can be used to provide more information about the shutdown.
+    /// </summary>
+    public String Message;
+    /// <summary>
+    /// The affected Runner object.
+    /// </summary>
+    public SessionRunner Runner;
+
+    /// <summary>
+    /// Is the shutdown an error?
+    /// </summary>
+    public readonly bool IsError => Cause != ShutdownCause.Ok;
+  }
+}
+
+
+#endregion
+
+
 #region Assets/Photon/Quantum/Simulation/Runner/ShutdownCause.cs
 
 namespace Quantum {
+  using System;
+
+  /// <summary>
+  /// The cause of the SessionRunner shutdown.
+  /// </summary>
   public enum ShutdownCause {
     /// <summary>
     /// Expected shutdown
     /// </summary>
     Ok,
     /// <summary>
+    /// An error occurred
+    /// </summary>
+    Error,
+
+    #region Legacy
+
+    /// <summary>
     /// Start timed out or cancelled
     /// </summary>
+    [Obsolete("Use Error instead")]
     StartFailed,
     /// <summary>
     /// The session threw an exception.
     /// </summary>
+    [Obsolete("Use Error instead")]
     SessionError,
     /// <summary>
     /// Not used.
     /// </summary>
+    [Obsolete("Use Error instead")]
     NetworkError,
     /// <summary>
     /// Simulation stopped. Could also be a network error.
     /// </summary>
+    [Obsolete("Use Error instead")]
     SimulationStopped
+
+    #endregion
   }
 }
 
@@ -8449,28 +9058,28 @@ namespace Quantum.Task {
     /// <summary>
     /// Initializes the system and call the virtual <see cref="OnInitUser(Frame)"/> method.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
-    public sealed override void OnInit(Frame f) {
-      f.Context.TaskContext.RegisterDelegate(TaskArrayComponent, ProfilerName, ref _arrayTaskDelegateHandle);
-      OnInitUser(f);
+    /// <param name="frame">The referenced frame.</param>
+    public sealed override void OnInit(Frame frame) {
+      frame.Context.TaskContext.RegisterDelegate(TaskArrayComponent, ProfilerName, ref _arrayTaskDelegateHandle);
+      OnInitUser(frame);
     }
 
     /// <summary>
     /// Override to initialize a custom system.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
-    protected virtual void OnInitUser(Frame f) {
+    /// <param name="frame">The referenced frame.</param>
+    protected virtual void OnInitUser(Frame frame) {
     }
 
     /// <summary>
     /// Override to schedule extra tasks.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
+    /// <param name="frame">The referenced frame.</param>
     /// <param name="taskHandle">The initial task handle.</param>
     /// <returns>The updated task graph.</returns>
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
       var slicesCount = Math.Max(1, Math.Min(SlicesCount, MAX_SLICES_COUNT));
-      return f.Context.TaskContext.AddArrayTask(_arrayTaskDelegateHandle, null, f.ComponentCount<T>(includePendingRemoval: true), taskHandle, slicesCount);
+      return frame.Context.TaskContext.AddArrayTask(_arrayTaskDelegateHandle, null, frame.ComponentCount<T>(includePendingRemoval: true), taskHandle, slicesCount);
     }
 
     private void TaskArrayComponent(FrameThreadSafe f, int start, int count, void* arg) {
@@ -8485,10 +9094,10 @@ namespace Quantum.Task {
     /// Override to add workload.
     /// <para>Only access to the component itself and <see cref="FrameThreadSafe"/> is safe.</para>
     /// </summary>
-    /// <param name="f">The thread-safe referenced frame.</param>
+    /// <param name="frame">The thread-safe referenced frame.</param>
     /// <param name="entity">The entity that the component belongs to, only read access is safe.</param>
     /// <param name="component">The component to update.</param>
-    public abstract void Update(FrameThreadSafe f, EntityRef entity, T* component);
+    public abstract void Update(FrameThreadSafe frame, EntityRef entity, T* component);
   }
 }
 
@@ -8531,37 +9140,37 @@ namespace Quantum.Task {
     public virtual ComponentSet Any => default;
 
     /// <inheritdoc cref="SystemArrayComponent{T}.OnInit(Frame)"/>
-    public sealed override void OnInit(Frame f) {
+    public sealed override void OnInit(Frame frame) {
       _filterMeta = ComponentFilterStructMeta.Create<T>();
       Assert.Check(_filterMeta.ComponentCount > 0, "Filter Struct '{0}' must have at least one component pointer.", typeof(T));
       
-      f.Context.TaskContext.RegisterDelegate(TaskArrayFilter, ProfilerName, ref _arrayTaskDelegateHandle);
-      OnInitUser(f);
+      frame.Context.TaskContext.RegisterDelegate(TaskArrayFilter, ProfilerName, ref _arrayTaskDelegateHandle);
+      OnInitUser(frame);
     }
 
     /// <inheritdoc cref="SystemArrayComponent{T}.OnInitUser(Frame)"/>
-    protected virtual void OnInitUser(Frame f) {
+    protected virtual void OnInitUser(Frame frame) {
     }
 
     /// <inheritdoc cref="SystemArrayComponent{T}.Schedule(Frame, TaskHandle)"/>
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
       // figure out smallest block iterator
-      var taskSize = f.ComponentCount(_filterMeta.ComponentTypes[0], includePendingRemoval: true);
+      var taskSize = frame.ComponentCount(_filterMeta.ComponentTypes[0], includePendingRemoval: true);
 
       for (var i = 1; i < _filterMeta.ComponentCount; ++i) {
-        var otherCount = f.ComponentCount(_filterMeta.ComponentTypes[i], includePendingRemoval: true);
+        var otherCount = frame.ComponentCount(_filterMeta.ComponentTypes[i], includePendingRemoval: true);
         if (otherCount < taskSize) {
           taskSize = otherCount;
         }
       }
 
       var slicesCount = Math.Max(1, Math.Min(SlicesCount, MAX_SLICES_COUNT));
-      return f.Context.TaskContext.AddArrayTask(_arrayTaskDelegateHandle, null, taskSize, taskHandle, slicesCount);
+      return frame.Context.TaskContext.AddArrayTask(_arrayTaskDelegateHandle, null, taskSize, taskHandle, slicesCount);
     }
 
-    private void TaskArrayFilter(FrameThreadSafe f, int start, int count, void* userData) {
+    private void TaskArrayFilter(FrameThreadSafe frame, int start, int count, void* userData) {
       // grab iterator
-      var iterator = f.FilterStruct<T>(Without, Any, start, count);
+      var iterator = frame.FilterStruct<T>(Without, Any, start, count);
 
       // set culling flag
       iterator.UseCulling = UseCulling;
@@ -8570,7 +9179,7 @@ namespace Quantum.Task {
 
       // execute filter loop
       while (iterator.Next(&filter)) {
-        Update(f, ref filter);
+        Update(frame, ref filter);
       }
     }
 
@@ -8578,9 +9187,9 @@ namespace Quantum.Task {
     /// Override to add workload.
     /// <para>Only access to the component itself and <see cref="FrameThreadSafe"/> is safe.</para>
     /// </summary>
-    /// <param name="f">The thread-safe referenced frame.</param>
+    /// <param name="frame">The thread-safe referenced frame.</param>
     /// <param name="filter">The entity filter.</param>
-    public abstract void Update(FrameThreadSafe f, ref T filter);
+    public abstract void Update(FrameThreadSafe frame, ref T filter);
   }
 }
 
@@ -8722,19 +9331,19 @@ namespace Quantum {
     /// <summary>
     /// Is called when the system is initialized.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
-    public virtual void OnInit(Frame f) {
+    /// <param name="frame">The referenced frame.</param>
+    public virtual void OnInit(Frame frame) {
     }
 
     /// <summary>
     /// Is called when the system was enabled for example after calling <see cref="Frame.SystemEnable{T}()"/> 
     /// or during <see cref="QuantumGame.InitSystems(Photon.Deterministic.DeterministicFrame)"/>.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
-    public virtual void OnEnabled(Frame f) {
+    /// <param name="frame">The referenced frame.</param>
+    public virtual void OnEnabled(Frame frame) {
       for (int i = 0; i < _children.Length; ++i) {
-        if (f.SystemIsEnabledSelf(_children[i])) {
-          _children[i].OnEnabled(f);
+        if (frame.SystemIsEnabledSelf(_children[i])) {
+          _children[i].OnEnabled(frame);
         }
       }
     }
@@ -8742,11 +9351,11 @@ namespace Quantum {
     /// <summary>
     /// Is called when the system was disabled for example after <see cref="Frame.SystemDisable(Type)"/>.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
-    public virtual void OnDisabled(Frame f) {
+    /// <param name="frame">The referenced frame.</param>
+    public virtual void OnDisabled(Frame frame) {
       for (int i = 0; i < _children.Length; ++i) {
-        if (f.SystemIsEnabledSelf(_children[i])) {
-          _children[i].OnDisabled(f);
+        if (frame.SystemIsEnabledSelf(_children[i])) {
+          _children[i].OnDisabled(frame);
         }
       }
     }
@@ -8754,43 +9363,35 @@ namespace Quantum {
     /// <summary>
     /// Creates the task graph for the system.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
+    /// <param name="frame">The referenced frame.</param>
     /// <param name="taskHandle">The initial task handle.</param>
     /// <returns>The system task graph.</returns>
-    public TaskHandle OnSchedule(Frame f, TaskHandle taskHandle) {
-#if DEBUG
-      var profiler = f.Context.ProfilerContext.GetProfilerForTaskThread(0);
-      try {
-        profiler.Start(ProfilerName);
-#endif
-        
-        taskHandle = Schedule(f, taskHandle);
+    public TaskHandle OnSchedule(Frame frame, TaskHandle taskHandle) {
+      var profilerContext = frame.Context.ProfilerContext;
+      using var scope = profilerContext.IsEnabled ? profilerContext.GetProfilerForTaskThread(0).Scope(ProfilerName) : default;
 
-        for (var i = 0; i < _children.Length; ++i) {
-          if (f.SystemIsEnabledSelf(_children[i])) {
-            try {
-              taskHandle = _children[i].OnSchedule(f, taskHandle);
-            } catch (Exception exn) {
-              Log.Exception(exn);
-            }
+      taskHandle = Schedule(frame, taskHandle);
+
+      for (var i = 0; i < _children.Length; ++i) {
+        if (frame.SystemIsEnabledSelf(_children[i])) {
+          try {
+            taskHandle = _children[i].OnSchedule(frame, taskHandle);
+          } catch (Exception exn) {
+            Log.Exception(exn);
           }
         }
-
-        return taskHandle;
-#if DEBUG
-      } finally {
-        profiler.End();
       }
-#endif
+
+      return taskHandle;
     }
 
     /// <summary>
     /// Override to add tasks to this system.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
+    /// <param name="frame">The referenced frame.</param>
     /// <param name="taskHandle">The initial task handle.</param>
     /// <returns>The system task graph.</returns>
-    protected abstract TaskHandle Schedule(Frame f, TaskHandle taskHandle);
+    protected abstract TaskHandle Schedule(Frame frame, TaskHandle taskHandle);
   }
 }
 
@@ -8826,7 +9427,7 @@ namespace Quantum {
     /// <summary>
     /// Nothing to schedule, this is only a container for children.
     /// </summary>
-    protected sealed override TaskHandle Schedule(Frame f, TaskHandle taskHandle) => taskHandle;
+    protected sealed override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) => taskHandle;
   }
 }
 
@@ -8872,25 +9473,25 @@ namespace Quantum {
     /// <summary>
     /// Adds the basic update callback.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
+    /// <param name="frame">The referenced frame.</param>
     /// <param name="taskHandle">The initial task handle.</param>
     /// <returns>The final task graph.</returns>
-    protected TaskHandle ScheduleUpdate(Frame f, TaskHandle taskHandle) {
+    protected TaskHandle ScheduleUpdate(Frame frame, TaskHandle taskHandle) {
       if (_updateHandle.IsValid == false) {
-        f.Context.TaskContext.RegisterDelegate(TaskCallback, ProfilerName, ref _updateHandle);
+        frame.Context.TaskContext.RegisterDelegate(TaskCallback, ProfilerName, ref _updateHandle);
       }
 
-      return f.Context.TaskContext.AddMainThreadTask(_updateHandle, null, taskHandle);
+      return frame.Context.TaskContext.AddMainThreadTask(_updateHandle, null, taskHandle);
     }
 
     /// <summary>
     /// Override to add additional tasks.
     /// </summary>
-    /// <param name="f">The referenced frame.</param>
+    /// <param name="frame">The referenced frame.</param>
     /// <param name="taskHandle">The initial task handle.</param>
     /// <returns>The final task graph.</returns>
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
-      return ScheduleUpdate(f, taskHandle);
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
+      return ScheduleUpdate(frame, taskHandle);
     }
 
     void TaskCallback(FrameThreadSafe frame, int start, int count, void* arg) {
@@ -8904,8 +9505,8 @@ namespace Quantum {
     /// <summary>
     /// Override to add workload.
     /// </summary>
-    /// <param name="f">The current fame.</param>
-    public abstract void Update(Frame f);
+    /// <param name="frame">The current fame.</param>
+    public abstract void Update(Frame frame);
   }
 }
 
@@ -8930,8 +9531,8 @@ namespace Quantum {
   ///    public EntityRef Entity;
   ///    public Foo* FooComponent;
   ///  }
-  ///  public override void Update(Frame f, ref Filter filter) {
-  ///    filter.FooComponent->Update(f, filter.Entity);
+  ///  public override void Update(Frame frame, ref Filter filter) {
+  ///    filter.FooComponent->Update(frame, filter.Entity);
   ///  }
   ///}
   /// </code></example>
@@ -8963,10 +9564,10 @@ namespace Quantum {
     /// <summary>
     /// Internal update method, use <see cref="Update(Frame, ref T)"/> instead.
     /// </summary>
-    /// <param name="f">The current frame.</param>
-    public sealed override void Update(Frame f) {
+    /// <param name="frame">The current frame.</param>
+    public sealed override void Update(Frame frame) {
       // grab iterator
-      var it = f.Unsafe.FilterStruct<T>(Without, Any);
+      var it = frame.Unsafe.FilterStruct<T>(Without, Any);
 
       // set culling flag
       it.UseCulling = UseCulling;
@@ -8975,16 +9576,16 @@ namespace Quantum {
       var filter = default(T);
 
       while (it.Next(&filter)) {
-        Update(f, ref filter);
+        Update(frame, ref filter);
       }
     }
 
     /// <summary>
     /// Override to add workload.
     /// </summary>
-    /// <param name="f">The current frame.</param>
+    /// <param name="frame">The current frame.</param>
     /// <param name="filter">The frame object.</param>
-    public abstract void Update(Frame f, ref T filter);
+    public abstract void Update(Frame frame, ref T filter);
   }
 }
 
@@ -9021,7 +9622,7 @@ namespace Quantum {
     /// <summary>
     /// Nothing to schedule, this is just a container for children.
     /// </summary>
-    protected sealed override TaskHandle Schedule(Frame f, TaskHandle taskHandle) => taskHandle;
+    protected sealed override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) => taskHandle;
   }
 }
 
@@ -9043,7 +9644,7 @@ namespace Quantum {
     /// <summary>
     /// Nothing to schedule, this is a system just for signals that requires not task processing.
     /// </summary>
-    protected sealed override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
+    protected sealed override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
       return taskHandle;
     }
   }
@@ -9082,30 +9683,30 @@ namespace Quantum.Task {
     public virtual int SliceSize => DEFAULT_SLICE_SIZE;
 
     /// <inheritdoc cref="SystemArrayComponent{T}.OnInit(Frame)"/>
-    public sealed override void OnInit(Frame f) {
-      f.Context.TaskContext.RegisterDelegate(TaskThreadedComponent, GetType().Name + ".Update", ref _threadedTaskDelegateHandle);
-      OnInitUser(f);
+    public sealed override void OnInit(Frame frame) {
+      frame.Context.TaskContext.RegisterDelegate(TaskThreadedComponent, GetType().Name + ".Update", ref _threadedTaskDelegateHandle);
+      OnInitUser(frame);
     }
 
     /// <inheritdoc cref="SystemArrayComponent{T}.OnInitUser(Frame)"/>
-    protected virtual void OnInitUser(Frame f) {
+    protected virtual void OnInitUser(Frame frame) {
     }
 
     /// <inheritdoc cref="SystemArrayComponent{T}.Schedule(Frame, TaskHandle)"/>
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
       // reset indexer
       _sliceIndexer = -1;
       
       // cache slice size safely in main-thread
       _sliceSize = Math.Max(1, SliceSize);
       
-      return f.Context.TaskContext.AddThreadedTask(_threadedTaskDelegateHandle, null, taskHandle);
+      return frame.Context.TaskContext.AddThreadedTask(_threadedTaskDelegateHandle, null, taskHandle);
     }
 
-    private void TaskThreadedComponent(FrameThreadSafe f, int start, int count, void* userData) {
+    private void TaskThreadedComponent(FrameThreadSafe frame, int start, int count, void* userData) {
       while (true) {
         var sliceIndex = Interlocked.Increment(ref _sliceIndexer);
-        var iterator   = f.GetComponentBlockIterator<T>(sliceIndex * _sliceSize, _sliceSize).GetEnumerator();
+        var iterator   = frame.GetComponentBlockIterator<T>(sliceIndex * _sliceSize, _sliceSize).GetEnumerator();
 
         if (iterator.MoveNext() == false) {
           // chunk is out of buffer range, we're done
@@ -9114,13 +9715,13 @@ namespace Quantum.Task {
 
         do {
           var (entity, component) = iterator.Current;
-          Update(f, entity, component);
+          Update(frame, entity, component);
         } while (iterator.MoveNext());
       }
     }
 
     /// <inheritdoc cref="SystemArrayComponent{T}.Update(FrameThreadSafe, EntityRef, T*)"/>
-    public abstract void Update(FrameThreadSafe f, EntityRef entity, T* component);
+    public abstract void Update(FrameThreadSafe frame, EntityRef entity, T* component);
   }
 }
 
@@ -9174,18 +9775,18 @@ namespace Quantum.Task {
     }
 
     /// <inheritdoc cref="SystemArrayComponent{T}.OnInitUser(Frame)"/>
-    protected virtual void OnInitUser(Frame f) {
+    protected virtual void OnInitUser(Frame frame) {
     }
 
     /// <inheritdoc cref="SystemArrayComponent{T}.Schedule(Frame, TaskHandle)"/>
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
       // reset indexer
       _sliceIndexer = -1;
 
       // cache slice size safely in main-thread
       _sliceSize = Math.Max(1, SliceSize);
 
-      return f.Context.TaskContext.AddThreadedTask(_threadedTaskDelegateHandle, null, taskHandle);
+      return frame.Context.TaskContext.AddThreadedTask(_threadedTaskDelegateHandle, null, taskHandle);
     }
 
     private void TaskThreadedFilter(FrameThreadSafe f, int start, int count, void* userData) {
@@ -9213,7 +9814,7 @@ namespace Quantum.Task {
 
 
     /// <inheritdoc cref="SystemArrayFilter{T}.Update(FrameThreadSafe, ref T)"/>
-    public abstract void Update(FrameThreadSafe f, ref T filter);
+    public abstract void Update(FrameThreadSafe frame, ref T filter);
   }
 }
 
@@ -9234,8 +9835,8 @@ namespace Quantum.Core {
   /// \ingroup Culling
   [Preserve]
   public unsafe class CullingSystem2D : SystemBase {
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
-      return f.Context.Culling.Schedule2D(f, taskHandle);
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
+      return frame.Context.Culling.Schedule2D(frame, taskHandle);
     }
   }
   
@@ -9247,8 +9848,8 @@ namespace Quantum.Core {
   /// \ingroup Culling
   [Preserve]
   public unsafe class CullingSystem3D : SystemBase {
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
-      return f.Context.Culling.Schedule3D(f, taskHandle);
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
+      return frame.Context.Culling.Schedule3D(frame, taskHandle);
     }
   }
 }
@@ -9297,9 +9898,9 @@ namespace Quantum.Core {
     /// <summary>
     /// Partial method that allows to execute user defined debug commands.
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="payload">The debug command payload.</param>
-    static partial void ExecuteUser(Frame f, ref Payload payload);
+    static partial void ExecuteUser(Frame frame, ref Payload payload);
     /// <summary>
     /// Partial method that allows to serialize user defined debug commands.
     /// </summary>
@@ -9338,7 +9939,7 @@ namespace Quantum.Core {
     /// <param name="payload">The command payloads can include multiple instances.</param>
     public static bool Send(QuantumGame game, params Payload[] payload) {
 #if DEBUG && !QUANTUM_DEBUG_COMMAND_DISABLED
-      var result = game.SendCommand(new InternalCommand() {
+      var result = game.AddCommand(new InternalCommand() {
         Data = payload
       });
       return result == DeterministicCommandSendResult.Success;
@@ -9472,26 +10073,26 @@ namespace Quantum.Core {
     internal static SystemBase CreateSystem() => new InternalSystem();
 
 #if DEBUG
-    private static void Execute(Frame f, ref Payload payload) {
+    private static void Execute(Frame frame, ref Payload payload) {
       Exception error = null;
       try {
         switch (payload.Type) {
           case DebugCommandType.Create:
-            payload.Entity = ExecuteCreate(f, payload.Entity, payload.Data);
+            payload.Entity = ExecuteCreate(frame, payload.Entity, payload.Data);
             break;
           case DebugCommandType.Destroy:
-            ExecuteDestroy(f, payload.Entity, payload.Components);
+            ExecuteDestroy(frame, payload.Entity, payload.Components);
             break;
           case DebugCommandType.Toggle:
             if (payload.SystemType != null) {
-              ExecuteToggle(f, Type.GetType(payload.SystemType));
+              ExecuteToggle(frame, Type.GetType(payload.SystemType));
             } else {
-              ExecuteToggle(f, payload.SystemRuntimeIndex);
+              ExecuteToggle(frame, payload.SystemRuntimeIndex);
             }
             break;
           default:
             if (payload.Type >= DebugCommandType.UserCommandTypeStart) {
-              ExecuteUser(f, ref payload);
+              ExecuteUser(frame, ref payload);
             } else {
               throw new InvalidOperationException($"Unknown command type: {payload.Type}");
             }
@@ -9503,11 +10104,11 @@ namespace Quantum.Core {
       _commandExecuted?.Invoke(payload, error);
     }
 
-    private static void ExecuteDestroy(Frame f, EntityRef entity, ComponentSet components) {
-      if (!f.Exists(entity)) {
+    private static void ExecuteDestroy(Frame frame, EntityRef entity, ComponentSet components) {
+      if (!frame.Exists(entity)) {
         Log.Error($"Entity does not exist: {entity}");
       } else if (components.IsEmpty) {
-        if (!f.Destroy(entity)) {
+        if (!frame.Destroy(entity)) {
           Log.Error($"Failed to destroy entity {entity}");
         }
       } else {
@@ -9516,7 +10117,7 @@ namespace Quantum.Core {
             continue;
           }
           var type = ComponentTypeId.Type[i];
-          if (!f.Remove(entity, type)) {
+          if (!frame.Remove(entity, type)) {
             Log.Error($"Failed to destroy component {type} of entity {entity}");
           }
         }
@@ -9524,10 +10125,10 @@ namespace Quantum.Core {
       }
     }
 
-    private static EntityRef ExecuteCreate(Frame f, EntityRef entity, byte[] data) {
+    private static EntityRef ExecuteCreate(Frame frame, EntityRef entity, byte[] data) {
       EntityPrototype prototype = null;
       if (data?.Length > 0) {
-        prototype = f.Context.AssetSerializer.AssetFromByteArray<EntityPrototype>(data);
+        prototype = frame.Context.AssetSerializer.AssetFromByteArray<EntityPrototype>(data);
         if (prototype == null) {
           Log.Error("No prototype found");
         }
@@ -9535,30 +10136,30 @@ namespace Quantum.Core {
 
       if (!entity.IsValid) {
         if (prototype != null) {
-          entity = f.Create(prototype);
+          entity = frame.Create(prototype);
         } else {
-          entity = f.Create();
+          entity = frame.Create();
         }
       } else if (prototype != null) {
-        f.Set(entity, prototype, out _);
+        frame.Set(entity, prototype, out _);
       }
 
       return entity;
     }
 
-    private static void ExecuteToggle(Frame f, Type systemType) {
-      if (f.SystemAnyEnabledSelf(systemType)) {
-        f.SystemDisable(systemType);
+    private static void ExecuteToggle(Frame frame, Type systemType) {
+      if (frame.SystemAnyEnabledSelf(systemType)) {
+        frame.SystemDisable(systemType);
       } else {
-        f.SystemEnable(systemType);
+        frame.SystemEnable(systemType);
       }
     }
 
-    private static void ExecuteToggle(Frame f, int systemRuntimeIndex) {
-      if (f.SystemIsEnabledSelf(systemRuntimeIndex)) {
-        f.SystemDisable(systemRuntimeIndex);
+    private static void ExecuteToggle(Frame frame, int systemRuntimeIndex) {
+      if (frame.SystemIsEnabledSelf(systemRuntimeIndex)) {
+        frame.SystemDisable(systemRuntimeIndex);
       } else {
-        f.SystemEnable(systemRuntimeIndex);
+        frame.SystemEnable(systemRuntimeIndex);
       }
     }
 
@@ -9588,7 +10189,7 @@ namespace Quantum.Core {
     private class InternalSystem : SystemMainThread {
       public override void Update(Frame f) {
         for (int p = 0; p < f.MaxPlayerCount; ++p) {
-          if (f.GetPlayerCommand(p) is InternalCommand cmd) {
+          foreach (InternalCommand cmd in f.GetPlayerCommands<InternalCommand>(p)) {
             for (int i = 0; i < cmd.Data.Length; ++i) {
               Execute(f, ref cmd.Data[i]);
             }
@@ -9604,7 +10205,7 @@ namespace Quantum.Core {
     }
 
     private class InternalSystem : SystemBase {
-      protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
+      protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
         return taskHandle;
       }
     }
@@ -9631,39 +10232,39 @@ namespace Quantum.Core {
     /// <summary>
     /// Create and destroy map entities of the initial map.
     /// </summary>
-    /// <param name="f">The frame reference.</param>
-    public override void OnInit(Frame f) {
-      OnMapChanged(f, default);
+    /// <param name="frame">The frame reference.</param>
+    public override void OnInit(Frame frame) {
+      OnMapChanged(frame, default);
     }
 
     /// <summary>
     /// Destroy current map entities and create new ones from the new map.
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="previousMap">The previous map.</param>
-    public void OnMapChanged(Frame f, AssetRef<Map> previousMap) {
+    public void OnMapChanged(Frame frame, AssetRef<Map> previousMap) {
       // Destroy map entities if previous map is valid and the new map is not a dynamic map.
       // Also destroy map entities if the new map is dynamic and the source map is not the previous map.
-      var dynamicMap = f.Map as DynamicMap;
+      var dynamicMap = frame.Map as DynamicMap;
       var isDynamicMap = dynamicMap != null;
       if (previousMap.Id.IsValid) { 
         if (isDynamicMap == false || dynamicMap.SourceMap != previousMap) {
-          foreach (var (entity, _) in f.GetComponentIterator<MapEntityLink>()) {
-            f.Destroy(entity);
+          foreach (var (entity, _) in frame.GetComponentIterator<MapEntityLink>()) {
+            frame.Destroy(entity);
           }
         }
       }
 
       // Always create map entities from the new map.
-      if (f.Map != null) {
-        f.Create(f.Map.MapEntities, f.Map);
+      if (frame.Map != null) {
+        frame.Create(frame.Map.MapEntities, frame.Map);
 
         // Handle cases where a dynamic map was created based on a non-loaded map:
         // If the new map is a dynamicMap, create map entities from the source map if the source map is different than the previous map.
         if (isDynamicMap && dynamicMap.SourceMap != previousMap) {
-          var sourceMap = f.FindAsset(dynamicMap.SourceMap);
+          var sourceMap = frame.FindAsset(dynamicMap.SourceMap);
           if (sourceMap != null) {
-            f.Create(f.Map.MapEntities, sourceMap);
+            frame.Create(frame.Map.MapEntities, sourceMap);
           }
         }
       }
@@ -9691,12 +10292,12 @@ namespace Quantum.Core {
     /// <summary>
     /// Create the navigation system update task graph.
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="taskHandle">The root task handle used to create new tasks.</param>
     /// <returns>Updated task handle with the navigation update graph.</returns>
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
-      _f = f;
-      return f.Navigation.Update(f, f.DeltaTime, this, taskHandle);
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
+      _f = frame;
+      return frame.Navigation.Update(frame, frame.DeltaTime, this, taskHandle);
     }
 
     /// <inheritdoc cref="INavigationCallbacks.OnWaypointReached(EntityRef, FPVector3, Navigation.WaypointFlag, ref bool)"/>
@@ -9741,41 +10342,41 @@ namespace Quantum.Core {
     /// <summary>
     /// Create the 2D physics system update task graph.
     /// </summary>
-    /// <param name="f">The frame reference.</param>
+    /// <param name="frame">The frame reference.</param>
     /// <param name="taskHandle">The initial task handle.</param>
     /// <returns>The updated task handle with the physics update graph.</returns>
-    protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
-      return f.Physics2D.Update(this, f.DeltaTime, taskHandle);
+    protected override TaskHandle Schedule(Frame frame, TaskHandle taskHandle) {
+      return frame.Physics2D.ScheduleUpdate(this, frame.DeltaTime, taskHandle, resetScene: false);
     }
 
     /// <inheritdoc cref="ISignalOnCollision2D.OnCollision2D(Frame, CollisionInfo2D)"/>
-    public void OnCollision2D(FrameBase f, CollisionInfo2D info) {
-      ((Frame)f).Signals.OnCollision2D(info);
+    public void OnCollision2D(FrameBase frame, CollisionInfo2D info) {
+      ((Frame)frame).Signals.OnCollision2D(info);
     }
 
     /// <inheritdoc cref="ISignalOnCollisionEnter2D.OnCollisionEnter2D(Frame, CollisionInfo2D)"/>
-    public void OnCollisionEnter2D(FrameBase f, CollisionInfo2D info) {
-      ((Frame)f).Signals.OnCollisionEnter2D(info);
+    public void OnCollisionEnter2D(FrameBase frame, CollisionInfo2D info) {
+      ((Frame)frame).Signals.OnCollisionEnter2D(info);
     }
 
     /// <inheritdoc cref="ISignalOnCollisionExit2D.OnCollisionExit2D(Frame, ExitInfo2D)"/>
-    public void OnCollisionExit2D(FrameBase f, ExitInfo2D info) {
-      ((Frame)f).Signals.OnCollisionExit2D(info);
+    public void OnCollisionExit2D(FrameBase frame, ExitInfo2D info) {
+      ((Frame)frame).Signals.OnCollisionExit2D(info);
     }
 
     /// <inheritdoc cref="ISignalOnTrigger2D.OnTrigger2D(Frame, TriggerInfo2D)"/>
-    public void OnTrigger2D(FrameBase f, TriggerInfo2D info) {
-      ((Frame)f).Signals.OnTrigger2D(info);
+    public void OnTrigger2D(FrameBase frame, TriggerInfo2D info) {
+      ((Frame)frame).Signals.OnTrigger2D(info);
     }
 
     /// <inheritdoc cref="ISignalOnTriggerEnter2D.OnTriggerEnter2D(Frame, TriggerInfo2D)"/>
-    public void OnTriggerEnter2D(FrameBase f, TriggerInfo2D info) {
-      ((Frame)f).Signals.OnTriggerEnter2D(info);
+    public void OnTriggerEnter2D(FrameBase frame, TriggerInfo2D info) {
+      ((Frame)frame).Signals.OnTriggerEnter2D(info);
     }
 
     /// <inheritdoc cref="ISignalOnTriggerExit2D.OnTriggerExit2D(Frame, ExitInfo2D)"/>
-    public void OnTriggerExit2D(FrameBase f, ExitInfo2D info) {
-      ((Frame)f).Signals.OnTriggerExit2D(info);
+    public void OnTriggerExit2D(FrameBase frame, ExitInfo2D info) {
+      ((Frame)frame).Signals.OnTriggerExit2D(info);
     }
   }
   
@@ -9799,37 +10400,37 @@ namespace Quantum.Core {
     /// <param name="taskHandle">The initial task handle.</param>
     /// <returns>The updated task handle with the physics update graph.</returns>
     protected override TaskHandle Schedule(Frame f, TaskHandle taskHandle) {
-      return f.Physics3D.Update(this, f.DeltaTime, taskHandle);
+      return f.Physics3D.ScheduleUpdate(this, f.DeltaTime, taskHandle, resetScene: false);
     }
 
     /// <inheritdoc cref="ISignalOnCollision3D.OnCollision3D(Frame, CollisionInfo3D)"/>
-    public void OnCollision3D(FrameBase f, CollisionInfo3D info) {
-      ((Frame)f).Signals.OnCollision3D(info);
+    public void OnCollision3D(FrameBase frame, CollisionInfo3D info) {
+      ((Frame)frame).Signals.OnCollision3D(info);
     }
 
     /// <inheritdoc cref="ISignalOnCollisionEnter3D.OnCollisionEnter3D(Frame, CollisionInfo3D)"/>
-    public void OnCollisionEnter3D(FrameBase f, CollisionInfo3D info) {
-      ((Frame)f).Signals.OnCollisionEnter3D(info);
+    public void OnCollisionEnter3D(FrameBase frame, CollisionInfo3D info) {
+      ((Frame)frame).Signals.OnCollisionEnter3D(info);
     }
 
     /// <inheritdoc cref="ISignalOnCollisionExit3D.OnCollisionExit3D(Frame, ExitInfo3D)"/>
-    public void OnCollisionExit3D(FrameBase f, ExitInfo3D info) {
-      ((Frame)f).Signals.OnCollisionExit3D(info);
+    public void OnCollisionExit3D(FrameBase frame, ExitInfo3D info) {
+      ((Frame)frame).Signals.OnCollisionExit3D(info);
     }
 
     /// <inheritdoc cref="ISignalOnTrigger3D.OnTrigger3D(Frame, TriggerInfo3D)"/>
-    public void OnTrigger3D(FrameBase f, TriggerInfo3D info) {
-      ((Frame)f).Signals.OnTrigger3D(info);
+    public void OnTrigger3D(FrameBase frame, TriggerInfo3D info) {
+      ((Frame)frame).Signals.OnTrigger3D(info);
     }
 
     /// <inheritdoc cref="ISignalOnTriggerEnter3D.OnTriggerEnter3D(Frame, TriggerInfo3D)"/>
-    public void OnTriggerEnter3D(FrameBase f, TriggerInfo3D info) {
-      ((Frame)f).Signals.OnTriggerEnter3D(info);
+    public void OnTriggerEnter3D(FrameBase frame, TriggerInfo3D info) {
+      ((Frame)frame).Signals.OnTriggerEnter3D(info);
     }
 
     /// <inheritdoc cref="ISignalOnTriggerExit3D.OnTriggerExit3D(Frame, ExitInfo3D)"/>
-    public void OnTriggerExit3D(FrameBase f, ExitInfo3D info) {
-      ((Frame)f).Signals.OnTriggerExit3D(info);
+    public void OnTriggerExit3D(FrameBase frame, ExitInfo3D info) {
+      ((Frame)frame).Signals.OnTriggerExit3D(info);
     }
   }
 }
