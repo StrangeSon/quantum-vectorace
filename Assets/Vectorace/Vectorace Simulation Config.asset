@@ -67,8 +67,8 @@ MonoBehaviour:
       RawValue: 32768
     CCDDistanceTolerance:
       RawValue: 66
-    MaxTimeOfImpactIterations: 16
-    MaxRootFindingIterations: 32
+    MaxTimeOfImpactIterations: 64
+    MaxRootFindingIterations: 128
     DefaultEntriesCapacity: 2048
     DefaultStaticsCapacity: 1024
     DefaultQueriesCapacity: 1024
